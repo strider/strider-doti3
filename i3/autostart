@@ -1,0 +1,90 @@
+#!/bin/sh
+
+# Wait for program coming up
+wait_for_program () {
+  n=0
+  while true
+  do
+    # PID of last background command
+    if xdotool search --onlyvisible --pid $!; then
+      break
+    else
+      if [ $n -eq 90 ]; then
+        notify-send -u critical "Error during start"
+        break
+      else
+        n=`expr $n + 1`
+        sleep 0.5
+      fi
+    fi
+  done
+}
+
+#xsetroot -solid '#000000' &
+exec feh --bg-scale ~/Pictures/redhat_by_lostsoul164-d3bjnyf.png &
+
+## Set startup volume
+pactl set-sink-volume 0 '30%' &
+
+## Disable beeps
+xset -b &
+
+## Keybord layout setting
+setxkbmap -layout uk -option grp:shift_shift_toggle &
+
+## Set LCD brightness
+xbacklight -set 100 &
+
+## Clipboard manager
+LC_ALL=C parcellite &
+
+## OSD
+dunst &
+
+## Mail checker
+dunst-checkmail -p ~/Maildir/INBOX/cur/ -s 150 &
+
+## Load "funny" sample
+pactl upload-sample ~/.i3/that_was_easy.wav that_was_easy &
+
+## Set touchpad off
+synclient TouchpadOff=1
+
+firefox &
+
+PANEL_CONNECTED=0; xrandr | grep -qE "(LVDS1|VGA1) connected" && PANEL_CONNECTED=1
+
+if [ grep -qE "VGA1 connected" ]; then
+  # my configuration is for DP1 (move workspaces explicitly)
+  i3-msg move workspace 1 to output VGA1
+  i3-msg move workspace 2 to output VGA1
+  i3-msg move workspace 3 to output VGA1
+  i3-msg move workspace 4 to output VGA1
+fi
+
+## Working shells on workspace 1
+i3-msg workspace 1
+i3-msg layout tabbed
+urxvt256c -name "GhostInTheShell-1-SCREEN" &
+#urxvt256c -name mail -e bash -c "mutt" &
+wait_for_program
+urxvt256c -name "GhostInTheShell-2" &
+wait_for_program
+
+## Working shells on workspace 3
+i3-msg workspace 3
+i3-msg layout tabbed
+urxvt256c -name "FileExplorer" -e bash -c "mc" &
+wait_for_program
+
+## Refresh and GO!
+xrefresh &
+
+#exec /usr/libexec/gnome-settings-daemon &
+exec /usr/libexec/gnome-session/helpers/gnome-settings-daemon-helper &
+exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec /usr/bin/gnome-keyring-daemon --start --components=gpg &
+exec /usr/bin/gnome-keyring-daemon --start --components=ssh &
+exec /usr/bin/gnome-keyring-daemon --start --components=secrets &
+exec nm-applet &
+exec ssh-add &
