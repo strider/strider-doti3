@@ -21,7 +21,7 @@ wait_for_program () {
 }
 
 #xsetroot -solid '#000000' &
-exec feh --bg-scale ~/Pictures/redhat_by_lostsoul164-d3bjnyf.png &
+exec feh --bg-scale ~/Pictures/simple_linux_wallpaper_by_dablim-d5kdma2.jpg &
 
 ## Set startup volume
 pactl set-sink-volume 0 '30%' &
@@ -65,16 +65,16 @@ fi
 ## Working shells on workspace 1
 i3-msg workspace 1
 i3-msg layout tabbed
-urxvt256c -name "GhostInTheShell-1-SCREEN" &
+urxvt256c-ml -name "GhostInTheShell-1-SCREEN" &
 #urxvt256c -name mail -e bash -c "mutt" &
 wait_for_program
-urxvt256c -name "GhostInTheShell-2" &
+urxvt256c-ml -name "GhostInTheShell-2" &
 wait_for_program
 
 ## Working shells on workspace 3
 i3-msg workspace 3
 i3-msg layout tabbed
-urxvt256c -name "FileExplorer" -e bash -c "mc" &
+urxvt256c-ml -name "FileExplorer" -e bash -c "mc" &
 wait_for_program
 
 ## Refresh and GO!

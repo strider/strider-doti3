@@ -18,7 +18,7 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Ubuntu 08
+font pango:Droid Sans 07
 
 client.focused             #1793D0   #1793D0    #FFFFFF
 client.focused_inactive    #000000   #333333    #FFFFFF
@@ -30,7 +30,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt256c
+bindsym $mod+Return exec urxvt256c-ml
 
 # kill focused window
 bindsym $mod+Shift+q kill
