@@ -18,7 +18,7 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Droid Sans 07
+font pango:Droid Sans 11
 
 client.focused             #1793D0   #1793D0    #FFFFFF
 client.focused_inactive    #000000   #333333    #FFFFFF
@@ -184,6 +184,15 @@ workspace 6 output LVDS1
 workspace 7 output LVDS1
 workspace 8 output LVDS1
 
+# scratchpad
+bindsym $mod+m move scratchpad
+bindsym $mod+o scratchpad show
+
+## Make the currently focused window a scratchpad
+#bindsym $mod+Shift+minus move scratchpad
+## Show the first scratchpad window
+#bindsym $mod+minus scratchpad show
+
 
 # workspace assignment (use "xprop")
 assign [class="^Google-chrome$"] 2
@@ -195,6 +204,9 @@ for_window [class="^Google-chrome$"] border none
 #for_window [class="^Firefox$"] floating enable
 for_window [class="^Firefox$"] border none
 for_window [class="^Nautilus$"] split v, layout stacking
+
+# create scratchpad shell
+exec urxvt256c-ml -name scratchpad -e bash
 
 # start the session
 exec ~/.i3/autostart
