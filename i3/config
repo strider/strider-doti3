@@ -43,10 +43,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 new_window none
 bindsym $mod+t border normal
@@ -60,10 +60,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+H move left
+bindsym $mod+Shift+J move down
+bindsym $mod+Shift+K move up
+bindsym $mod+Shift+L move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -72,10 +72,12 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+#bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
+# split orientation
+bindsym $mod+v layout toggle split
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -204,9 +206,6 @@ for_window [class="^Google-chrome$"] border none
 #for_window [class="^Firefox$"] floating enable
 for_window [class="^Firefox$"] border none
 for_window [class="^Nautilus$"] split v, layout stacking
-
-# create scratchpad shell
-exec urxvt256c-ml -name scratchpad -e bash
 
 # start the session
 exec ~/.i3/autostart

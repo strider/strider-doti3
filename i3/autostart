@@ -6,7 +6,7 @@ wait_for_program () {
   while true
   do
     # PID of last background command
-    if xdotool search --onlyvisible --pid $!; then
+    if xdotool search --onlyvisible --pid $! 2>/dev/null; then
       break
     else
       if [ $n -eq 90 ]; then
@@ -20,8 +20,11 @@ wait_for_program () {
   done
 }
 
+## Merge Xressources
+xrdb -merge ~/.Xresources &
+
 #xsetroot -solid '#000000' &
-exec feh --bg-scale ~/Pictures/simple_linux_wallpaper_by_dablim-d5kdma2.jpg &
+exec feh --bg-scale ~/Pictures/2560x1240_fedora.jpg &
 
 ## Set startup volume
 pactl set-sink-volume 0 '30%' &
@@ -50,8 +53,6 @@ pactl upload-sample ~/.i3/that_was_easy.wav that_was_easy &
 ## Set touchpad off
 synclient TouchpadOff=1
 
-firefox &
-
 PANEL_CONNECTED=0; xrandr | grep -qE "(LVDS1|VGA1) connected" && PANEL_CONNECTED=1
 
 if [ grep -qE "VGA1 connected" ]; then
@@ -65,16 +66,7 @@ fi
 ## Working shells on workspace 1
 i3-msg workspace 1
 i3-msg layout tabbed
-urxvt256c-ml -name "GhostInTheShell-1-SCREEN" &
-#urxvt256c -name mail -e bash -c "mutt" &
-wait_for_program
-urxvt256c-ml -name "GhostInTheShell-2" &
-wait_for_program
-
-## Working shells on workspace 3
-i3-msg workspace 3
-i3-msg layout tabbed
-urxvt256c-ml -name "FileExplorer" -e bash -c "mc" &
+urxvt256c-ml -name "TMUX Session" -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -sStrider" &
 wait_for_program
 
 ## Refresh and GO!
@@ -86,5 +78,5 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 exec /usr/bin/gnome-keyring-daemon --start --components=gpg &
 exec /usr/bin/gnome-keyring-daemon --start --components=ssh &
 exec /usr/bin/gnome-keyring-daemon --start --components=secrets &
-exec nm-applet &
+LC_ALL=C nm-applet &
 exec ssh-add &
