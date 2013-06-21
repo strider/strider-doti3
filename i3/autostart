@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-exec feh --bg-scale ~/Pictures/2560x1240_fedora.jpg &
+exec feh --bg-scale ~/Pictures/IMG_5269.JPG &
 
 ## Set startup volume
 pactl set-sink-volume 0 '30%' &
