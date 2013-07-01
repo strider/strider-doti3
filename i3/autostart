@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-exec feh --bg-scale ~/Pictures/IMG_5269.JPG &
+exec feh --bg-fill ~/Pictures/IMG_5269.JPG &
 
 ## Set startup volume
 pactl set-sink-volume 0 '30%' &
@@ -42,7 +42,7 @@ xbacklight -set 100 &
 LC_ALL=C parcellite &
 
 ## OSD
-dunst &
+dunst -config ~/.i3/dunstrc &
 
 ## Mail checker
 dunst-checkmail -p ~/Maildir/INBOX/cur/ -s 150 &
