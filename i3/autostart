@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-exec feh --bg-fill ~/Pictures/IMG_5269.JPG &
+feh --bg-fill ~/Pictures/1477478.jpg &
 
 ## Set startup volume
 pactl set-sink-volume 0 '30%' &
@@ -53,10 +53,20 @@ pactl upload-sample ~/.i3/that_was_easy.wav that_was_easy &
 ## Set touchpad off
 synclient TouchpadOff=1
 
-PANEL_CONNECTED=0; xrandr | grep -qE "(LVDS1|VGA1) connected" && PANEL_CONNECTED=1
+VGA_YES=0
+HDMI_YES=0
+ANY_YES=0
+xrandr | grep -q "HDMI1 connected" && HDMI_YES=1 && ANY_YES=1
+xrandr | grep -q "VGA1 connected" && VGA_YES=1 && ANY_YES=1
 
-if [ grep -qE "VGA1 connected" ]; then
-  # my configuration is for DP1 (move workspaces explicitly)
+if [ $HDMI_YES -eq 1]; then
+  i3-msg move workspace 1 to output HDMI1
+  i3-msg move workspace 2 to output HDMI1
+  i3-msg move workspace 3 to output HDMI1
+  i3-msg move workspace 4 to output HDMI1
+fi
+
+if [ $VGA_YES -eq 1]; then
   i3-msg move workspace 1 to output VGA1
   i3-msg move workspace 2 to output VGA1
   i3-msg move workspace 3 to output VGA1

@@ -205,7 +205,7 @@ assign [class="^Nautilus$"] 3
 for_window [class="^Google-chrome$"] border none
 #for_window [class="^Firefox$"] floating enable
 for_window [class="^Firefox$"] border none
-for_window [class="^Nautilus$"] split v, layout stacking
+for_window [class="^Nautilus$"] layout stacking
 
 # start the session
 exec ~/.i3/autostart
