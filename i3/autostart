@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-fill ~/Pictures/1477478.jpg &
+feh --bg-fill ~/Pictures/redhat_by_lostsoul164-d3bjnyf.png &
 
 ## Set startup volume
 pactl set-sink-volume 0 '30%' &
@@ -45,7 +45,7 @@ LC_ALL=C parcellite &
 dunst -config ~/.i3/dunstrc &
 
 ## Mail checker
-dunst-checkmail -p ~/Maildir/INBOX/cur/ -s 150 &
+# dunst-checkmail -p ~/Maildir/INBOX/cur/ -s 150 &
 
 ## Load "funny" sample
 pactl upload-sample ~/.i3/that_was_easy.wav that_was_easy &
@@ -76,8 +76,8 @@ fi
 ## Working shells on workspace 1
 i3-msg workspace 1
 i3-msg layout tabbed
-urxvt256c-ml -name "TMUX Session" -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -sStrider" &
-wait_for_program
+#xterm -name "TMUX Session" -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -sDEVEL" &
+#wait_for_program
 
 ## Refresh and GO!
 xrefresh &
