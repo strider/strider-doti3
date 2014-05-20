@@ -24,10 +24,10 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-fill ~/Pictures/redhat_by_lostsoul164-d3bjnyf.png &
+feh --bg-fill ~/Pictures/got3.jpg &
 
-## Set startup volume
-pactl set-sink-volume 0 '30%' &
+## Set startup volume (use pactl info to determine sink name)
+pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
 
 ## Disable beeps
 xset -b &
@@ -42,13 +42,10 @@ xbacklight -set 100 &
 LC_ALL=C parcellite &
 
 ## OSD
-dunst -config ~/.i3/dunstrc &
+/usr/local/bin/dunst &
 
-## Mail checker
-# dunst-checkmail -p ~/Maildir/INBOX/cur/ -s 150 &
-
-## Load "funny" sample
-pactl upload-sample ~/.i3/that_was_easy.wav that_was_easy &
+## Mail Checker
+~/bin/gocheckmail &
 
 ## Set touchpad off
 synclient TouchpadOff=1
@@ -89,4 +86,3 @@ exec /usr/bin/gnome-keyring-daemon --start --components=gpg &
 exec /usr/bin/gnome-keyring-daemon --start --components=ssh &
 exec /usr/bin/gnome-keyring-daemon --start --components=secrets &
 LC_ALL=C nm-applet &
-exec ssh-add &
