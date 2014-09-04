@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-fill ~/Pictures/got3.jpg &
+feh --bg-fill ~/Pictures/canada/h7gPOlE.jpg &
 
 ## Set startup volume (use pactl info to determine sink name)
 pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
@@ -45,7 +45,7 @@ LC_ALL=C parcellite &
 /usr/local/bin/dunst &
 
 ## Mail Checker
-~/bin/gocheckmail &
+#~/bin/gocheckmail &
 
 ## Set touchpad off
 synclient TouchpadOff=1
