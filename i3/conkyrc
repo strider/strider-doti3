@@ -1,0 +1,42 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+# Update interval in seconds
+update_interval 2.0
+total_run_times 0
+override_utf8_locale yes
+if_up_strictness link
+
+TEXT
+
+[
+ { "full_text" : "WIFI" , "color" : "\#b72f62" } ,
+ { "full_text" : "W: ${wireless_essid wlp3s0}(${wireless_link_qual_perc wlp3s0}%) ${addr wlp3s0}" } ,
+ { "full_text" : "ETHER" , "color" : "\#b72f62" } ,
+ { "full_text" : "E: ${if_up em1}${addr em1}${else}Down${endif}" } ,
+ { "full_text": "RAM", "color": "\#b72f62" },
+ { "full_text": "${memperc}%", "color":
+   ${if_match ${memperc}>90}"\#FF0000"${else}
+       ${if_match ${memperc}<10}"\#00CC00"${else}
+           "\#ffffff"
+       ${endif}
+   ${endif}
+ },
+ { "full_text" : "VPN" , "color" : "\#7996a9" } ,
+ { "full_text" : "${if_up tun0}Up${else}Down${endif}" },
+ { "full_text" : "LOAD" , "color" : "\#7996a9" } ,
+ { "full_text" : "${loadavg 1}" } ,
+ { "full_text" : "BAT" , "color" : "\#b72f62" } ,
+ { "full_text" : "${battery_short BAT0}" , "color" : 
+  ${if_match ${battery_percent BAT0}<20}"\#b95670"${else}"\#ffffff"${endif} },
+ { "full_text" : "VOL" , "color" : "\#FFFF00" } ,
+ { "full_text" : "♪: ${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6}"},
+ { "full_text" : "C", "color": 
+    ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}"\#00CC00"${else}"\#CC0000"${endif} },
+ #Shows upime
+ { "full_text" : " ↑ [${uptime}] ","color": "\#dc322f"},
+ { "full_text" : "TIME" , "color" : "\#b492b6" } , 
+ { "full_text" : "${time %Y-%m-%d %I:%M %p}" }]  ,
+

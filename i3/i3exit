@@ -1,0 +1,29 @@
+#!/bin/sh
+
+IMG="~/Pictures/canada/Amazing-Sky-And-Toronto-Building-Canada-Wallpaper.png"
+
+case "$1" in
+   lock)
+        i3lock -i $IMG -d -t
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        sudo pm-suspend | i3lock -i $IMG -d -t 
+        ;;
+    hibernate)
+        sudo pm-hibernate
+        ;;
+    reboot)
+        sudo reboot
+        ;;
+    shutdown)
+        sudo poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

@@ -80,7 +80,7 @@
     urgency = low
 
 [irc]
-    appname = weechat
+    appname = mynotify.sh
     timeout = 0
     background = "#99FF33"
     foreground = "#000000"

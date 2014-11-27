@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-fill ~/Pictures/canada/h7gPOlE.jpg &
+feh --bg-scale ~/Pictures/canada/City-of-Toronto.jpg &
 
 ## Set startup volume (use pactl info to determine sink name)
 pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
@@ -33,7 +33,7 @@ pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
 xset -b &
 
 ## Keybord layout setting
-setxkbmap -layout uk -option grp:shift_shift_toggle &
+setxkbmap -layout us -option grp:shift_shift_toggle &
 
 ## Set LCD brightness
 xbacklight -set 100 &
@@ -42,10 +42,16 @@ xbacklight -set 100 &
 LC_ALL=C parcellite &
 
 ## OSD
-/usr/local/bin/dunst &
+exec /usr/bin/dunst &
 
-## Mail Checker
-#~/bin/gocheckmail &
+# linphone
+exec /usr/bin/linphone &
+
+# redshift-gtk
+exec /usr/bin/redshift-gtk &
+
+# shutter
+exec /usr/bin/shutter &
 
 ## Set touchpad off
 synclient TouchpadOff=1
@@ -61,6 +67,10 @@ if [ $HDMI_YES -eq 1]; then
   i3-msg move workspace 2 to output HDMI1
   i3-msg move workspace 3 to output HDMI1
   i3-msg move workspace 4 to output HDMI1
+  i3-msg move workspace 5 to output HDMI1
+  i3-msg move workspace 6 to output HDMI1
+  i3-msg move workspace 7 to output HDMI1
+  i3-msg move workspace 8 to output HDMI1
 fi
 
 if [ $VGA_YES -eq 1]; then
