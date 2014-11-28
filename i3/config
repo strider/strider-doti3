@@ -154,6 +154,9 @@ bindsym XF86HomePage exec /usr/bin/xdg-open "http://www.github.com"; workspace 2
 # ranger
 bindsym $mod+F1 exec gnome-terminal --class ranger -e ranger
 bindsym $mod+F2 exec gnome-terminal --class htop -e htop
+bindsym $mod+F3 exec synclient TouchpadOff=0
+bindsym $mod+F4 exec synclient TouchpadOff=1
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -248,7 +251,7 @@ assign [class="^Evince$"] 3
 for_window [class="^Google-chrome$"] border none
 #for_window [class="^Firefox$"] floating enable
 for_window [class="^Firefox$"] border none
-for_window [class="^GVim$"] split v, layout stacking
+for_window [class="^GVim$"] floating enable; border normal
 for_window [class="^Nautilus$"] border none
 for_window [title="- Shutter"] floating enable; border normal
 
