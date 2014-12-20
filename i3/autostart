@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-scale ~/Pictures/1639441.jpg &
+feh --bg-scale ~/Pictures/13236.png &
 
 ## Set startup volume (use pactl info to determine sink name)
 pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
@@ -33,58 +33,55 @@ pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
 xset -b &
 
 ## Keybord layout setting
-setxkbmap -layout us -option grp:shift_shift_toggle &
+setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
 
 ## Set LCD brightness
 xbacklight -set 100 &
 
 ## Clipboard manager
-LC_ALL=C parcellite &
+exec clipit &
 
 ## OSD
 exec /usr/bin/dunst &
 
 # linphone
-exec /usr/bin/linphone &
+exec /usr/bin/linphone --iconified &
 
 # redshift-gtk
 exec /usr/bin/redshift-gtk &
 
 # shutter
-exec /usr/bin/shutter &
+exec /usr/bin/shutter --min_at_startup &
 
 ## Set touchpad off
 synclient TouchpadOff=1
 
-VGA_YES=0
+ws_chat="1: chat"
+ws_mail="2: mail"
+ws_twitter="3: twitter"
+ws_1="1: 1"
+ws_2="2: 2"
+ws_3="3: 3"
+ws_4="4: 4"
+ws_5="5: 5"
+ws_6="6: 6"
+ws_7="7: 7"
+ws_8="8: 8"
+ws_9="9: 9"
+ws_0="10: 10"
+
 HDMI_YES=0
 ANY_YES=0
 xrandr | grep -q "HDMI1 connected" && HDMI_YES=1 && ANY_YES=1
 xrandr | grep -q "VGA1 connected" && VGA_YES=1 && ANY_YES=1
 
 if [ $HDMI_YES -eq 1]; then
-  i3-msg move workspace 1 to output HDMI1
-  i3-msg move workspace 2 to output HDMI1
-  i3-msg move workspace 3 to output HDMI1
-  i3-msg move workspace 4 to output HDMI1
-  i3-msg move workspace 5 to output HDMI1
-  i3-msg move workspace 6 to output HDMI1
-  i3-msg move workspace 7 to output HDMI1
-  i3-msg move workspace 8 to output HDMI1
+  for w in chat mail twitter 1 2 3 4 5 6 7 8 9 0; do
+    i3-msg "move workspace \$ws_${w}; to output HDMI1"
+  done
 fi
 
-if [ $VGA_YES -eq 1]; then
-  i3-msg move workspace 1 to output VGA1
-  i3-msg move workspace 2 to output VGA1
-  i3-msg move workspace 3 to output VGA1
-  i3-msg move workspace 4 to output VGA1
-fi
-
-## Working shells on workspace 1
-i3-msg workspace 1
-i3-msg layout tabbed
-#xterm -name "TMUX Session" -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -sDEVEL" &
-#wait_for_program
+i3-msg workspace ${ws_1}
 
 ## Refresh and GO!
 xrefresh &
@@ -92,7 +89,14 @@ xrefresh &
 #exec /usr/libexec/gnome-settings-daemon &
 exec /usr/libexec/gnome-session/helpers/gnome-settings-daemon-helper &
 exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec /usr/bin/gnome-screensaver &
+exec /usr/bin/xautolock -time 5 \
+    -locker "gnome-screensaver-command --lock" \
+    -notify 30 \
+    -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
 exec /usr/bin/gnome-keyring-daemon --start --components=gpg &
 exec /usr/bin/gnome-keyring-daemon --start --components=ssh &
 exec /usr/bin/gnome-keyring-daemon --start --components=secrets &
 LC_ALL=C nm-applet &
+
+exit 0
