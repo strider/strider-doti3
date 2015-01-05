@@ -21,27 +21,29 @@ set $display1 "LVDS1"
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Terminus for Powerline 8
+font pango:FontAwesome 08, Terminus for Powerline 08
 
 
 # Workspace names
 set $ws_chat    "1: chat"
 set $ws_mail    "2: mail"
 set $ws_twitter "3: twitter"
-set $ws_1       "1: 1"
-set $ws_2       "2: 2"
-set $ws_3       "3: 3"
-set $ws_4       "4: 4"
-set $ws_5       "5: 5"
-set $ws_6       "6: 6"
-set $ws_7       "7: 7"
-set $ws_8       "8: 8"
-set $ws_9       "9: 9"
-set $ws_0       "10: 10"
+set $ws_1       "1: "
+set $ws_2       "2: "
+set $ws_3       "3: "
+set $ws_4       "4: "
+set $ws_5       "5: "
+set $ws_6       "6: "
+set $ws_7       "7: "
+set $ws_8       "8: "
+set $ws_9       "9: "
+set $ws_0       "10: "
 
 # class                 border  backgr. text    indicator
-client.focused             #77994B #547628 #EEEEEE
-client.focused_inactive    #333333 #5F676A #EEEEEE
+client.focused          #272822 #66d9ef #272822 #f92672
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #de1b1b #ffffff #a40000
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -63,7 +65,9 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec dmenu_run -b -nb '#FFFFFF' -nf '#000000' -sb '#A1D569'
+#bindsym $mod+d exec dmenu_run -b -l 15 -fn 'Terminus for Powerline-08 '-nb '#FFFFFF' -nf '#000000' -sb '#A1D569'
+bindsym $mod+d exec dmenu_run -b -l 15  -fn 'Source Code Pro-10' -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -b -l 15 -i -fn 'Source Code Pro-10' -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'"
 
 # change focus
 bindsym $mod+h focus left
@@ -72,8 +76,8 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 hide_edge_borders both
-new_window normal
-new_float normal
+new_window 1pixel
+new_float 1pixel
 bindsym $mod+t border normal
 bindsym $mod+y border 1pixel
 bindsym $mod+u border none
@@ -156,6 +160,9 @@ bindsym $mod+Shift+7 move container to workspace $ws_7
 bindsym $mod+Shift+8 move container to workspace $ws_8
 bindsym $mod+Shift+9 move container to workspace $ws_9
 bindsym $mod+Shift+0 move container to workspace $ws_0
+bindsym $mod+Shift+F5 move container to workspace $ws_chat
+bindsym $mod+Shift+F6 move container to workspace $ws_mail
+bindsym $mod+Shift+F7 move container to workspace $ws_twitter
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -176,8 +183,6 @@ bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
 
 # ranger
-bindsym $mod+F1 exec gnome-terminal --class ranger -e ranger
-bindsym $mod+F2 exec gnome-terminal --class htop -e htop
 bindsym $mod+F3 exec synclient TouchpadOff=0
 bindsym $mod+F4 exec synclient TouchpadOff=1
 
