@@ -1,16 +1,14 @@
 #!/bin/sh
 
-IMG="~/Pictures/canada/Amazing-Sky-And-Toronto-Building-Canada-Wallpaper.png"
-
 case "$1" in
    lock)
-        i3lock -i $IMG -d -t
+        xautolock -locknow
         ;;
     logout)
         i3-msg exit
         ;;
     suspend)
-        sudo pm-suspend | i3lock -i $IMG -d -t 
+        sudo pm-suspend | xautolock -locknow 
         ;;
     hibernate)
         sudo pm-hibernate

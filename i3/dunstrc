@@ -18,7 +18,7 @@
     separator_color = frame
     startup_notification = true
     dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
-    browser = /home/knopwob/bin/url_dispatcher
+    browser = /usr/bin/firefox
 
 
 [frame]
@@ -80,7 +80,7 @@
     urgency = low
 
 [irc]
-    appname = weechat
+    appname = irssi
     timeout = 0
     background = "#99FF33"
     foreground = "#000000"

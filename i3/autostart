@@ -14,7 +14,7 @@ wait_for_program () {
         break
       else
         n=`expr $n + 1`
-        sleep 0.5
+        sleep 0.1
       fi
     fi
   done
@@ -24,7 +24,10 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-scale ~/Pictures/13236.png &
+feh --bg-scale ~/Pictures/1572043.jpg &
+
+# Terminal
+TERMINAL=urxvt256c-ml
 
 ## Set startup volume (use pactl info to determine sink name)
 pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
@@ -33,7 +36,7 @@ pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
 xset -b &
 
 ## Screen off after 5 minutes
-exec --no-startup-id xset dpms 600 &
+xset dpms 600 1200 2000 &
 
 ## Keybord layout setting
 setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
@@ -41,65 +44,76 @@ setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
 ## Set LCD brightness
 xbacklight -set 100 &
 
-## Clipboard manager
-exec clipit &
+## Clipboard manager and nm-applet
+LC_ALL=C clipit &
+LC_ALL=C nm-applet &
+
+pgrep || /usr/bin/urxvtd -q -f -o 
 
 ## OSD
-exec /usr/bin/dunst &
+/usr/bin/dunst &
 
-# linphone
-exec /usr/bin/linphone --iconified &
+EXT_SCREEN='None'
+EXT_SCREEN=`xrandr | grep -q " connected" | awk '{print $1}' | grep -v "eDP1"`
 
-# redshift-gtk
-exec /usr/bin/redshift-gtk &
+## Workspace 1, 4 and 5
+for w in 1 4 5; do
+    i3-msg workspace $w
+    $TERMINAL &
+    wait_for_program
+    i3-msg split h
+done
 
-# shutter
-exec /usr/bin/shutter --min_at_startup &
+i3-msg workspace 3
+## Udiskie
+~/.local/bin/udiskie -ant &
+$TERMINAL -e zsh -c "ranger ~/" &
+wait_for_program
+i3-msg split h
 
-## Set touchpad off
-synclient TouchpadOff=1
+i3-msg workspace 2
+firefox &
+i3-msg split h
 
-ws_chat="1: chat"
-ws_mail="2: mail"
-ws_twitter="3: twitter"
-ws_1="1: "
-ws_2="2: "
-ws_3="3: "
-ws_4="4: "
-ws_5="5: "
-ws_6="6: "
-ws_7="7: "
-ws_8="8: "
-ws_9="9: "
-ws_0="10: "
-
-HDMI_YES=0
-ANY_YES=0
-xrandr | grep -q "HDMI1 connected" && HDMI_YES=1 && ANY_YES=1
-xrandr | grep -q "VGA1 connected" && VGA_YES=1 && ANY_YES=1
-
-if [ $HDMI_YES -eq 1]; then
-  for w in chat mail twitter 1 2 3 4 5 6 7 8 9 0; do
-    i3-msg "move workspace \$ws_${w}; to output HDMI1"
+if [ $EXT_SCREEN != 'None' ]; then
+  for w in 1 2 3 4 5 6 7 8; do
+    i3-msg "move workspace ${w}; to output ${EXT_SCREEN}"
   done
 fi
 
-i3-msg workspace ${ws_1}
+# mpc
+/usr/bin/mpd &
 
-## Refresh and GO!
-xrefresh &
+# linphone
+/usr/bin/linphone --iconified &
 
-#exec /usr/libexec/gnome-settings-daemon &
-exec /usr/libexec/gnome-session/helpers/gnome-settings-daemon-helper &
+# redshift-gtk
+/usr/bin/redshift-gtk &
+
+# shutter
+/usr/bin/shutter --min_at_startup &
+
+# devpi-server startup
+~/.local/bin/devpi-server --start &
+
+# start dropbox
+~/.dropbox-dist/dropbox-lnx.x86_64-3.0.5/dropbox &
+
+# Mail-notification
+/usr/bin/mail-notification &
+
+## Set touchpad on
+synclient TouchpadOff=0
+
+exec abrt-applet &
 exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 exec /usr/bin/gnome-screensaver &
-exec /usr/bin/xautolock -time 1 \
+exec /usr/bin/xautolock -time 5 \
     -locker "gnome-screensaver-command --lock --activate" \
     -notify 30 \
     -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
-exec /usr/bin/gnome-keyring-daemon --start --components=gpg &
-exec /usr/bin/gnome-keyring-daemon --start --components=ssh &
-exec /usr/bin/gnome-keyring-daemon --start --components=secrets &
-LC_ALL=C nm-applet &
+
+## Refresh and GO!
+xrefresh &
 
 exit 0
