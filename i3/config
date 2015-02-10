@@ -11,7 +11,7 @@
 
 set $mod Mod4
 
-set $display0 "HDMI1"
+set $display0 "DP2-2"
 set $display1 "eDP1"
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -22,12 +22,6 @@ set $display1 "eDP1"
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 font pango:FontAwesome 08, Terminus for Powerline 08
-
-# class                 border  backgr. text    indicator
-client.focused          #272822 #66d9ef #272822 #f92672
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #de1b1b #ffffff #a40000
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -48,13 +42,13 @@ bindsym $mod+Shift+q kill
 # installed.
 #bindsym $mod+d exec dmenu_run -b -l 15 -fn 'Terminus for Powerline-08 '-nb '#FFFFFF' -nf '#000000' -sb '#A1D569'
 bindsym $mod+d exec dmenu_run -b -l 15  -fn 'Source Code Pro-10' -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -b -l 15 -i -fn 'Source Code Pro-10' -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'"
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -b -l 15 -i -fn '-*-terminus-medium-*-normal-*-12-120-72-*-*-*-*-*' -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'"
 bindsym $mod+x exec firefox
 bindsym $mod+n exec nautilus
 
 # mpdmenu (https://github.com/k00mi/mpdmenu)
 # A small bash script for controlling MPD through dmenu.
-bindsym Mod+Shift+up exec --no-startup-id ~/bin/mpdmenu.sh
+bindsym $mod+Shift+m exec --no-startup-id ~/bin/mpdmenu.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -243,11 +237,13 @@ bar {
   mode dock
   workspace_buttons yes
   colors {
-        background #222222
-        statusline #cccccc
-        separator #666666
-        focused_workspace #222222 #9fbc00 #000000
-        inactive_workspace #222222 #222222 #0190bc
+    separator #dc322f
+    background #002b36
+    statusline #268bd2
+    focused_workspace #fdf6e3 #859900 #fdf6e3
+    active_workspace #fdf6e3 #6c71c4 #fdf6e3
+    inactive_workspace #586e75 #93a1a1 #002b36
+    urgent_workspace #d33682 #d33682 #fdf6e3
   }
 }
 
@@ -298,3 +294,7 @@ for_window [title="- Shutter"] floating enable; border normal
 
 # start the session
 exec ~/.i3/autostart
+client.focused #859900 #859900 #fdf6e3 #859900
+client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
+client.unfocused #073642 #073642 #93a1a1 #586e75
+client.urgent #d33682 #d33682 #fdf6e3 #dc322f

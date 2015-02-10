@@ -24,7 +24,7 @@ wait_for_program () {
 xrdb -merge ~/.Xresources &
 
 #xsetroot -solid '#000000' &
-feh --bg-scale ~/Pictures/1572043.jpg &
+feh --bg-fill ~/Pictures/apple_style-wallpaper-1920x1080.jpg &
 
 # Terminal
 TERMINAL=urxvt256c-ml
@@ -56,12 +56,11 @@ pgrep || /usr/bin/urxvtd -q -f -o
 EXT_SCREEN='None'
 EXT_SCREEN=`xrandr | grep -q " connected" | awk '{print $1}' | grep -v "eDP1"`
 
-## Workspace 1, 4 and 5
-for w in 1 4 5; do
+## Workspace 1-4
+for w in 1 4; do
     i3-msg workspace $w
     $TERMINAL &
     wait_for_program
-    i3-msg split h
 done
 
 i3-msg workspace 3
@@ -69,11 +68,9 @@ i3-msg workspace 3
 ~/.local/bin/udiskie -ant &
 $TERMINAL -e zsh -c "ranger ~/" &
 wait_for_program
-i3-msg split h
 
 i3-msg workspace 2
 firefox &
-i3-msg split h
 
 if [ $EXT_SCREEN != 'None' ]; then
   for w in 1 2 3 4 5 6 7 8; do
