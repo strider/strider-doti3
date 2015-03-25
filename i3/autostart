@@ -20,38 +20,8 @@ wait_for_program () {
   done
 }
 
-## Merge Xressources
-xrdb -merge ~/.Xresources &
-
-#xsetroot -solid '#000000' &
-feh --bg-fill ~/Pictures/apple_style-wallpaper-1920x1080.jpg &
-
 # Terminal
 TERMINAL=urxvt256c-ml
-
-## Set startup volume (use pactl info to determine sink name)
-pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
-
-## Disable beeps
-xset -b &
-
-## Screen off after 5 minutes
-xset dpms 600 1200 2000 &
-
-## Keybord layout setting
-setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
-
-## Set LCD brightness
-xbacklight -set 100 &
-
-## Clipboard manager and nm-applet
-LC_ALL=C clipit &
-LC_ALL=C nm-applet &
-
-pgrep || /usr/bin/urxvtd -q -f -o 
-
-## OSD
-/usr/bin/dunst &
 
 EXT_SCREEN='None'
 EXT_SCREEN=`xrandr | grep -q " connected" | awk '{print $1}' | grep -v "eDP1"`
@@ -64,9 +34,7 @@ for w in 1 4; do
 done
 
 i3-msg workspace 3
-## Udiskie
-~/.local/bin/udiskie -ant &
-$TERMINAL -e zsh -c "ranger ~/" &
+$TERMINAL -e zsh -c "~/.local/bin/ranger ~/" &
 wait_for_program
 
 i3-msg workspace 2
@@ -77,38 +45,6 @@ if [ $EXT_SCREEN != 'None' ]; then
     i3-msg "move workspace ${w}; to output ${EXT_SCREEN}"
   done
 fi
-
-# mpc
-/usr/bin/mpd &
-
-# linphone
-/usr/bin/linphone --iconified &
-
-# redshift-gtk
-/usr/bin/redshift-gtk &
-
-# shutter
-/usr/bin/shutter --min_at_startup &
-
-# devpi-server startup
-~/.local/bin/devpi-server --start &
-
-# start dropbox
-~/.dropbox-dist/dropbox-lnx.x86_64-3.0.5/dropbox &
-
-# Mail-notification
-/usr/bin/mail-notification &
-
-## Set touchpad on
-synclient TouchpadOff=0
-
-exec abrt-applet &
-exec /usr/libexec/polkit-gnome-authentication-agent-1 &
-exec /usr/bin/gnome-screensaver &
-exec /usr/bin/xautolock -time 5 \
-    -locker "gnome-screensaver-command --lock --activate" \
-    -notify 30 \
-    -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
 
 ## Refresh and GO!
 xrefresh &

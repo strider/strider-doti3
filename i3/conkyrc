@@ -13,23 +13,18 @@ TEXT
 
 [ \
   ${if_up wlp4s0}  \
-    { "color":"\#9c77b2", "full_text":"UP: ${upspeed wlp4s0}" }, \
-    { "color":"\#CC0000", "full_text":"DOWN: ${downspeed wlp4s0}" }, \
     { "color":"\#82b414", "full_text":"${wireless_essid wlp4s0}(${wireless_link_qual_perc wlp4s0}%) - ${addr wlp4s0}" }, \
   ${else} \
     ${if_up enp0s25}\
-      { "color":"\#9c77b2", "full_text":"UP: ${upspeed enp0s25}" }, \
-      { "color":"\#CC0000", "full_text":"DOWN: ${downspeed enp0s25}" }, \
       { "color":"\#82b414", "full_text":"Wired: ${addr enp0s25}" }, \
     ${endif} \
   ${endif} \
   ${if_up tun0}  \
-    { "color":"\#00CC00", "full_text":"VPN Connected" }, \
+    { "color":"\#00CC00", "full_text":"VPN Up" }, \
   ${else} \
-    { "color":"\#CC0000", "full_text":"VPN Not Connected" }, \
+    { "color":"\#CC0000", "full_text":"VPN Down" }, \
   ${endif} \
    { "color":"\#FF4000", "full_text":"   ${kernel}"},\
-   { "color":"\#AEB404", "full_text":"   ${execi 200 yum check-update -q | grep -v '^$' | wc -l}"},\
  ${if_empty ${battery BAT0}} \
   ${else} \
     ${if_match ${battery_percent BAT0}>85} \
@@ -53,4 +48,4 @@ TEXT
   { "color":"\#b72f62", "full_text": "  ${loadavg 1}"}, \
   { "full_text" : "C", "color": ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}"\#00CC00"${else}"\#CC0000"${endif} },
   { "color":"\#9db270", "full_text": "  ${exec amixer -c 1 get Master | grep Mono: | cut -d " " -f6}"},
-  { "color":"\#94d8e5", "full_text": "   ${time %Y-%m-%d %l:%M %p}"}],
+  { "color":"\#94d8e5", "full_text": "  ${time %Y-%m-%d %l:%M %p}"}],
