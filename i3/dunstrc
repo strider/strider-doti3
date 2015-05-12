@@ -1,13 +1,15 @@
 [global]
-    font = "Anivers 8"
+    font = "Ubuntu 8"
     allow_markup = yes
     format = "<b>%a > %s</b>:\n %b"
     sort = yes
+    transparency = 20
+    monitor = 0
     indicate_hidden = true
     # geometry = "x5"
     idle_threshold = 0
-    geometry = "300x5-20+20"
-    alignment = center
+    geometry = "300x5-30+20"
+    alignment = left
     show_age_threshold = 60
     sticky_history = yes
     follow = mouse
@@ -16,74 +18,36 @@
     padding = 10
     horizontal_padding = 10
     separator_color = frame
-    startup_notification = true
+    startup_notification = false
     dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
     browser = /usr/bin/firefox
 
-
 [frame]
-    width = 3
-    color = "#000000"
+    width = 0
+    color = "#002b36"
+
+[urgency_low]
+    # IMPORTANT: colors have to be defined in quotation marks.
+    # Otherwise the "#" and following would be interpreted as a comment.
+    background = "#6C71C4"
+    foreground = "#002b36"
+    timeout = 5
+
+[urgency_normal]
+    background = "#2AA198"
+    foreground = "#002b26"
+    timeout = 5
+
+[urgency_critical]
+    background = "#dc322f"
+    foreground = "#002b36"
+    timeout = 0
 
 [shortcuts]
     close = ctrl+space
-    close_all = ctrl+shift+space
+    close_all = ctrl+alt+space
     history = ctrl+grave
     context = ctrl+shift+period
-
-[urgency_low]
-    background = "#ffffff"
-    foreground = "#000000"
-    timeout = 30
-
-[urgency_normal]
-    background = "#94DBFF"
-    foreground = "#000000"
-    timeout = 45
-
-[urgency_critical]
-    background = "#ff9999"
-    foreground = "#000000"
-    timeout = 0
-
-
-[libpurple_signed]
-    appname = libpurple
-    summary = *igned*
-    urgency = low
-    timeout = 3
-    background = "#ccff33"
-
-[libpurple_came_back]
-    appname = libpurple
-    summary = "*came*"
-    format = ""
-
-[libpurple_went_away]
-    appname = libpurple
-    summary = "*went*"
-    format = ""
-
-[libpurple_says]
-    appname = libpurple
-    summary = *ays*
-    urgency = critical
-    background = "#ccff33"
-
-[libpurple]
-    appname = libpurple
-    urgency = critical
-    background = "#ccff33"
-
-[ttytter]
-    summary = "TTYtter*"
-    urgency = low
-
-[irc]
-    appname = irssi
-    timeout = 0
-    background = "#99FF33"
-    foreground = "#000000"
 
 [test]
     summary = "*test*"

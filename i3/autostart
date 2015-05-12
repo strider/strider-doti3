@@ -20,11 +20,14 @@ wait_for_program () {
   done
 }
 
+# Background
+[ -e ~/.fehbg ] && eval `cat ~/.fehbg`
+
 # Terminal
 TERMINAL=urxvt256c-ml
 
 EXT_SCREEN='None'
-EXT_SCREEN=`xrandr | grep -q " connected" | awk '{print $1}' | grep -v "eDP1"`
+EXT_SCREEN=`xrandr | grep -q " connected" | awk '{print $1}' | grep -v "HDMI1"`
 
 ## Workspace 1-4
 for w in 1 4; do
