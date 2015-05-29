@@ -297,6 +297,7 @@ for_window [class="^Vlc$"] floating enable
 for_window [instance="gimp"] floating enable
 for_window [class="Gnome-disks"] floating enable
 for_window [class="Linphone"] floating enable
+for_window [class="URxvt"] border 1pixel
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
 
