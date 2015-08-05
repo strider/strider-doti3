@@ -60,7 +60,8 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "180x15-10+50"
+    #geometry = "180x15-10+50"
+    geometry = "300x5-30+20"
 
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
@@ -182,6 +183,12 @@
 # NOTE: if you don't want a notification to be displayed, set the format to ""
 # NOTE: It might be helpful to run dunst -print in a terminal in order to find
 # fitting options for rules.
+
+[irc]
+    appname = weechat-curses
+    timeout = 10
+    background = "#0033bb"
+    foreground = "#dddddd"
 
 #[espeak]
 #    summary = "*"

@@ -12,10 +12,9 @@
 set $mod Mod4
 
 set $display0 "eDP1"
-set $display1 "DP2-1"
-set $display2 "DP2-2"
-set $display3 "HDMI1"
-set $display4 "VGA1"
+set $display1 "DP2-2"
+set $display2 "HDMI1"
+set $display3 "VGA1"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -48,8 +47,10 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -b -l 15 -i -fn -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso8859-1 -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'"
-bindsym $mod+d exec "dmenu_run -b -i -fn -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso8859-1 -p 'Fedora 22' -nb '#272822' -nf '#f8f8f2' -sb '#f92672' -sf '#272822'"
+bindsym $mod+d exec "~/bin/rofi -show run -font 'Terminus for Powerline 8' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
+bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -font 'Terminus for Powerline 8' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
+bindsym $mod+Shift+i exec "~/bin/i3_switch_workspace.sh"
+bindsym $mod+Shift+p exec passmenu
 
 # mpdmenu (https://github.com/k00mi/mpdmenu)
 # A small bash script for controlling MPD through dmenu.
@@ -262,13 +263,13 @@ bar {
   mode dock
   workspace_buttons yes
   colors {
-    separator #586e75
-    background #002b36
-    statusline #aea79f
-    focused_workspace #586e75 #586e75 #ffffff
-    active_workspace #073642 #073642 #ffffff
-    inactive_workspace #002b36 #002b36 #aea79f
-    urgent_workspace #77216f #77216f #ffffff
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace #2f343a #900000 #ffffff
   }
 }
 
@@ -293,19 +294,6 @@ workspace 17 output $display1
 workspace 18 output $display1
 workspace 19 output $display1
 workspace 20 output $display1
-
-# ENovance Office Configuration
-workspace 10 output $display3
-workspace 11 output $display3
-workspace 12 output $display3
-workspace 13 output $display3
-workspace 14 output $display3
-workspace 15 output $display3
-workspace 16 output $display4
-workspace 17 output $display4
-workspace 18 output $display4
-workspace 19 output $display4
-workspace 20 output $display4
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -335,8 +323,8 @@ for_window [class="^Vlc$"] floating enable
 for_window [instance="gimp"] floating enable
 for_window [class="Gnome-disks"] floating enable
 for_window [class="Linphone"] floating enable
-for_window [class="Zathura"] floating enable
-for_window [class="URxvt"] border pixel3
+for_window [class="Zathura"] floating enable; border normal
+for_window [class="URxvt"] border pixel 3
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
 
@@ -419,7 +407,7 @@ mode "$mode_nautilus" {
 }
 bindsym $mod+Shift+backslash mode "$mode_nautilus"
 
-client.focused #586e75 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #073642 #073642 #93a1a1 #002b36
-client.unfocused #002b36 #002b36 #586e75 #002b36
-client.urgent #dc322f #dc322f #fdf6e3 #dc322f
+client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000

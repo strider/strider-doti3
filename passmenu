@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob globstar
+
+typeit=0
+if [[ $1 == "--type" ]]; then
+	typeit=1
+	shift
+fi
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+password=$(printf '%s\n' "${password_files[@]}" | rofi -font "Terminus for Powerline 8" -hlbg "#000000" -hlfg "#ffb964" -o 85 -dmenu -p "pass:" "$@")
+
+[[ -n $password ]] || exit
+
+if [[ $typeit -eq 0 ]]; then
+	pass show -c "$password" 2>/dev/null
+        notify-send -u normal 'passmenu: Password loaded' "Copied $password to clipboard. Will clear in 45 seconds."
+else
+	xdotool - <<<"type --clearmodifiers -- $(pass show "$password" | head -n 1)"
+fi
