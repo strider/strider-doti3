@@ -41,7 +41,7 @@ $TERMINAL -e zsh -c "~/.local/bin/ranger ~/" &
 wait_for_program
 
 i3-msg workspace 2
-firefox &
+#firefox &
 
 if [ $EXT_SCREEN != 'None' ]; then
   for w in 1 2 3 4 5 6 7 8; do

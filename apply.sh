@@ -9,3 +9,4 @@ ln -vsf ~/.i3/dunstrc ~/.config/dunst/dunstrc
 cp -vf mpdmenu.sh ~/bin/
 cp -vf i3_switch_workspace.sh ~/bin
 cp -vf passmenu ~/bin
+sudo cp -rvf ./keyboard-backlight.sh /usr/local/bin/

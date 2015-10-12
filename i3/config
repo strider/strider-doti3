@@ -16,23 +16,13 @@ set $display1 "DP2-2"
 set $display2 "HDMI1"
 set $display3 "VGA1"
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-#font -*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-*
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Terminus for Powerline 8
+font pango:Terminus for Powerline 14
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 for_window [class="^.*"] border pixel 0
-#gaps inner 5
-#gaps outer 2
-#smart_gaps on
-#smart_borders on
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
@@ -47,8 +37,8 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec "~/bin/rofi -show run -font 'Terminus for Powerline 8' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
-bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -font 'Terminus for Powerline 8' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
+bindsym $mod+d exec "~/bin/rofi -show run -font 'Terminus for Powerline 14' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
+bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -font 'Terminus for Powerline 14' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
 bindsym $mod+Shift+i exec "~/bin/i3_switch_workspace.sh"
 bindsym $mod+Shift+p exec passmenu
 
@@ -179,7 +169,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -i ~/Pictures/modern_architecture-wallpaper-1920x1080.png -d -t
+bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -i ~/Pictures/KM/km1.png -d -t
 
 # pulse audio volume control
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
@@ -257,43 +247,43 @@ bindsym $mod+Shift+o exec i3-input -F 'move container to workspace "%s"' -P 'mov
 # finds out, if available)
 bar {
   position top
-  font pango:Terminus for Powerline 8
+  font pango:Terminus for Powerline 14
   status_command py3status -c ~/.i3/.i3status.conf
   tray_output eDP1
   mode dock
   workspace_buttons yes
   colors {
-    separator #888888
-    background #333333
-    statusline #FFFFFF
-    focused_workspace #4E9C00 #4E9C00 #FFFFFF
-    active_workspace #333333 #333333 #FFFFFF
-    inactive_workspace #333333 #333333 #888888
-    urgent_workspace #C20000 #C20000 #FFFFFF
+    separator #586e75
+    background #002b36
+    statusline #aea79f
+    focused_workspace #586e75 #586e75 #ffffff
+    active_workspace #073642 #073642 #ffffff
+    inactive_workspace #002b36 #002b36 #aea79f
+    urgent_workspace #77216f #77216f #ffffff
   }
 }
 
 # Workspaces
-workspace 1 output $display0
-workspace 2 output $display0
-workspace 3 output $display0
-workspace 4 output $display0
-workspace 5 output $display0
-workspace 6 output $display0
-workspace 7 output $display0
-workspace 8 output $display0
-workspace 9 output $display0
-workspace 10 output $display2
-workspace 11 output $display2
-workspace 12 output $display2
-workspace 13 output $display2
-workspace 14 output $display2
-workspace 15 output $display2
-workspace 16 output $display1
-workspace 17 output $display1
-workspace 18 output $display1
-workspace 19 output $display1
-workspace 20 output $display1
+workspace 1 output $display2
+workspace 2 output $display2
+workspace 3 output $display2
+workspace 4 output $display2
+workspace 5 output $display2
+workspace 6 output $display2
+workspace 7 output $display2
+workspace 8 output $display2
+workspace 9 output $display2
+workspace 10 output $display0
+workspace 11 output $display0
+workspace 12 output $display0
+workspace 13 output $display0
+workspace 14 output $display0
+workspace 15 output $display0
+workspace 16 output $display2
+workspace 17 output $display2
+workspace 18 output $display2
+workspace 19 output $display2
+workspace 20 output $display2
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -349,65 +339,30 @@ exec --no-startup-id ~/.local/bin/udiskie -ant &
 exec pulseaudio --start
 exec synclient TouchpadOff=0
 
-#exec abrt-applet &
+exec abrt-applet &
+exec /usr/bin/xfsettingsd &
 exec /usr/libexec/polkit-gnome-authentication-agent-1
+exec /usr/bin/xfce4-power-manager
 exec --no-startup-id ~/.i3/autostart
 
 # Windows decoration colors
 # class                 border  backgr. text    indicator
 client.background #121212
 
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-# start nautilus interactively
-set $mode_nautilus File Browser (h) Home, (d) Downloads, (c) Cloud
-mode "$mode_nautilus" {
-    bindsym h exec --no-startup-id nautilus ~/, mode "default"
-    bindsym d exec --no-startup-id nautilus ~/Downloads, mode "default"
-    bindsym c exec --no-startup-id nautilus ~/Dropbox, mode "default"
+set $mode_kb_backlight (u) Up, (d) Down, (t) Total, (o) Off
+mode "$mode_kb_backlight" {
+    bindsym u exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh up, mode "default"
+    bindsym d exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh down, mode "default"
+    bindsym t exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh total, mode "default"
+    bindsym o exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh off, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+backslash mode "$mode_nautilus"
+bindsym $mod+Shift+backslash mode "$mode_kb_backlight"
 
-client.focused #4E9C00 #4E9C00 #FFFFFF #FFFFFF
-client.focused_inactive #1B3600 #1B3600 #888888 #FFFFFF
-client.unfocused #333333 #333333 #888888 #FFFFFF
-client.urgent #C20000 #C20000 #FFFFFF #FFFFFF
+client.focused #586e75 #586e75 #fdf6e3 #268bd2
+client.focused_inactive #073642 #073642 #93a1a1 #002b36
+client.unfocused #002b36 #002b36 #586e75 #002b36
+client.urgent #dc322f #dc322f #fdf6e3 #dc322f

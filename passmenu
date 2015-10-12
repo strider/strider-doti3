@@ -13,7 +13,7 @@ password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
-password=$(printf '%s\n' "${password_files[@]}" | rofi -font "Terminus for Powerline 8" -hlbg "#000000" -hlfg "#ffb964" -o 85 -dmenu -p "pass:" "$@")
+password=$(printf '%s\n' "${password_files[@]}" | rofi -font "Terminus for Powerline 14" -hlbg "#000000" -hlfg "#ffb964" -o 85 -dmenu -p "pass:" "$@")
 
 [[ -n $password ]] || exit
 
