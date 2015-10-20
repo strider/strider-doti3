@@ -103,10 +103,10 @@ bindsym $mod+Shift+Tab focus mode_toggle
 bindsym $mod+a focus parent
 
 bindsym $mod+p bar mode toggle
-#bindsym $mod+Shift+p bar mode dock
-bindsym Mod4+z workspace prev
-bindsym Mod4+x workspace next
-bindsym Mod4+c workspace back_and_forth
+#bindsym $mod+Shift+l bar mode dock
+bindsym $mod+z workspace prev
+bindsym $mod+x workspace next
+bindsym $mod+c workspace back_and_forth
 
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
@@ -169,7 +169,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -i ~/Pictures/KM/km1.png -d -t
+bindsym Control+$mod+l exec i3-msg workspace 1 && i3lock -i ~/Pictures/KM/km1.png -d -t
 
 # pulse audio volume control
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
@@ -247,8 +247,8 @@ bindsym $mod+Shift+o exec i3-input -F 'move container to workspace "%s"' -P 'mov
 # finds out, if available)
 bar {
   position top
-  font pango:Terminus for Powerline 14
-  status_command py3status -c ~/.i3/.i3status.conf
+  font pango:Ubuntu Mono for Powerline 12
+  status_command ~/.i3/conky.sh
   tray_output eDP1
   mode dock
   workspace_buttons yes

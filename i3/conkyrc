@@ -1,48 +1,31 @@
-out_to_x no
-own_window no
-out_to_console yes
-background no
-max_text_width 0
-# Update interval in seconds
-update_interval 2.0
-total_run_times 0
+background        no
+out_to_console 	  yes
+out_to_x	  no
+update_interval	  1
+total_run_times	  0
+short_units	  yes
+pad_percents	  3
 override_utf8_locale yes
 if_up_strictness link
 
 TEXT
+[${if_match ${battery_percent BAT0} <= 10 }
+  {"full_text": "Plug In Charger!!!", "urgent": true, "color": "\#FF0000"},${endif}
+  {"full_text": " / ${fs_free /}" },
+  {"full_text": " ~/ ${fs_free /home}" },
+  {"full_text": "❤ $acpitemp°C [$cpu%]","color": "\#DC322F"},
+  {"full_text": " RAM ${memperc}%", "color":"\#B58900"},
+  {"full_text": " CPU ${cpu cpu1}% ${freq_g 1}GHz ${exec sensors | grep -m 1 "Core 0"|awk '{print $3}'}", "color":"\#B58900"},
+  {"full_text": " ${uptime_short}", "min_width": "59m59s" },
+  ${if_up tun0}{ "full_text": " ${addr tun0}" , "color": "\#00FF00"},${endif}
+  ${if_up wlp3s0}{"full_text": " ${wireless_essid wlp3s0} [${addr wlp3s0}]","color":"\#33CC99"},
+  $else${if_up ens9}{"full_text": "ens9 [${addr ens9}]","color":"\#33CC99"},
+  $else{"full_text": "≈ no connection","color":"\#33CC99"},$endif$endif
+  {"full_text": " ${execpi 6 dropbox status | sed -n 1p}","color":"\#a6a6a6"},
+  ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
+  {"full_text": "CapsLock", "color": "\#00FF00" },$endif
+  {"full_text": " [$battery_percent%]","color":"\#9933CC"},
+  {"full_text": " ${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6}", "color":"\#268BD2"},
+  {"full_text": " ${time %V.%u, %Y-%m-%d %H:%M}"}
+],
 
-[ \
-  ${if_up wlp3s0}  \
-    { "color":"\#82b414", "full_text":"${wireless_essid wlp3s0}: ${addr wlp3s0}" }, \
-  ${else} \
-    ${if_up ens9}\
-      { "color":"\#82b414", "full_text":"Wired: ${addr ens9}" }, \
-    ${endif} \
-  ${endif} \
-  ${if_up tun0}  \
-    { "color":"\#00CC00", "full_text":"VPN Up" }, \
-  ${else} \
-    { "color":"\#CC0000", "full_text":"VPN Down" }, \
-  ${endif} \
- ${if_empty ${battery BAT0}} \
-  ${else} \
-    ${if_match ${battery_percent BAT0}>85} \
-    { "color":"\#82b414", "full_text":"    ${battery_percent BAT0}% " }, \
-    ${else} \
-      ${if_match ${battery_percent BAT0}>65} \
-      { "color":"\#fd971f", "full_text":"    ${battery_percent BAT0}% " }, \
-      ${else} \
-        ${if_match ${battery_percent BAT0}>32} \
-        { "color":"\#ff5995", "full_text":"    ${battery_percent BAT0}% " }, \
-        ${else} \
-          ${if_match ${battery_percent BAT0}>9} \
-          { "color":"\#f92672", "full_text":"    ${battery_percent BAT0}% " }, \
-          ${else} \
-          { "color":"\#f92672", "full_text":"    ${battery_percent BAT0}% " }, \
-          ${endif} \
-        ${endif} \
-      ${endif} \
-    ${endif} \
-  ${endif} \
-  { "color":"\#9db270", "full_text": "  ${exec amixer -c 1 get Master | grep Mono: | cut -d " " -f6}"},
-  { "color":"\#94d8e5", "full_text": "  ${time %Y-%m-%d %l:%M %p}"}],
