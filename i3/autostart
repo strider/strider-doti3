@@ -20,14 +20,17 @@ wait_for_program () {
   done
 }
 
-# Background
-[ -e ~/.fehbg ] && eval `cat ~/.fehbg`
-
 # Terminal
 TERMINAL=urxvt256c-ml
 
-EXT_SCREEN='None'
-EXT_SCREEN=`xrandr | grep -q " connected" | awk '{print $1}' | grep -v "HDMI1"`
+## Determine connected monitors
+HDMI_YES=0
+DP_YES=0
+ANY_YES=0
+xrandr | grep -Eq "DP[12345]-[12345] connected" && DP_YES=1 && ANY_YES=1
+xrandr | grep -Eq "HDMI[12345] connected" && HDMI_YES=1 && ANY_YES=1
+DP=$(xrandr | grep -E "DP[12345]-[12345] connected" | grep -oE "DP[12345]-[12345]")
+HDMI=$(xrandr | grep -E "HDMI[12345] connected" | grep -oE "HDMI[12345]")
 
 ## Workspace 1-4
 for w in 1 4; do
@@ -41,7 +44,7 @@ $TERMINAL -e zsh -c "~/.local/bin/ranger ~/" &
 wait_for_program
 
 i3-msg workspace 2
-#firefox &
+##firefox &
 
 if [ $EXT_SCREEN != 'None' ]; then
   for w in 1 2 3 4 5 6 7 8; do

@@ -12,17 +12,14 @@
 set $mod Mod4
 
 set $display0 "eDP1"
-set $display1 "DP2-2"
-set $display2 "HDMI1"
-set $display3 "VGA1"
+set $display1 "HDMI1"
+set $display2 "DP2-2"
 
 # chose a FreeType font, such as:
-font pango:Terminus for Powerline 14
+font pango:Terminus for Powerline 08
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-for_window [class="^.*"] border pixel 0
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
@@ -37,14 +34,13 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec "~/bin/rofi -show run -font 'Terminus for Powerline 14' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
-bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -font 'Terminus for Powerline 14' -fg '#f8f8f2' -bg '#272822' -hlfg '#272822' -hlbg '#f92672' -o 85"
-bindsym $mod+Shift+i exec "~/bin/i3_switch_workspace.sh"
+bindsym $mod+d exec "~/bin/rofi -show run -o 85"
+bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -o 85"
 bindsym $mod+Shift+p exec passmenu
 
 # mpdmenu (https://github.com/k00mi/mpdmenu)
 # A small bash script for controlling MPD through dmenu.
-bindsym $mod+Shift+m exec --no-startup-id ~/bin/mpdmenu.sh
+#bindsym $mod+Shift+m exec --no-startup-id ~/bin/mpdmenu.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -133,11 +129,6 @@ bindsym $mod+Control+2 workspace 12
 bindsym $mod+Control+3 workspace 13
 bindsym $mod+Control+4 workspace 14
 bindsym $mod+Control+5 workspace 15
-bindsym $mod+Control+6 workspace 16
-bindsym $mod+Control+7 workspace 17
-bindsym $mod+Control+8 workspace 18
-bindsym $mod+Control+9 workspace 19
-bindsym $mod+Control+0 workspace 20
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -155,11 +146,6 @@ bindsym $mod+Shift+Control+2 move container to workspace 12
 bindsym $mod+Shift+Control+3 move container to workspace 13
 bindsym $mod+Shift+Control+4 move container to workspace 14
 bindsym $mod+Shift+Control+5 move container to workspace 15
-bindsym $mod+Shift+Control+6 move container to workspace 16
-bindsym $mod+Shift+Control+7 move container to workspace 17
-bindsym $mod+Shift+Control+8 move container to workspace 18
-bindsym $mod+Shift+Control+9 move container to workspace 19
-bindsym $mod+Shift+Control+0 move container to workspace 20
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -169,16 +155,12 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+$mod+l exec i3-msg workspace 1 && i3lock -i ~/Pictures/KM/km1.png -d -t
+bindsym Control+$mod+l exec i3-msg workspace 1 && i3lock -i ~/Pictures/waterfall_seljalandsfoss-2560x1600.png -d -t
 
 # pulse audio volume control
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
 bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
-bindsym XF86Calculator exec /usr/bin/gnome-calculator
-bindsym XF86Tools exec /usr/bin/gnome-control-center
-bindsym XF86HomePage exec /usr/bin/firefox
-bindsym XF86Explorer exec nautilus
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
 bindsym $mod+F4 exec --no-startup-id $HOME/bin/mutemic.sh
@@ -209,26 +191,9 @@ mode "resize" {
 }
 
 # Create Log out, Reboot, Poweroff bindings
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $HOME/.i3/./i3exit lock, mode "default"
-    bindsym e exec --no-startup-id $HOME/.i3/./i3exit logout, mode "default"
-    bindsym s exec --no-startup-id $HOME/.i3/./i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id $HOME/.i3/./i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id $HOME/.i3/./i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id $HOME/.i3/./i3exit shutdown, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+T mode "$mode_system"
-
-# Create Log out, Reboot, Poweroff bindings
-set $screen_setup SCREEN (l) Laptop Only, (e) Enovance Office, (h) Home Office
+set $screen_setup SCREEN (l) Laptop Only, (h) Home Office
 mode "$screen_setup" {
     bindsym l exec --no-startup-id $HOME/.screenlayout/laptop.sh, mode "default"
-    bindsym e exec --no-startup-id $HOME/.screenlayout/ENOOffice.sh, mode "default"
     bindsym h exec --no-startup-id $HOME/.screenlayout/home.sh, mode "default"
 
     # back to normal: Enter or Escape
@@ -246,44 +211,39 @@ bindsym $mod+Shift+o exec i3-input -F 'move container to workspace "%s"' -P 'mov
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+  output HDMI1
   position top
-  font pango:Ubuntu Mono for Powerline 12
+  font pango:Terminus for Powerline 08
   status_command ~/.i3/conky.sh
-  tray_output eDP1
+  tray_output HDMI1
   mode dock
   workspace_buttons yes
-  colors {
-    separator #888888
-    background #333333
-    statusline #FFFFFF
-    focused_workspace #4E9C00 #4E9C00 #FFFFFF
-    active_workspace #333333 #333333 #FFFFFF
-    inactive_workspace #333333 #333333 #888888
-    urgent_workspace #C20000 #C20000 #FFFFFF
-  }
+}
+
+bar {
+  output eDP1
+  output DP2-2
+  tray_output none
+  position top
+  #status_command ~/.i3/conky.sh
 }
 
 # Workspaces
-workspace 1 output $display2
-workspace 2 output $display2
-workspace 3 output $display2
-workspace 4 output $display2
-workspace 5 output $display2
-workspace 6 output $display2
-workspace 7 output $display2
-workspace 8 output $display2
-workspace 9 output $display2
+workspace 1 output $display1
+workspace 2 output $display1
+workspace 3 output $display1
+workspace 4 output $display1
+workspace 5 output $display1
+workspace 6 output $display0
+workspace 7 output $display0
+workspace 8 output $display0
+workspace 9 output $display0
 workspace 10 output $display0
-workspace 11 output $display0
-workspace 12 output $display0
-workspace 13 output $display0
-workspace 14 output $display0
-workspace 15 output $display0
-workspace 16 output $display2
-workspace 17 output $display2
-workspace 18 output $display2
-workspace 19 output $display2
-workspace 20 output $display2
+workspace 11 output $display2
+workspace 12 output $display2
+workspace 13 output $display2
+workspace 14 output $display2
+workspace 15 output $display2
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -296,73 +256,53 @@ bindsym $mod+o scratchpad show
 
 # workspace assignment (use "xprop")
 assign [class="^Google-chrome$"] 2
-assign [class="^Firefox$"] 2
+#assign [class="^Firefox$"] 2
 assign [class="^Nautilus$"] 3
+assign [class="^Nemo$"] 3
 assign [class="^Evince$"] 3
 assign [class="^Zathura$"] 3
 
 # custom window settings
-for_window [window_role="pop-up"] floating enable
-for_window [class="Google-chrome"] border none
-for_window [class="Firefox"] border none
+for_window [class="^.*"] border normal
+for_window [window_role="pop-up"] floating enable; border normal
+for_window [class="google-chrome"] border none
+for_window [class="Firefox"] border pixel 1
 for_window [class="Gvim"] floating enable; border pixel 1
 for_window [class="Nautilus"] border none
+for_window [class="Nemo"] border none
 for_window [class="Virt-manager"] floating enable; border none
 for_window [title="- Shutter"] floating enable; border normal
 for_window [class="^Vlc$"] floating enable
 for_window [instance="gimp"] floating enable
 for_window [class="Gnome-disks"] floating enable
 for_window [class="Linphone"] floating enable
-for_window [class="Zathura"] floating enable; border normal
+for_window [class="Zathura"] border none
 for_window [class="URxvt"] border pixel 1
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
 
 # start the session
-exec --no-startup-id xrdb -merge ~/.Xresources
-exec --no-startup-id xset -b
-exec --no-startup-id xset dpms 600 1200 2000
-exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle
-exec --no-startup-id xbacklight -set 100
+exec --no-startup-id xrdb -merge ~/.Xresources &
+exec --no-startup-id xset -b &
+exec --no-startup-id xset dpms 600 1200 2000 &
+exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
+exec --no-startup-id xbacklight -set 100 &
+exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
 exec pgrep urxvtd || /usr/bin/urxvtd -q -f -o
 exec /usr/bin/dunst
-exec unclutter
 exec clipit
-exec --no-startup-id nm-applet
 exec --no-startup-id /usr/bin/mpd
-exec --no-startup-id /usr/bin/linphone --iconified
+#exec --no-startup-id /usr/bin/linphone --iconified
 exec --no-startup-id /usr/bin/redshift-gtk
 exec --no-startup-id ~/.local/bin/devpi-server --start
-exec dropbox start
-#exec --no-startup-id /usr/bin/mail-notification
+#exec dropbox start
 exec --no-startup-id ~/.local/bin/udiskie -ant &
 exec pulseaudio --start
-exec synclient TouchpadOff=0
+exec_always feh --bg-fill '/home/gchamoul/Pictures/1405595-need-more-coffee.jpg'
 
-exec abrt-applet &
-exec /usr/bin/xfsettingsd &
-exec /usr/libexec/polkit-gnome-authentication-agent-1
-exec /usr/bin/xfce4-power-manager
+exec /usr/libexec/cinnamon-settings-daemon &
+#exec /usr/libexec/gnome-settings-daemon &
+exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec nm-applet
+exec seapplet
 exec --no-startup-id ~/.i3/autostart
-
-# Windows decoration colors
-# class                 border  backgr. text    indicator
-client.background #121212
-
-set $mode_kb_backlight (u) Up, (d) Down, (t) Total, (o) Off
-mode "$mode_kb_backlight" {
-    bindsym u exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh up, mode "default"
-    bindsym d exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh down, mode "default"
-    bindsym t exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh total, mode "default"
-    bindsym o exec --no-startup-id sudo /usr/local/bin/keyboard-backlight.sh off, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+backslash mode "$mode_kb_backlight"
-
-client.focused #4E9C00 #4E9C00 #FFFFFF #FFFFFF
-client.focused_inactive #1B3600 #1B3600 #888888 #FFFFFF
-client.unfocused #333333 #333333 #888888 #FFFFFF
-client.urgent #C20000 #C20000 #FFFFFF #FFFFFF

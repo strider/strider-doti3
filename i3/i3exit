@@ -8,7 +8,7 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        sudo pm-suspend | xautolock -locknow 
+        sudo pm-suspend
         ;;
     hibernate)
         sudo pm-hibernate
