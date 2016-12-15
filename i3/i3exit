@@ -1,26 +1,33 @@
 #!/bin/sh
 
+lock() {
+    i3lock -i ~/Pictures/waterfall_seljalandsfoss-2560x1600.png -d -t -c 2d2d2d
+}
+
 case "$1" in
    lock)
-        xautolock -locknow
+        lock
         ;;
     logout)
         i3-msg exit
         ;;
     suspend)
-        sudo pm-suspend
+        lock && sudo systemctl suspend
         ;;
     hibernate)
-        sudo pm-hibernate
+        lock && sudo systemctl hibernate
         ;;
     reboot)
-        sudo reboot
+        sudo systemctl reboot
         ;;
     shutdown)
-        sudo poweroff
+        sudo systemctl poweroff
+        ;;
+    hybrid)
+        sudo systemctl hybrid-sleep
         ;;
     *)
-        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown|hybrid-sleep}"
         exit 2
 esac
 

@@ -1,23 +1,20 @@
 #!/bin/sh
 
-# Wait for program coming up
+# Wait for the last command sent to background to create a window
 wait_for_program () {
-  n=0
-  while true
-  do
-    # PID of last background command
-    if xdotool search --onlyvisible --pid $! 2>/dev/null; then
-      break
-    else
-      if [ $n -eq 90 ]; then
-        notify-send -u critical "Error during start"
-        break
-      else
-        n=`expr $n + 1`
-        sleep 0.1
-      fi
-    fi
-  done
+	local c=0; until [ $((++c)) -eq 15 ]; do
+		xdotool search --onlyvisible --pid $! 2>/dev/null && break
+		sleep 1
+    done
+	[ $c -eq 15 ] && i3-nagbar -m "Error on executing $0 script"
+}
+
+# Temporarily disable pointer while setting layout
+# $1 == <enable|disable>
+pointer_control() {
+	[ -v pointer_devices ] || pointer_devices=$(xinput --list \
+		| sed -nr '/Virtual\score.*pointer/ !s/.*id=([0-9]+)\s+\[slave\s+pointer.*/\1/p')
+	for dev in $pointer_devices; do xinput --$1 $dev; done
 }
 
 # Terminal
@@ -32,27 +29,22 @@ xrandr | grep -Eq "HDMI[12345] connected" && HDMI_YES=1 && ANY_YES=1
 DP=$(xrandr | grep -E "DP[12345]-[12345] connected" | grep -oE "DP[12345]-[12345]")
 HDMI=$(xrandr | grep -E "HDMI[12345] connected" | grep -oE "HDMI[12345]")
 
-## Workspace 1-4
-for w in 1 4; do
-    i3-msg workspace $w
-    $TERMINAL &
-    wait_for_program
-done
+#pointer_control disable
 
-i3-msg workspace 3
-$TERMINAL -e zsh -c "~/.local/bin/ranger ~/" &
-wait_for_program
-
-i3-msg workspace 2
-##firefox &
-
-if [ $EXT_SCREEN != 'None' ]; then
-  for w in 1 2 3 4 5 6 7 8; do
-    i3-msg "move workspace ${w}; to output ${EXT_SCREEN}"
-  done
+if [ "$HDMI_YES" -eq 1 ] && [ "$DP_YES" -eq 1 ]; then
+    sh $HOME/.screenlayout/home.sh
+else
+    sh $HOME/.screenlayout/laptop.sh
 fi
 
-## Refresh and GO!
-xrefresh &
+i3-msg workspace 3
+$TERMINAL --title "Ranger" -e zsh -c "~/.local/bin/ranger ~/" &
+wait_for_program
 
+i3-msg workspace 4
+$TERMINAL &
+wait_for_program
+
+#pointer_control enable
+xrefresh &
 exit 0
