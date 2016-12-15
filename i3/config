@@ -315,23 +315,23 @@ exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-s
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
 exec clipit
-exec --no-startup-id /usr/bin/mpd
+#exec --no-startup-id /usr/bin/mpd
 #exec --no-startup-id /usr/bin/linphone --iconified
 exec --no-startup-id /usr/bin/redshift-gtk
 exec --no-startup-id ~/.local/bin/devpi-server --start
-#exec dropbox start
-exec --no-startup-id ~/.local/bin/udiskie -ant &
+exec dropbox start
+exec --no-startup-id /usr/bin/udiskie -ant &
 exec pulseaudio --start
 exec_always feh --bg-fill '/home/gchamoul/Pictures/pacific_ocean_rocks-wallpaper-1920x1080.jpg'
 exec /usr/bin/xautolock -time 5 \
    -locker "i3lock -c 000000" \
    -notify 30 \
-   -notifier "notify-send -u critical -t 10000 -- 'LOCKING scree in 30 seconds'" &
+   -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
 
-exec /usr/libexec/cinnamon-settings-daemon &
-#exec /usr/libexec/gnome-settings-daemon &
+#exec /usr/libexec/cinnamon-settings-daemon &
+exec /usr/libexec/gnome-settings-daemon &
 exec /usr/libexec/polkit-gnome-authentication-agent-1 &
-exec nm-applet
+#exec nm-applet
 exec seapplet
 exec --no-startup-id ~/.i3/autostart
 

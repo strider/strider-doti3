@@ -38,10 +38,10 @@ else
 fi
 
 i3-msg workspace 3
-$TERMINAL --title "Ranger" -e zsh -c "~/.local/bin/ranger ~/" &
+$TERMINAL --title "Ranger" -e zsh -c "/usr/bin/ranger ~/" &
 wait_for_program
 
-i3-msg workspace 4
+i3-msg workspace 1
 $TERMINAL &
 wait_for_program
 
