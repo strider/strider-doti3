@@ -27,7 +27,7 @@ case "$1" in
         sudo systemctl hybrid-sleep
         ;;
     *)
-        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown|hybrid-sleep}"
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown|hybrid}"
         exit 2
 esac
 

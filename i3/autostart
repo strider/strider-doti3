@@ -9,14 +9,6 @@ wait_for_program () {
 	[ $c -eq 15 ] && i3-nagbar -m "Error on executing $0 script"
 }
 
-# Temporarily disable pointer while setting layout
-# $1 == <enable|disable>
-pointer_control() {
-	[ -v pointer_devices ] || pointer_devices=$(xinput --list \
-		| sed -nr '/Virtual\score.*pointer/ !s/.*id=([0-9]+)\s+\[slave\s+pointer.*/\1/p')
-	for dev in $pointer_devices; do xinput --$1 $dev; done
-}
-
 # Terminal
 TERMINAL=urxvt256c-ml
 
@@ -37,14 +29,37 @@ else
     sh $HOME/.screenlayout/laptop.sh
 fi
 
-i3-msg workspace 3
-$TERMINAL --title "Ranger" -e zsh -c "/usr/bin/ranger ~/" &
-wait_for_program
-
 i3-msg workspace 1
 $TERMINAL &
 wait_for_program
+sleep 5
+
+i3-msg workspace 3
+$TERMINAL --title "Ranger" -e zsh -c "/usr/bin/ranger $HOME/" &
+wait_for_program
+
+#i3-msg workspace 4
+#$TERMINAL --title "DEVEL" -e zsh -c "/usr/bin/mux DEVEL" &
+#wait_for_program
+
+#i3-msg workspace 5
+#$TERMINAL --title "REDHAT" -e zsh -c "/usr/bin/mux RedHat" &
+#wait_for_program
+
+#if [ "$DP_YES" -eq 1 ]; then
+    #i3-msg workspace 7
+    #$TERMINAL --title "IRC" -e zsh
+    #wait_for_program
+#else
+    #i3-msg workspace 6
+    #$TERMINAL --title "IRC" -e zsh
+    #wait_for_program
+#fi
 
 #pointer_control enable
 xrefresh &
+
+# Update dmenu cache
+dmenu_path >/dev/null &
+
 exit 0
