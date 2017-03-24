@@ -53,10 +53,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 hide_edge_borders both
-new_window pixel 2
-new_float pixel 2
+new_window pixel 1
+new_float pixel 1
 bindsym $mod+t border normal
-bindsym $mod+y border pixel 2
+bindsym $mod+y border pixel 1
 bindsym $mod+u border none
 
 # alternatively, you can use the cursor keys:
