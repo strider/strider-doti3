@@ -112,7 +112,7 @@ bindsym $mod+c workspace back_and_forth
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
 bindsym $mod+Shift+x exec urxvt256c-ml -title "Ranger" -e zsh -c "~/.local/bin/ranger ~/"
 bindsym $mod+Shift+u exec urxvt256c-ml -title "DNF Upgrade!!!" -e zsh -c "sudo dnf upgrade && sleep 20"
-bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c "kinit && sleep 5"
+bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c "kinit && klist && sleep 5"
 
 # focus the child container
 #bindsym $mod+d focus child
