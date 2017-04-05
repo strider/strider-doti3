@@ -34,27 +34,9 @@ $TERMINAL &
 wait_for_program
 sleep 5
 
-i3-msg workspace 3
-$TERMINAL --title "Ranger" -e zsh -c "/usr/bin/ranger $HOME/" &
-wait_for_program
-
-#i3-msg workspace 4
-#$TERMINAL --title "DEVEL" -e zsh -c "/usr/bin/mux DEVEL" &
+#i3-msg workspace 3
+#$TERMINAL --title "Ranger" -e zsh -c "/usr/bin/ranger $HOME/" &
 #wait_for_program
-
-#i3-msg workspace 5
-#$TERMINAL --title "REDHAT" -e zsh -c "/usr/bin/mux RedHat" &
-#wait_for_program
-
-#if [ "$DP_YES" -eq 1 ]; then
-    #i3-msg workspace 7
-    #$TERMINAL --title "IRC" -e zsh
-    #wait_for_program
-#else
-    #i3-msg workspace 6
-    #$TERMINAL --title "IRC" -e zsh
-    #wait_for_program
-#fi
 
 #pointer_control enable
 xrefresh &

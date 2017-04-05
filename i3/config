@@ -39,8 +39,8 @@ bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -o 85"
 bindsym $mod+Shift+p exec passmenu
 bindsym $mod+Shift+a exec "rofi -combi-modi window,drun -show combi -modi combi"
 
-bindsym $mod+d workspace 4; exec "urxvt256c-ml --title 'DEVEL' -e zsh -c '/usr/bin/mux DEVEL'"
-bindsym $mod+shift+m workspace 5;  exec "urxvt256c-ml --title 'RedHat' -e zsh -c '/usr/bin/mux RedHat'"
+bindsym $mod+d exec "urxvt256c-ml --title 'DEVEL' -e zsh -c '/usr/bin/mux DEVEL'"
+bindsym $mod+shift+m exec "urxvt256c-ml --title 'RedHat' -e zsh -c '/usr/bin/mux RedHat'"
 
 # mpdmenu (https://github.com/k00mi/mpdmenu)
 # A small bash script for controlling MPD through dmenu.
@@ -131,11 +131,6 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+Control+1 workspace 11
-bindsym $mod+Control+2 workspace 12
-bindsym $mod+Control+3 workspace 13
-bindsym $mod+Control+4 workspace 14
-bindsym $mod+Control+5 workspace 15
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -148,11 +143,6 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-bindsym $mod+Shift+Control+1 move container to workspace 11
-bindsym $mod+Shift+Control+2 move container to workspace 12
-bindsym $mod+Shift+Control+3 move container to workspace 13
-bindsym $mod+Shift+Control+4 move container to workspace 14
-bindsym $mod+Shift+Control+5 move container to workspace 15
 
 bindsym $mod+F1 focus output $display0
 bindsym $mod+F2 focus output $display1
@@ -261,13 +251,14 @@ bar {
   font pango:FontAwesome 8, Terminus for Powerline 08
   status_command ~/.i3/conky.sh
   tray_output eDP1
+  separator_symbol ""
   mode dock
   workspace_buttons yes
   colors {
 	# Whole color settings
 	background   $lightblack
-	statusline   $green
-	separator    $grey
+	statusline   $lightwhite
+	separator    $yellow
 
 	# type			border       backgr.      text
 	focused_workspace	$green   $green       $black
@@ -307,11 +298,6 @@ workspace 7 output $display2
 workspace 8 output $display2
 workspace 9 output $display2
 workspace 10 output $display2
-workspace 11 output $display2
-workspace 12 output $display2
-workspace 13 output $display2
-workspace 14 output $display2
-workspace 15 output $display2
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -374,10 +360,10 @@ exec --no-startup-id /usr/bin/udiskie -ant &
 exec pulseaudio --start
 exec --no-startup-id /usr/bin/pasystray
 exec_always feh --bg-fill '/home/gchamoul/Pictures/9C48gT1.jpg'
-exec /usr/bin/xautolock -time 5 \
-   -locker "i3lock -c 000000" \
-   -notify 30 \
-   -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+#exec /usr/bin/xautolock -time 5 \
+   #-locker "i3lock -c 000000" \
+   #-notify 30 \
+   #-notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
 
 #exec /usr/libexec/cinnamon-settings-daemon &
 exec /usr/libexec/gnome-settings-daemon &
