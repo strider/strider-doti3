@@ -195,7 +195,7 @@ mode "resize" {
 }
 
 # Create Log out, Reboot, Poweroff bindings
-set $screen_setup SCREEN (l) Laptop Only, (h) Home Office
+set $screen_setup SCREEN (l) Laptop Only, (h) Office
 mode "$screen_setup" {
     bindsym l exec --no-startup-id $HOME/.screenlayout/laptop.sh, mode "default"
     bindsym h exec --no-startup-id $HOME/.screenlayout/home.sh, mode "default"
@@ -255,16 +255,16 @@ bar {
   mode dock
   workspace_buttons yes
   colors {
-	# Whole color settings
-	background   $lightblack
-	statusline   $lightwhite
-	separator    $yellow
+    # Whole color settings
+    background   $lightblack
+    statusline   $lightwhite
+    separator    $yellow
 
-	# type			border       backgr.      text
-	focused_workspace	$green   $green       $black
-	active_workspace	$grey    $grey        $lightgrey
-	inactive_workspace	$grey    $grey        $lightgrey
-	urgent_workspace	$red     $red         $lightwhite
+    # type			border       backgr.      text
+    focused_workspace	$green   $green       $black
+    active_workspace	$grey    $grey        $lightgrey
+    inactive_workspace	$grey    $grey        $lightgrey
+    urgent_workspace	$red     $red         $lightwhite
   }
 }
 
@@ -274,16 +274,16 @@ bar {
   tray_output none
   position top
   colors {
-	# Whole color settings
-	background   $lightblack
-	statusline   $green
-	separator    $grey
+    # Whole color settings
+    background   $lightblack
+    statusline   $green
+    separator    $grey
 
-	# type			border       backgr.      text
-	focused_workspace	$green   $green       $black
-	active_workspace	$grey    $grey        $lightgrey
-	inactive_workspace	$grey    $grey        $lightgrey
-	urgent_workspace	$red     $red         $lightwhite
+    # type			border       backgr.      text
+    focused_workspace	$green   $green       $black
+    active_workspace	$grey    $grey        $lightgrey
+    inactive_workspace	$grey    $grey        $lightgrey
+    urgent_workspace	$red     $red         $lightwhite
   }
 }
 
