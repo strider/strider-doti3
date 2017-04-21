@@ -323,7 +323,7 @@ for_window [window_role="bubble"] floating enable; border normal
 for_window [window_role="Preferences"] floating enable; border normal
 for_window [class="google-chrome"] border none
 for_window [class="Firefox"] border none
-for_window [class="Gvim"] floating enable; border pixel 1
+for_window [class="Gvim"] border pixel 1
 for_window [class="Nautilus"] border none
 for_window [class="Nemo"] border none
 for_window [class="Virt-manager"] floating enable; border none
@@ -351,21 +351,13 @@ exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-s
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
 exec clipit
-#exec --no-startup-id /usr/bin/mpd
-#exec --no-startup-id /usr/bin/linphone --iconified
 exec --no-startup-id /usr/bin/redshift-gtk
-exec --no-startup-id ~/.local/bin/devpi-server --start
 exec dropbox start
 exec --no-startup-id /usr/bin/udiskie -ant &
 exec pulseaudio --start
 exec --no-startup-id /usr/bin/pasystray
-exec_always feh --bg-fill '/home/gchamoul/Pictures/9C48gT1.jpg'
-#exec /usr/bin/xautolock -time 5 \
-   #-locker "i3lock -c 000000" \
-   #-notify 30 \
-   #-notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+exec_always feh --bg-fill '/usr/share/backgrounds/f25/extras/milky-way-over-mangart-mountain.jpg'
 
-#exec /usr/libexec/cinnamon-settings-daemon &
 exec /usr/libexec/gnome-settings-daemon &
 exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 exec nm-applet
