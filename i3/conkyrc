@@ -22,6 +22,7 @@ TEXT
   {"full_text": " ${uptime_short}", "min_width": "59m59s" },
 
   ${if_up redhat0}{ "full_text": " ${addr redhat0}" , "color": "\#00FF00"},${endif}
+  ${if_up tun0}{ "full_text": " ${addr tun0}" , "color": "\#00FF00"},${endif}
 
   ${if_up wlp4s0}{"full_text": " ${wireless_essid wlp4s0} [${addr wlp4s0}]","color":"\#33CC99"},${endif}
   ${if_up wlp3s0}{"full_text": " ${wireless_essid wlp3s0} [${addr wlp3s0}]","color":"\#33CC99"},${endif}
