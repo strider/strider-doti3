@@ -38,6 +38,8 @@ bindsym $mod+space exec "~/bin/rofi -show run -o 85"
 bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -o 85"
 bindsym $mod+Shift+p exec passmenu
 bindsym $mod+Shift+a exec "rofi -combi-modi window,drun -show combi -modi combi"
+bindsym $mod+F6 exec $HOME/.i3/monitor_layout.sh
+bindsym $mod+F7 exec $HOME/.i3/rofi-randr
 
 bindsym $mod+d exec "urxvt256c-ml --title 'DEVEL' -e zsh -c '/usr/bin/mux DEVEL'"
 bindsym $mod+shift+m exec "urxvt256c-ml --title 'RedHat' -e zsh -c '/usr/bin/mux RedHat'"
@@ -119,6 +121,8 @@ bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c 
 
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
+
+workspace_layout tabbed
 
 # switch to workspace
 bindsym $mod+1 workspace 1

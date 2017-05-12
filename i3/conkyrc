@@ -1,12 +1,12 @@
-background        no
-out_to_console 	  yes
-out_to_x	  no
-update_interval	  1
-total_run_times	  0
-short_units	  yes
-pad_percents	  3
-override_utf8_locale yes
-if_up_strictness link
+background             no
+out_to_console         yes
+out_to_x               no
+update_interval        1
+total_run_times        0
+short_units            yes
+pad_percents           3
+override_utf8_locale   yes
+if_up_strictness       link
 
 TEXT
 [
@@ -14,24 +14,21 @@ TEXT
     {"full_text": "Plug In Charger!!!", "urgent": true, "color": "\#FF0000"},
   ${endif}
 
-  {"full_text": " / ${fs_free /}" },
-  {"full_text": " ~/ ${fs_free /home}" },
-  {"full_text": "❤ $acpitemp°C [$cpu%]","color": "\#DC322F"},
-  {"full_text": " RAM ${memperc}%", "color":"\#B58900"},
-  {"full_text": " CPU ${cpu cpu1}% ${freq_g 1}GHz ${exec sensors | grep -m 1 "Core 0"|awk '{print $3}'}", "color":"\#B58900"},
-  {"full_text": " ${uptime_short}", "min_width": "59m59s" },
+  {"full_text": "[CPU] $acpitemp°C [$cpu%]","color": "\#DC322F"},
+  {"full_text": "[RAM] ${membar}%", "color":"\#B58900"},
+  {"full_text": "[UPTIME] ${uptime_short}", "min_width": "59m59s", "color": "\#2AA198" },
 
-  ${if_up redhat0}{ "full_text": " ${addr redhat0}" , "color": "\#00FF00"},${endif}
-  ${if_up tun0}{ "full_text": " ${addr tun0}" , "color": "\#00FF00"},${endif}
+  ${if_up redhat0}{ "full_text": "[VPN] ${addr redhat0}" , "color": "\#00FF00"},${endif}
+  ${if_up tun0}{ "full_text": "[VPN] ${addr tun0}" , "color": "\#00FF00"},${endif}
 
-  ${if_up wlp4s0}{"full_text": " ${wireless_essid wlp4s0} [${addr wlp4s0}]","color":"\#33CC99"},${endif}
-  ${if_up wlp3s0}{"full_text": " ${wireless_essid wlp3s0} [${addr wlp3s0}]","color":"\#33CC99"},${endif}
+  ${if_up wlp4s0}{"full_text": "[WLAN] ${wireless_essid wlp4s0}/(${wireless_link_qual_perc wlp4s0}%)/[${addr wlp4s0}]","color":"\#33CC99"},${endif}
+  ${if_up wlp3s0}{"full_text": "[WLAN] ${wireless_essid wlp3s0}/(${wireless_link_qual_perc wlp3s0}%)/[${addr wlp3s0}]","color":"\#33CC99"},${endif}
 
-  ${if_up enp0s25}{"full_text": " enp0s25 [${addr enp0s25}]","color":"\#33CC99"},${endif}
+  ${if_up enp0s25}{"full_text": "[ETH] enp0s25: ${addr enp0s25}","color":"\#33CC99"},${endif}
 
   ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
   {"full_text": "CapsLock", "color": "\#00FF00" },$endif
-  {"full_text": " ${execpi 6 dropbox status | sed -n 1p}","color":"\#a6a6a6"},
+
   ${if_existing /sys/class/power_supply/AC/online 0}
     ${if_match ${battery_percent} <= 20}
         {"full_text": " ${battery_percent BAT0}%" , "color":"\#FB4646"},
@@ -45,6 +42,8 @@ TEXT
         {"full_text": "🔌 ${battery_percent BAT0}%" , "color":"\#909090"},
     ${endif}
   ${endif}
-  {"full_text": "${time %Y-%m-%d %H:%M}"}
+  {"full_text": "US/Pacific ${tztime US/Pacific %H:%M%p}"},
+  {"full_text": "US/Eastern ${tztime US/Eastern %H:%M%p}"},
+  {"full_text": "${time %a %d %b, %H:%M%p, WW%V.%u}"}
 ],
 
