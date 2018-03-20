@@ -1,6 +1,6 @@
 # <- this tricks vim into using syntax highlighting
 [global]
-    font = Terminus for Powerline 08
+    font = Terminus for Powerline Bold 08
 
     # allow a small subset of html markup:
     # <b>bold</b>
@@ -20,7 +20,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "<b>%a:</b> %s\n%b"
 
     # Sort messages by urgency
     sort = yes
@@ -47,7 +47,6 @@
 
     # ignore newlines '\n' in notifications
     ignore_newline = no
-
 
     # the geometry of the window
     # geometry [{width}]x{height}][+/-{x}+/-{y}]
@@ -184,10 +183,18 @@
 # fitting options for rules.
 
 [irc]
-    appname = "weechat-curses"
+    appname = "WeeChat"
+    format = "%s: %b"
     timeout = 10
-    background = "#0033bb"
-    foreground = "#dddddd"
+    background = "#4682B4"
+    foreground = "#ffffff"
+
+[Mozilla Firefox]
+    appname = Firefox
+    format = "<b>.::. Mozilla Firefox .::.</b>\n%s\n%b"
+    background = "#FFF8DC"
+    foreground = "#000000"
+    timeout = 10
 
 #[espeak]
 #    summary = "*"

@@ -16,10 +16,10 @@ TERMINAL=urxvt256c-ml
 HDMI_YES=0
 DP_YES=0
 ANY_YES=0
-xrandr | grep -Eq "DP[12345]-[12345] connected" && DP_YES=1 && ANY_YES=1
-xrandr | grep -Eq "HDMI[12345] connected" && HDMI_YES=1 && ANY_YES=1
-DP=$(xrandr | grep -E "DP[12345]-[12345] connected" | grep -oE "DP[12345]-[12345]")
-HDMI=$(xrandr | grep -E "HDMI[12345] connected" | grep -oE "HDMI[12345]")
+xrandr | grep -Eq "DP-[12345]-[12345] connected" && DP_YES=1 && ANY_YES=1
+xrandr | grep -Eq "HDMI-[12345] connected" && HDMI_YES=1 && ANY_YES=1
+DP=$(xrandr | grep -E "DP-[12345]-[12345] connected" | grep -oE "DP-[12345]-[12345]")
+HDMI=$(xrandr | grep -E "HDMI-[12345] connected" | grep -oE "HDMI-[12345]")
 
 #pointer_control disable
 
