@@ -34,9 +34,10 @@ $TERMINAL &
 wait_for_program
 sleep 5
 
-#i3-msg workspace 3
-#$TERMINAL --title "Ranger" -e zsh -c "/usr/bin/ranger $HOME/" &
-#wait_for_program
+pulseaudio --kill
+wait_for_program
+pulseaudio --start
+wait_for_program
 
 #pointer_control enable
 xrefresh &

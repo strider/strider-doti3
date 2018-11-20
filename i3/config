@@ -18,6 +18,7 @@ set $display2 "HDMI-1"
 # chose a FreeType font, such as:
 font pango:Terminus for Powerline 08
 
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -36,6 +37,7 @@ bindsym $mod+Shift+q kill
 # installed.
 bindsym $mod+space exec "~/bin/rofi -show run -o 85"
 bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -o 85"
+bindsym $mod+g exec "gentoken.sh"
 bindsym $mod+Shift+p exec passmenu
 bindsym $mod+Shift+a exec "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+F4 exec --no-startup-id $HOME/bin/mutemic.sh
@@ -44,8 +46,8 @@ bindsym $mod+F7 exec $HOME/.i3/rofi-randr
 bindsym $mod+F9 exec --no-startup-id $HOME/.screenlayout/laptop.sh
 bindsym $mod+F8 exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
 
-bindsym $mod+d exec "urxvt256c-ml --title 'DEVEL' -e zsh -c '/usr/bin/mux DEVEL'"
-bindsym $mod+shift+m exec "urxvt256c-ml --title 'RedHat' -e zsh -c '/usr/bin/mux RedHat'"
+bindsym $mod+d exec "firefox"
+bindsym $mod+shift+m exec "pavucontrol"
 
 # mpdmenu (https://github.com/k00mi/mpdmenu)
 # A small bash script for controlling MPD through dmenu.
@@ -57,9 +59,9 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-hide_edge_borders both
-new_window pixel 1
-new_float pixel 1
+hide_edge_borders smart
+default_border normal
+default_floating_border normal
 bindsym $mod+t border normal
 bindsym $mod+y border pixel 1
 bindsym $mod+u border none
@@ -116,8 +118,8 @@ bindsym $mod+c workspace back_and_forth
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
 bindsym $mod+Shift+x exec urxvt256c-ml -title "Ranger" -e zsh -c "~/.local/bin/ranger ~/"
-bindsym $mod+Shift+u exec urxvt256c-ml -title "DNF Upgrade!!!" -e zsh -c "sudo dnf upgrade && sleep 20"
-bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c "kinit && klist && sleep 5"
+#bindsym $mod+Shift+u exec urxvt256c-ml -title "DNF Upgrade!!!" -e zsh -c "sudo dnf upgrade && sleep 20"
+#bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c "kinit && klist && sleep 5"
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -164,6 +166,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # screen locker (first move to "safe" workspace without any chat app)
 bindsym Control+$mod+l exec /usr/bin/i3lock -c 000000
+bindsym Shift+$mod+s exec $HOME/.i3/./i3exit suspend
 
 # pulse audio volume control
 #bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
@@ -200,21 +203,24 @@ mode "resize" {
 }
 
 # Create Log out, Reboot, Poweroff bindings
-set $screen_setup SCREEN (l) Laptop Only, (h) Office
-mode "$screen_setup" {
-    bindsym l exec --no-startup-id $HOME/.screenlayout/laptop.sh, mode "default"
-    bindsym h exec --no-startup-id $HOME/.screenlayout/home.sh, mode "default"
+#set $screen_setup SCREEN (l) Laptop Only, (h) Office
+#mode "$screen_setup" {
+    #bindsym l exec --no-startup-id $HOME/.screenlayout/laptop.sh, mode "default"
+    #bindsym h exec --no-startup-id $HOME/.screenlayout/home.sh, mode "default"
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+S mode "$screen_setup"
+    ## back to normal: Enter or Escape
+    #bindsym Return mode "default"
+    #bindsym Escape mode "default"
+#}
+#bindsym $mod+Shift+S mode "$screen_setup"
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+i exec i3-input -F 'rename workspace to %s' -P 'New name: '
-bindsym $mod+Shift+o exec i3-input -F 'move container to workspace "%s"' -P 'move this window to workspace #: '
+#bindsym $mod+i exec i3-input -F 'rename workspace to %s' -P 'New name: '
+#bindsym $mod+Shift+o exec i3-input -F 'move container to workspace "%s"' -P 'move this window to workspace #: '
+# mark container
+bindsym $mod+i exec i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+o exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
 # turn off the screen
 bindsym $mod+shift+z exec "sleep 2; xset dpms force off"
@@ -252,45 +258,47 @@ set $lightgrey		#707880
 bar {
   output eDP-1
   position top
-  font pango: Terminus for Powerline 08
+  font pango: Terminus for Powerline Bold 08
   status_command py3status -c ~/.i3/.i3status.conf
   tray_output eDP-1
   mode dock
   separator_symbol "  "
   workspace_buttons yes
   colors {
-    separator #ffffff
-    background #3c3b37
+    separator #666666
+    background #000000
     statusline #ffffff
-    focused_workspace #526532 #526532 #ffffff
-    active_workspace #aea79f #aea79f #3c3b37
-    inactive_workspace #3c3b37 #3c3b37 #aea79f
-    urgent_workspace #FF0000 #FF0000 #ffffff
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace #2f343a #900000 #ffffff
   }
 }
 
 bar {
   output HDMI-1
   output DP-2-2
-  tray_output none
+  tray_output DP-2-2
+  font pango: Terminus for Powerline 08
+  status_command py3status -c ~/.i3/.i3status.conf
   position top
   colors {
-    separator #ffffff
-    background #3c3b37
+    separator #666666
+    background #000000
     statusline #ffffff
-    focused_workspace #526532 #526532 #ffffff
-    active_workspace #aea79f #aea79f #3c3b37
-    inactive_workspace #3c3b37 #3c3b37 #aea79f
-    urgent_workspace #FF0000 #FF0000 #ffffff
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace #2f343a #900000 #ffffff
   }
 }
 
 # Workspaces
 workspace 1 output $display0
-workspace 2 output $display1
-workspace 3 output $display1
-workspace 4 output $display1
-workspace 5 output $display1
+workspace 2 output $display0
+workspace 3 output $display0
+workspace 4 output $display0
+workspace 5 output $display0
 workspace 6 output $display1
 workspace 7 output $display1
 workspace 8 output $display1
@@ -323,8 +331,7 @@ for_window [class="google-chrome"] border none
 for_window [class="Firefox"] border none
 for_window [class="Gvim"] border pixel 1
 for_window [class="Nautilus"] border none
-for_window [class="Nemo"] border none
-for_window [class="Virt-manager"] floating enable; border none
+for_window [class="Virt-manager"] floating enable; border normal
 for_window [title="- Shutter"] floating enable; border normal
 for_window [title="DNF Upgrade!!!"] floating enable; border pixel 1
 for_window [title="Get Kerberos Ticket"] floating enable; border pixel 1
@@ -343,20 +350,21 @@ exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
-exec --no-startup-id xbacklight -set 100 &
-exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo '60%' &
+#exec --no-startup-id xbacklight -set 100 &
+#exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo '60%' &
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
-exec clipit
-exec --no-startup-id /usr/bin/redshift-gtk
-exec dropbox start
-exec --no-startup-id /usr/bin/udiskie -ant &
-exec pulseaudio --start
-exec --no-startup-id /usr/bin/pasystray
-exec_always feh --bg-scale '/home/gchamoul/Pictures/YOGA/yoga-wallpaper-hd-6.jpg'
+exec clipit -n
+#exec --no-startup-id /usr/bin/redshift-gtk
+#exec dropbox start
+exec --no-startup-id /usr/bin/udiskie -anT &
+#exec pulseaudio --start
+#exec --no-startup-id /usr/bin/pasystray
+exec_always feh --bg-scale '/home/gchamoul/Pictures/mnmlist3.jpg'
+exec --no-startup-id compton --config ~/.i3/compton.conf &
 
-exec /usr/libexec/polkit-gnome-authentication-agent-1 &
-exec nm-applet
+#exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+#exec nm-applet
 exec seapplet
 exec --no-startup-id ~/.i3/autostart
 
@@ -364,7 +372,7 @@ exec --no-startup-id ~/.i3/autostart
 #class				border		backgr.		text		        split
 client.background		$black
 
-client.focused #526532 #526532 #ffffff #a4cb64
-client.focused_inactive #aea79f #aea79f #3c3b37 #aea79f
-client.unfocused #3c3b37 #3c3b37 #aea79f #3c3b37
-client.urgent #FF0000 #FF0000 #ffffff #FF0000
+client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
