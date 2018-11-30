@@ -60,6 +60,8 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 hide_edge_borders smart
+new_window normal
+new_float normal
 default_border normal
 default_floating_border normal
 bindsym $mod+t border normal
@@ -117,9 +119,9 @@ bindsym $mod+c workspace back_and_forth
 
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
-bindsym $mod+Shift+x exec urxvt256c-ml -title "Ranger" -e zsh -c "~/.local/bin/ranger ~/"
+bindsym $mod+Shift+x exec i3-msg workspace 3; exec urxvt256c-ml -title "Ranger" -e zsh -c "ranger ~/"
 #bindsym $mod+Shift+u exec urxvt256c-ml -title "DNF Upgrade!!!" -e zsh -c "sudo dnf upgrade && sleep 20"
-#bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c "kinit && klist && sleep 5"
+bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c "kinit && klist && sleep 2"
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -127,7 +129,7 @@ bindsym $mod+Shift+x exec urxvt256c-ml -title "Ranger" -e zsh -c "~/.local/bin/r
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
 
-workspace_layout tabbed
+#workspace_layout tabbed
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -165,8 +167,12 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+$mod+l exec /usr/bin/i3lock -c 000000
+bindsym Control+$mod+l exec $HOME/bin/i3lockmore -d --lock-icon --image-fill $HOME/Pictures/mnmlist3.jpg
 bindsym Shift+$mod+s exec $HOME/.i3/./i3exit suspend
+
+# compton
+bindsym $mod+b exec --no-startup-id pkill compton; exec notify-send 'Compton Off'
+bindsym $mod+Shift+b exec --no-startup-id compton --config ~/.i3/compton.conf; exec notify-send 'Compton On'
 
 # pulse audio volume control
 #bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
@@ -242,17 +248,6 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+T mode "$mode_system"
 
-# oldschool theme
-set $black		#000000
-set $blue		        #0000FF
-set $grey	 	        #373B41
-set $yellow		#FFFF00
-set $red		        #FF0000
-set $green		#00FF00
-set $lightwhite		#C5C8C6
-set $lightblack		#232B2B
-set $lightgrey		#707880
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -322,26 +317,27 @@ assign [class="^Zathura$"] 3
 assign [class="^Stardict$"] 8
 
 # custom window settings
-for_window [class="^.*"] border none; title_format ">_ %title "
+#for_window [class="^.*"] border none; title_format ">_ %title "
+for_window [class="^.*"] title_format ">_ %title "
 for_window [window_role="pop-up"] floating enable; border normal
 for_window [window_role="task_dialog"] floating enable; border normal
 for_window [window_role="bubble"] floating enable; border normal
 for_window [window_role="Preferences"] floating enable; border normal
 for_window [class="google-chrome"] border none
 for_window [class="Firefox"] border none
-for_window [class="Gvim"] border pixel 1
+for_window [class="Gvim"] border normal
 for_window [class="Nautilus"] border none
 for_window [class="Virt-manager"] floating enable; border normal
 for_window [title="- Shutter"] floating enable; border normal
-for_window [title="DNF Upgrade!!!"] floating enable; border pixel 1
-for_window [title="Get Kerberos Ticket"] floating enable; border pixel 1
+for_window [title="DNF Upgrade!!!"] floating enable; border normal
+for_window [title="Get Kerberos Ticket"] floating enable; border normal
 for_window [class="^Vlc$"] floating enable
 for_window [instance="gimp"] floating enable
-for_window [class="Gnome-disks"] floating enable
+for_window [class="Gnome-disks"] floating enable; border normal
 for_window [class="Linphone"] floating enable
-for_window [class="Zathura"] border none
+for_window [class="Zathura"] border normal
 for_window [class="URxvt"] border pixel 1
-for_window [class="(?i)pavucontrol"] floating enable, move position mouse
+for_window [class="(?i)pavucontrol"] floating enable; move position mouse; border normal
 
 bindsym $mod+F5 [class="Firefox"] move workspace current
 
@@ -350,21 +346,11 @@ exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
-#exec --no-startup-id xbacklight -set 100 &
-#exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo '60%' &
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
 exec clipit -n
-#exec --no-startup-id /usr/bin/redshift-gtk
-#exec dropbox start
 exec --no-startup-id /usr/bin/udiskie -anT &
-#exec pulseaudio --start
-#exec --no-startup-id /usr/bin/pasystray
-exec_always feh --bg-scale '/home/gchamoul/Pictures/mnmlist3.jpg'
-exec --no-startup-id compton --config ~/.i3/compton.conf &
-
-#exec /usr/libexec/polkit-gnome-authentication-agent-1 &
-#exec nm-applet
+exec_always feh --bg-scale '/home/gchamoul/Pictures/Discovering-space2-166320056.jpg'
 exec seapplet
 exec --no-startup-id ~/.i3/autostart
 
