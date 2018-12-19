@@ -35,18 +35,18 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+space exec "~/bin/rofi -show run -o 85"
-bindsym $mod+Shift+d exec "~/bin/rofi -show ssh -o 85"
-bindsym $mod+g exec "gentoken.sh"
-bindsym $mod+Shift+p exec passmenu
+bindsym $mod+space exec "rofi -show drun -o 85"
 bindsym $mod+Shift+a exec "rofi -combi-modi window,drun -show combi -modi combi"
+bindsym $mod+Shift+p exec passmenu
+#bindsym $mod+Shift+d exec "rofi -show ssh -o 85"
+bindsym $mod+g exec "gentoken.sh"
 bindsym $mod+F4 exec --no-startup-id $HOME/bin/mutemic.sh
 bindsym $mod+F6 exec $HOME/.i3/monitor_layout.sh
 bindsym $mod+F7 exec $HOME/.i3/rofi-randr
-bindsym $mod+F9 exec --no-startup-id $HOME/.screenlayout/laptop.sh
 bindsym $mod+F8 exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
+bindsym $mod+F9 exec --no-startup-id $HOME/.screenlayout/laptop.sh
 
-bindsym $mod+d exec "firefox"
+bindsym $mod+d exec i3-msg workspace 2; exec "firefox -P work"
 bindsym $mod+shift+m exec "pavucontrol"
 
 # mpdmenu (https://github.com/k00mi/mpdmenu)
@@ -87,9 +87,9 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Control+h split h
+bindsym Mod1+h split h
 # split in vertical orientation
-bindsym $mod+Control+v split v
+bindsym Mod1+v split v
 
 # split orientation
 bindsym $mod+v layout toggle split
@@ -129,7 +129,7 @@ bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -e zsh -c 
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
 
-#workspace_layout tabbed
+workspace_layout tabbed
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -167,12 +167,15 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+$mod+l exec $HOME/bin/i3lockmore -d --lock-icon --image-fill $HOME/Pictures/mnmlist3.jpg
-bindsym Shift+$mod+s exec $HOME/.i3/./i3exit suspend
+bindsym Control+$mod+l exec $HOME/bin/i3lockmore -d --lock-icon --image-fill $HOME/Pictures/mnmlist3.jpg --dpms 5
+bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
 # compton
 bindsym $mod+b exec --no-startup-id pkill compton; exec notify-send 'Compton Off'
 bindsym $mod+Shift+b exec --no-startup-id compton --config ~/.i3/compton.conf; exec notify-send 'Compton On'
+
+# redshift
+bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send 'RedShift Off'
 
 # pulse audio volume control
 #bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
@@ -231,29 +234,12 @@ bindsym $mod+Shift+o exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 # turn off the screen
 bindsym $mod+shift+z exec "sleep 2; xset dpms force off"
 
-# Create Log out, Reboot, Poweroff bindings
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+h) hybrid, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $HOME/.i3/./i3exit lock, mode "default"
-    bindsym e exec --no-startup-id $HOME/.i3/./i3exit logout, mode "default"
-    bindsym s exec --no-startup-id $HOME/.i3/./i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id $HOME/.i3/./i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id $HOME/.i3/./i3exit reboot, mode "default"
-    bindsym Shift+h exec --no-startup-id $HOME/.i3/./i3exit hybrid, mode "default"
-    bindsym Shift+s exec --no-startup-id $HOME/.i3/./i3exit shutdown, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+T mode "$mode_system"
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
   output eDP-1
   position top
-  font pango: Terminus for Powerline Bold 08
+  font pango: Terminus for Powerline 08
   status_command py3status -c ~/.i3/.i3status.conf
   tray_output eDP-1
   mode dock
@@ -261,11 +247,11 @@ bar {
   workspace_buttons yes
   colors {
     separator #666666
-    background #000000
-    statusline #ffffff
-    focused_workspace #4c7899 #285577 #ffffff
-    active_workspace #333333 #5f676a #ffffff
-    inactive_workspace #333333 #222222 #888888
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff
+    active_workspace #333333 #333333 #ffffff
+    inactive_workspace #333333 #333333 #888888
     urgent_workspace #2f343a #900000 #ffffff
   }
 }
@@ -279,11 +265,11 @@ bar {
   position top
   colors {
     separator #666666
-    background #000000
-    statusline #ffffff
-    focused_workspace #4c7899 #285577 #ffffff
-    active_workspace #333333 #5f676a #ffffff
-    inactive_workspace #333333 #222222 #888888
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff
+    active_workspace #333333 #333333 #ffffff
+    inactive_workspace #333333 #333333 #888888
     urgent_workspace #2f343a #900000 #ffffff
   }
 }
@@ -310,7 +296,7 @@ bindsym $mod+o scratchpad show
 #bindsym $mod+minus scratchpad show
 
 # workspace assignment (use "xprop")
-assign [class="^Firefox$"] 2
+#assign [class="^Firefox$"] 2
 assign [class="^Nautilus$"] 3
 assign [class="^Evince$"] 3
 assign [class="^Zathura$"] 3
@@ -319,7 +305,7 @@ assign [class="^Stardict$"] 8
 # custom window settings
 #for_window [class="^.*"] border none; title_format ">_ %title "
 for_window [class="^.*"] title_format ">_ %title "
-for_window [window_role="pop-up"] floating enable; border normal
+for_window [window_role="pop-up"] floating enable; border normal, move absolute center
 for_window [window_role="task_dialog"] floating enable; border normal
 for_window [window_role="bubble"] floating enable; border normal
 for_window [window_role="Preferences"] floating enable; border normal
@@ -337,28 +323,33 @@ for_window [class="Gnome-disks"] floating enable; border normal
 for_window [class="Linphone"] floating enable
 for_window [class="Zathura"] border normal
 for_window [class="URxvt"] border pixel 1
-for_window [class="(?i)pavucontrol"] floating enable; move position mouse; border normal
+for_window [class="(?i)pavucontrol"] floating enable; move position mouse
 
 bindsym $mod+F5 [class="Firefox"] move workspace current
 
 # start the session
-exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
 exec clipit -n
+exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always feh --bg-scale '/home/gchamoul/Pictures/Discovering-space2-166320056.jpg'
+#exec_always feh --bg-scale '/home/gchamoul/Pictures/Discovering-space2-166320056.jpg'
+exec_always feh --bg-scale '/home/gchamoul/Pictures/WP/wallpapersden.com_minimalistic-wind-farm_1920x1080.jpg'
 exec seapplet
+exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
 
 # Client color settings
-#class				border		backgr.		text		        split
-client.background		$black
+#class           border      backgr.     text             split
 
-client.focused #4c7899 #285577 #ffffff #2e9ef4
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused #333333 #222222 #888888 #292d2e
+# class                 border  backgr. text    indicator child_border
+client.placeholder      #212121 #0c0c0c #ffffff #212121   #262626
+client.background       #212121
+
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000

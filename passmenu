@@ -19,7 +19,7 @@ password=$(printf '%s\n' "${password_files[@]}" | rofi -o 85 -dmenu -p "pass:" "
 
 if [[ $typeit -eq 0 ]]; then
 	pass show -c "$password" 2>/dev/null
-        notify-send -u normal 'passmenu: Password loaded' "Copied $password to clipboard. Will clear in 45 seconds."
+        notify-send -u critical 'passmenu: Password loaded' "Copied $password to clipboard. Will clear in 45 seconds."
 else
 	xdotool - <<<"type --clearmodifiers -- $(pass show "$password" | head -n 1)"
 fi

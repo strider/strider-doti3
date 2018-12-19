@@ -1,12 +1,23 @@
 #!/bin/sh
 
-# Wait for the last command sent to background to create a window
+# Wait for program coming up
 wait_for_program () {
-	local c=0; until [ $((++c)) -eq 15 ]; do
-		xdotool search --onlyvisible --pid $! 2>/dev/null && break
-		sleep 1
-    done
-	[ $c -eq 15 ] && i3-nagbar -m "Error on executing $0 script"
+  n=0
+  while true
+  do
+    # PID of last background command
+    if xdotool search --onlyvisible --pid $! 2>/dev/null; then
+      break
+    else
+      if [ $n -eq 200 ]; then
+        notify-send -u critical "Error during start: last program $! did not started fast enough"
+        break
+      else
+        n=`expr $n + 1`
+        sleep 0.1
+      fi
+    fi
+  done
 }
 
 # Terminal
