@@ -32,23 +32,18 @@ xrandr | grep -Eq "HDMI-[12345] connected" && HDMI_YES=1 && ANY_YES=1
 DP=$(xrandr | grep -E "DP-[12345]-[12345] connected" | grep -oE "DP-[12345]-[12345]")
 HDMI=$(xrandr | grep -E "HDMI-[12345] connected" | grep -oE "HDMI-[12345]")
 
-#pointer_control disable
-
-if [ "$HDMI_YES" -eq 1 ] && [ "$DP_YES" -eq 1 ]; then
-    sh $HOME/.screenlayout/home.sh
-else
-    sh $HOME/.screenlayout/laptop.sh
+if [ "$DP_YES" -eq 1 ]; then
+    xrandr --output eDP-1 --mode 1920x1080 --below $DP --output $DP --mode 1920x1080
 fi
 
-i3-msg workspace 1
-$TERMINAL &
-wait_for_program
-sleep 5
-
-pulseaudio --kill
-wait_for_program
-pulseaudio --start
-wait_for_program
+if [ "$DP_YES" -eq 1 ]; then
+    for w in 1 2 3 4 5; do
+        i3-msg "workspace $w; move workspace to output $DP"
+    done
+    for w in 6 7 8 9 10; do
+        i3-msg "workspace $w; move workspace to output eDP-1"
+    done
+fi
 
 #pointer_control enable
 xrefresh &

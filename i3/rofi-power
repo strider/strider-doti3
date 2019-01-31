@@ -5,7 +5,7 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 
-OPTIONS="Lock\nReboot system\nPower-off system\nSuspend system\nHibernate system"
+OPTIONS="Lock Session\nReboot system\nPower-off system\nSuspend system\nHibernate system"
 
 LAUNCHER="rofi -width 30 -dmenu -i -p rofi-power:"
 
@@ -38,7 +38,7 @@ then
         lock && sudo systemctl suspend
         ;;
       Hibernate)
-        lock && sudo systemctl hibernate
+        sudo systemctl hibernate
         ;;
       *)
         ;;
