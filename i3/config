@@ -239,13 +239,10 @@ bar {
     separator_symbol "  "
     workspace_buttons yes
   colors {
-    separator #666666
-    background #000000
-    statusline #ffffff
-    focused_workspace #4c7899 #285577 #ffffff
-    active_workspace #333333 #5f676a #ffffff
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace #2f343a #900000 #ffffff
+    statusline #AAAAAA
+    background #333333
+    focused_workspace #282828 #282828 #FFFFFF
+    inactive_workspace #333333 #333333 #AAAAAA
   }
 }
 
@@ -285,7 +282,8 @@ for_window [window_role="task_dialog"] floating enable; border normal
 for_window [window_role="bubble"] floating enable; border normal
 for_window [window_role="Preferences"] floating enable; border normal
 for_window [class="google-chrome"] border none
-for_window [class="Firefox"] border none
+for_window [class="qutebrowser"] border normal
+for_window [class="Firefox"] border normal
 for_window [class="Gvim"] border normal
 for_window [class="Nautilus"] border normal
 for_window [class="Virt-manager"] floating enable; border normal
@@ -331,7 +329,6 @@ exec --no-startup-id ~/.i3/autostart
 client.placeholder      #212121 #0c0c0c #ffffff #212121   #262626
 client.background       #212121
 
-client.focused #4c7899 #285577 #ffffff #2e9ef4
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused #333333 #222222 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+client.unfocused #333333 #333333 #FFFFFF #333333
+client.focused_inactive #333333 #333333 #FFFFFF #000000
+client.focused #000000 #000000 #FFFFFF #000000
