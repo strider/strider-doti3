@@ -238,12 +238,15 @@ bar {
     mode dock
     separator_symbol "  "
     workspace_buttons yes
-  colors {
-    statusline #AAAAAA
-    background #333333
-    focused_workspace #282828 #282828 #FFFFFF
-    inactive_workspace #333333 #333333 #AAAAAA
-  }
+    colors {                #Border #Backg  #Text
+        focused_workspace   #a30000 #a30000 #f0f0f0
+        active_workspace    #820000 #1e1e1e #f0f0f0
+        inactive_workspace  #6e0000 #820000 #f0f0f0
+        urgent_workspace    #cc0000 #1e1e1e #f0f0f0
+        background                  #1e1e1e
+        statusline                          #f0f0f0
+        separator                           #f0f0f0
+    }
 }
 
 # Workspaces
@@ -282,10 +285,11 @@ for_window [window_role="task_dialog"] floating enable; border normal
 for_window [window_role="bubble"] floating enable; border normal
 for_window [window_role="Preferences"] floating enable; border normal
 for_window [class="google-chrome"] border none
-for_window [class="qutebrowser"] border normal
+for_window [class="qutebrowser"] border none
 for_window [class="Firefox"] border normal
 for_window [class="Gvim"] border normal
 for_window [class="Nautilus"] border normal
+for_window [class="Emacs"] border normal
 for_window [class="Virt-manager"] floating enable; border normal
 for_window [title="- Shutter"] floating enable; border normal
 for_window [title="DNF Upgrade!!!"] floating enable; border normal
@@ -322,13 +326,8 @@ exec --no-startup-id urxvt256c-ml -title Wiki -name Wiki -e zsh -c "vim -c Vimwi
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
 
-# Client color settings
-#class           border      backgr.     text             split
-
-# class                 border  backgr. text    indicator child_border
-client.placeholder      #212121 #0c0c0c #ffffff #212121   #262626
-client.background       #212121
-
-client.unfocused #333333 #333333 #FFFFFF #333333
-client.focused_inactive #333333 #333333 #FFFFFF #000000
-client.focused #000000 #000000 #FFFFFF #000000
+# Colors                #Border #backg  #text   #indicator
+client.focused          #a30000 #a30000 #f0f0f0 #a30000
+client.focused_inactive #820000 #1e1e1e #f0f0f0 #820000
+client.unfocused        #6e0000 #1e1e1e #f0f0f0 #0e418c
+client.urgent           #cc0000 #1e1e1e #f0f0f0 #cc0000
