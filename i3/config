@@ -67,6 +67,10 @@ bindsym $mod+Shift+b exec --no-startup-id compton --config ~/.i3/compton.conf; e
 # redshift
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
 
+# Emacs
+bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -- emacsclient -nw"
+bindsym $mod+n exec --no-startup-id "gnome-terminal -- emacs -nw"
+
 # pulse audio volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%; exec /usr/bin/killall -USR1 i3status
 bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%; exec /usr/bin/killall -USR1 i3status
@@ -232,21 +236,21 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-    font pango: Terminus for Powerline 08
+    font pango:Terminus for Powerline 08
     status_command py3status -c ~/.i3/.i3status.conf
     tray_output eDP-1
     mode dock
     separator_symbol "  "
     workspace_buttons yes
-    colors {                #Border #Backg  #Text
-        focused_workspace   #a30000 #a30000 #f0f0f0
-        active_workspace    #820000 #1e1e1e #f0f0f0
-        inactive_workspace  #6e0000 #820000 #f0f0f0
-        urgent_workspace    #cc0000 #1e1e1e #f0f0f0
-        background                  #1e1e1e
-        statusline                          #f0f0f0
-        separator                           #f0f0f0
-    }
+  colors {
+    separator #444444
+    background #222222
+    statusline #666666
+    focused_workspace #d70a53 #d70a53 #ffffff
+    active_workspace #333333 #333333 #888888
+    inactive_workspace #333333 #333333 #888888
+    urgent_workspace #eb709b #eb709b #ffffff
+  }
 }
 
 # Workspaces
@@ -285,6 +289,7 @@ for_window [window_role="task_dialog"] floating enable; border normal
 for_window [window_role="bubble"] floating enable; border normal
 for_window [window_role="Preferences"] floating enable; border normal
 for_window [class="google-chrome"] border none
+for_window [class="Gnome-terminal"] border none
 for_window [class="qutebrowser"] border none
 for_window [class="Firefox"] border none
 for_window [class="Gvim"] border normal
@@ -304,7 +309,7 @@ for_window [instance="Ranger"] mark ranger
 for_window [instance="IRC"] mark irc
 for_window [instance="Mail"] mark mail
 for_window [instance="DEVEL"] mark dev
-for_window [instance="Wiki"] move scratchpad
+# for_window [instance="Wiki"] move scratchpad
 #for_window [instance="Mail"] resize set 1400 1000, move position center
 #for_window [instance="Mail"] move scratchpad
 
@@ -313,21 +318,19 @@ bindsym $mod+F5 [class="Firefox"] move workspace current
 # start the session
 exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
-exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle &
+exec --no-startup-id ~/bin/keyboard
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
 exec clipit -n
 exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
 #exec_always feh --bg-scale '/home/gchamoul/Pictures/Discovering-space2-166320056.jpg'
-exec_always feh --bg-scale '/home/gchamoul/Pictures/WP/wallpapersden.com_minimalistic-wind-farm_1920x1080.jpg'
+exec_always feh --bg-scale '/home/gchamoul/Pictures/wall.png'
 exec seapplet
-exec --no-startup-id urxvt256c-ml -title Wiki -name Wiki -e zsh -c "vim -c VimwikiIndex" &
+# exec --no-startup-id urxvt256c-ml -title Wiki -name Wiki -e zsh -c "vim -c VimwikiIndex" &
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
 
 # Colors                #Border #backg  #text   #indicator
-client.focused          #a30000 #a30000 #f0f0f0 #a30000
-client.focused_inactive #820000 #1e1e1e #f0f0f0 #820000
-client.unfocused        #6e0000 #1e1e1e #f0f0f0 #0e418c
-client.urgent           #cc0000 #1e1e1e #f0f0f0 #cc0000
+# class                 border  backgr. text    indicator child_border
+client.focused          #333333 #333333 #ffffff #2e9ef4
