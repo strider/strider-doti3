@@ -93,11 +93,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-hide_edge_borders smart
-new_window normal
-new_float normal
-default_border normal
-default_floating_border normal
+hide_edge_borders both
+new_window pixel 0
+new_float pixel 0
+default_border pixel 0
+default_floating_border pixel 0
 bindsym $mod+t border normal
 bindsym $mod+y border pixel 1
 bindsym $mod+u border none
@@ -157,7 +157,7 @@ bindsym $mod+c workspace back_and_forth
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
 
-workspace_layout tabbed
+workspace_layout default
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -244,8 +244,8 @@ bar {
     workspace_buttons yes
   colors {
     separator #444444
-    background #222222
-    statusline #666666
+    background #333333
+    statusline #ffffff
     focused_workspace #d70a53 #d70a53 #ffffff
     active_workspace #333333 #333333 #888888
     inactive_workspace #333333 #333333 #888888
@@ -281,29 +281,65 @@ assign [class="^Evince$"] 3
 assign [class="^Zathura$"] 3
 assign [class="^Stardict$"] 8
 
+# i3-gaps
+gaps inner 05
+gaps outer 05
+# smart_gaps on
+
+set $mode_gaps Gaps: (o)uter, (i)nner
+set $mode_gaps_outer Outer Gaps: k|j|0 (local), Up +|-|Ctrl+0 (global)
+set $mode_gaps_inner Inner Gaps: k|j|0 (local), Down +|-|Ctrl+0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym h      mode "$mode_gaps_horiz"
+        bindsym v      mode "$mode_gaps_verti"
+        bindsym t      mode "$mode_gaps_top"
+        bindsym r      mode "$mode_gaps_right"
+        bindsym b      mode "$mode_gaps_bottom"
+        bindsym l      mode "$mode_gaps_left"
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+        bindsym k  gaps outer current plus 5
+        bindsym j gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Up  gaps outer all plus 5
+        bindsym Down gaps outer all minus 5
+        bindsym Ctrl+0     gaps outer all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym k  gaps inner current plus 5
+        bindsym j gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Up  gaps inner all plus 5
+        bindsym Down gaps inner all minus 5
+        bindsym Ctrl+0     gaps inner all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+
 # custom window settings
 #for_window [class="^.*"] border none; title_format ">_ %title "
-for_window [class="^.*"] title_format ">_ %title "
-for_window [window_role="pop-up"] floating enable; border normal, move absolute center
-for_window [window_role="task_dialog"] floating enable; border normal
-for_window [window_role="bubble"] floating enable; border normal
-for_window [window_role="Preferences"] floating enable; border normal
-for_window [class="google-chrome"] border none
-for_window [class="Gnome-terminal"] border none
-for_window [class="qutebrowser"] border none
-for_window [class="Firefox"] border none
-for_window [class="Gvim"] border normal
-for_window [class="Nautilus"] border normal
-for_window [class="Emacs"] border none
-for_window [class="Virt-manager"] floating enable; border normal
-for_window [title="- Shutter"] floating enable; border normal
-for_window [title="DNF Upgrade!!!"] floating enable; border normal
-#for_window [instance="krb"] floating enable; border normal
-for_window [class="^Vlc$"] floating enable
-for_window [instance="gimp"] floating enable
-for_window [class="Gnome-disks"] floating enable; border normal
-for_window [class="Zathura"] border normal
-for_window [class="URxvt"] border pixel 1
+for_window [class=".*"] title_format ">_ %title "
+for_window [class="^.*"] border pixel 0
+for_window [window_role="pop-up"] floating enable; border pixel 0, move absolute center
+for_window [window_role="task_dialog"] floating enable; border pixel 0
+for_window [window_role="bubble"] floating enable; border pixel 0
+for_window [window_role="Preferences"] floating enable; border pixel 0
+for_window [title="- Shutter"] floating enable; border pixel 0
+for_window [class="Gnome-disks"] floating enable; border pixel 0
+for_window [class="URxvt"] border pixel 0
 for_window [class="(?i)pavucontrol"] floating enable; move position mouse
 for_window [instance="Ranger"] mark ranger
 for_window [instance="IRC"] mark irc
