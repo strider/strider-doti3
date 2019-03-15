@@ -236,12 +236,13 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-    font pango:Terminus for Powerline 08
-    status_command py3status -c ~/.i3/.i3status.conf
-    tray_output eDP-1
-    mode dock
-    separator_symbol "  "
-    workspace_buttons yes
+  height 20
+  font pango:agave 11
+  status_command py3status -c ~/.i3/.i3status.conf
+  tray_output eDP-1
+  mode dock
+  separator_symbol "  "
+  workspace_buttons yes
   colors {
     separator #444444
     background #333333
@@ -294,12 +295,6 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
         bindsym i      mode "$mode_gaps_inner"
-        bindsym h      mode "$mode_gaps_horiz"
-        bindsym v      mode "$mode_gaps_verti"
-        bindsym t      mode "$mode_gaps_top"
-        bindsym r      mode "$mode_gaps_right"
-        bindsym b      mode "$mode_gaps_bottom"
-        bindsym l      mode "$mode_gaps_left"
         bindsym Return mode "$mode_gaps"
         bindsym Escape mode "default"
 }
