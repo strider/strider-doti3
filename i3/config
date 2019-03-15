@@ -68,8 +68,8 @@ bindsym $mod+Shift+b exec --no-startup-id compton --config ~/.i3/compton.conf; e
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
 
 # Emacs
-bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -- emacsclient -nw"
-bindsym $mod+n exec --no-startup-id "gnome-terminal -- emacs -nw"
+bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -- /bin/zsh -i -c 'emacsclient -nw'"
+bindsym $mod+n exec --no-startup-id "gnome-terminal -- /bin/zsh -i -c 'emacs -nw'"
 
 # pulse audio volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%; exec /usr/bin/killall -USR1 i3status
