@@ -14,7 +14,7 @@ set $mod Mod4
 set $display0 "eDP-1"
 set $display1 "DP-2-1"
 set $display2 "DP-2-2"
-set $i3fontinput "pango:Terminus for Powerline 08"
+set $i3fontinput "pango:agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
 
 # chose a FreeType font, such as:
