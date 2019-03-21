@@ -55,7 +55,7 @@ bindsym $mod+F8 exec --no-startup-id "setxkbmap -layout us -variant altgr-intl -
 bindsym $mod+F9 exec --no-startup-id "setxkbmap -layout fr -option grp:shift_shift_toggle"
 bindsym $mod+F10 exec --no-startup-id $HOME/bin/i3-touchpad enable
 bindsym $mod+F11 exec --no-startup-id $HOME/bin/i3-touchpad disable
-bindsym $mod+d exec i3-msg workspace 2; exec "firefox -P work"
+bindsym $mod+d exec i3-msg workspace $ws2; exec "firefox-wayland -P work"
 bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
