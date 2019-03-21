@@ -17,6 +17,17 @@ set $display2 "DP-2-2"
 set $i3fontinput "pango:agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
 
+# define names for workspaces
+set $ws1    "1:   Code "
+set $ws2    "2:   Web "
+set $ws3    "3:   Files "
+set $ws4    "4:   Irc "
+set $ws5    "5:   Media "
+set $ws6    "6:   Documents "
+set $ws7    "7:   Terminal "
+set $ws8    "8:   Settings "
+set $ws9    "9:   Misc "
+
 # chose a FreeType font, such as:
 font $i3fontinput
 
@@ -160,27 +171,27 @@ focus_follows_mouse no
 workspace_layout default
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace 10
 
 #bindsym $mod+F1 focus output $display0
@@ -255,15 +266,15 @@ bar {
 }
 
 # Workspaces
-workspace 1 output $display1
-workspace 2 output $display1
-workspace 3 output $display1
-workspace 4 output $display1
-workspace 5 output $display1
-workspace 6 output $display0
-workspace 7 output $display2
-workspace 8 output $display2
-workspace 9 output $display2
+workspace $ws1 output $display1
+workspace $ws2 output $display1
+workspace $ws3 output $display1
+workspace $ws4 output $display1
+workspace $ws5 output $display1
+workspace $ws6 output $display0
+workspace $ws7 output $display2
+workspace $ws8 output $display2
+workspace $ws9 output $display2
 workspace 10 output $display2
 
 # scratchpad
@@ -276,11 +287,11 @@ bindsym $mod+o scratchpad show
 #bindsym $mod+minus scratchpad show
 
 # workspace assignment (use "xprop")
-#assign [class="^Firefox$"] 2
-assign [class="^Nautilus$"] 3
-assign [class="^Evince$"] 3
-assign [class="^Zathura$"] 3
-assign [class="^Stardict$"] 8
+assign [class="^Firefox$"] $ws2
+assign [class="^Nautilus$"] $ws3
+assign [class="^Evince$"] $ws3
+assign [class="^Zathura$"] $ws3
+assign [class="^Stardict$"] $ws8
 
 # i3-gaps
 gaps inner 05
