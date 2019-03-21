@@ -363,6 +363,7 @@ exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id ~/bin/keyboard
 exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
+exec --no-startup-id compton --config ~/.i3/compton.conf; exec notify-send -t 2000 'Compton On'
 exec clipit -n
 exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
