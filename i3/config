@@ -36,7 +36,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt256c-ml
+bindsym $mod+Return exec gnome-terminal
 # start a filemanager
 bindsym $mod+Shift+Return exec --no-startup-id nautilus
 
@@ -60,12 +60,12 @@ bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
 
-bindsym $mod+Shift+x exec i3-msg workspace 3; exec urxvt256c-ml -title Ranger -name Ranger -e zsh -c "ranger ~/"
-bindsym $mod+Control+k exec urxvt256c-ml -title "Get Kerberos Ticket" -name krb -e zsh -c "kinit && klist && sleep 2"
+bindsym $mod+Shift+x exec i3-msg workspace $ws3; exec urxvt256c-ml -title Ranger -name Ranger -e zsh -c "ranger ~/"
+bindsym $mod+Control+k exec gnome-terminal -t "Get Kerberos Ticket" -- /bin/zsh -i -c "kinit && klist && sleep 2"
 
-bindsym $mod+Shift+u exec urxvt256c-ml -title IRC -name IRC -e zsh -c "mux IRC" &
-bindsym $mod+Control+u exec urxvt256c-ml -title Mail -name Mail -e zsh -c "mux redhat" &
-bindsym $mod+Control+d exec urxvt256c-ml -title DEVEL -name DEVEL -e zsh -c "mux DEVEL" &
+bindsym $mod+Shift+u exec gnome-terminal -t IRC -- /bin/zsh -i -c "mux IRC" &
+# bindsym $mod+Control+u exec urxvt256c-ml -title Mail -name Mail -e zsh -c "mux redhat" &
+bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
 bindsym Control+$mod+l exec $HOME/bin/i3lockmore -d --lock-icon --image-fill $HOME/Pictures/mnmlist3.jpg --dpms 5
@@ -79,8 +79,8 @@ bindsym $mod+Shift+b exec --no-startup-id compton --config ~/.i3/compton.conf; e
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
 
 # Emacs
-bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -- /bin/zsh -i -c 'emacsclient -nw'"
-bindsym $mod+n exec --no-startup-id "gnome-terminal -- /bin/zsh -i -c 'emacs -nw'"
+bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -t Emacs -- /bin/zsh -i -c 'emacsclient -nw'"
+bindsym $mod+n exec --no-startup-id "gnome-terminal -t Emacs -- /bin/zsh -i -c 'emacs -nw'"
 
 # pulse audio volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%; exec /usr/bin/killall -USR1 i3status
