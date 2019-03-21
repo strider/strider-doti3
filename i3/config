@@ -247,8 +247,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-  height 20
-  font pango:agave 11
+  height 25
+  font pango:Terminus for Powerline 08
   status_command py3status -c ~/.i3/.i3status.conf
   tray_output eDP-1
   mode dock
@@ -296,7 +296,7 @@ assign [class="^Stardict$"] $ws8
 # i3-gaps
 gaps inner 05
 gaps outer 05
-# smart_gaps on
+smart_gaps on
 
 set $mode_gaps Gaps: (o)uter, (i)nner
 set $mode_gaps_outer Outer Gaps: k|j|0 (local), Up +|-|Ctrl+0 (global)
