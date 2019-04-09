@@ -64,7 +64,7 @@ bindsym $mod+Shift+x exec i3-msg workspace $ws3; exec urxvt256c-ml -title Ranger
 bindsym $mod+Control+k exec gnome-terminal -t "Get Kerberos Ticket" -- /bin/zsh -i -c "kinit && klist && sleep 2"
 
 bindsym $mod+Shift+u exec gnome-terminal -t IRC -- /bin/zsh -i -c "mux IRC" &
-# bindsym $mod+Control+u exec urxvt256c-ml -title Mail -name Mail -e zsh -c "mux redhat" &
+bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "mux redhat" &
 bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
@@ -73,7 +73,7 @@ bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
 # compton
 bindsym $mod+b exec --no-startup-id pkill compton; exec notify-send -t 2000 'Compton Off'
-bindsym $mod+Shift+b exec --no-startup-id compton --config ~/.i3/compton.conf; exec notify-send -t 2000 'Compton On'
+bindsym $mod+Shift+b exec --no-startup-id compton -b --config ~/.i3/compton.conf; exec notify-send -t 2000 'Compton On'
 
 # redshift
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
@@ -362,11 +362,10 @@ bindsym $mod+F5 [class="Firefox"] move workspace current
 exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id ~/bin/keyboard
-exec pgrep urxvt256c-ml || urxvt256c-mld -q -f -o
 exec /usr/bin/dunst
-exec --no-startup-id compton --config ~/.i3/compton.conf; exec notify-send -t 2000 'Compton On'
-exec clipit -n
-exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
+exec --no-startup-id compton -b --config ~/.i3/compton.conf
+exec clipit -d -n
+# exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
 #exec_always feh --bg-scale '/home/gchamoul/Pictures/Discovering-space2-166320056.jpg'
 exec_always feh --bg-scale '/home/gchamoul/Pictures/wall.png'
