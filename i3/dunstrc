@@ -14,7 +14,7 @@
     separator_color = frame
     sort = yes
     idle_threshold = 120
-    font = Terminus for Powerline Bold 08
+    font = Terminus for Powerline 08
     line_height = 0
     markup = full
     format = "<span foreground='#f3f4f5'><b>%s %p</b></span>\n%b"
@@ -68,11 +68,3 @@
     foreground = "#f0e0e0"
     frame_color = "#d64e4e"
     timeout = 0
-
-#[irc]
-#    appname = "weechat"
-#    format = "%s: %b"
-#    icon = weechat.png
-#    background = "#232323"
-#    foreground = "#a8a8a8"
-#    timeout = 10
