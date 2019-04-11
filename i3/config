@@ -248,8 +248,8 @@ bindsym $mod+r mode "resize"
 bar {
   position top
   font pango:Terminus for Powerline 08
-  height 25
-  status_command py3status -c ~/.i3/.i3status.conf
+  # height 30
+  status_command ~/bin/i3status-rs ~/.i3/.i3status-rust.toml
   tray_output eDP-1
   mode dock
   separator_symbol "  "
