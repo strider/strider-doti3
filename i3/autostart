@@ -20,29 +20,14 @@ wait_for_program () {
   done
 }
 
-# Terminal
-TERMINAL=urxvt256c-ml
-
 ## Determine connected monitors
-HDMI_YES=0
-DP_YES=0
-ANY_YES=0
-xrandr | grep -Eq "DP-[12345]-[12345] connected" && DP_YES=1 && ANY_YES=1
-xrandr | grep -Eq "HDMI-[12345] connected" && HDMI_YES=1 && ANY_YES=1
-DP=$(xrandr | grep -E "DP-[12345]-[12345] connected" | grep -oE "DP-[12345]-[12345]")
-HDMI=$(xrandr | grep -E "HDMI-[12345] connected" | grep -oE "HDMI-[12345]")
+DP_2_1=0
+DP_2_2=0
+xrandr | grep -Eq "DP-2-1 connected" && DP_2_1=1
+xrandr | grep -Eq "DP-2-2 connected" && DP_2_2=1
 
-if [ "$DP_YES" -eq 1 ]; then
-    xrandr --output eDP-1 --mode 1920x1080 --below $DP --output $DP --mode 1920x1080
-fi
-
-if [ "$DP_YES" -eq 1 ]; then
-    for w in 1 2 3 4 5; do
-        i3-msg "workspace $w; move workspace to output $DP"
-    done
-    for w in 6 7 8 9 10; do
-        i3-msg "workspace $w; move workspace to output eDP-1"
-    done
+if [ "$DP_2_1" -eq 1 ] && [ "$DP_2_2" -eq 1 ]; then
+    . $HOME/.screenlayout/office.sh
 fi
 
 #pointer_control enable

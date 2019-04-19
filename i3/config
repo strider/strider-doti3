@@ -11,6 +11,12 @@
 
 set $mod Mod4
 
+# i3-gaps
+gaps inner 15
+gaps outer 15
+smart_gaps on
+smart_borders on
+
 set $display0 "eDP-1"
 set $display1 "DP-2-1"
 set $display2 "DP-2-2"
@@ -18,15 +24,16 @@ set $i3fontinput "pango:Terminus for Powerline 08"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
 
 # define names for workspaces
-set $ws1    "1:  "
-set $ws2    "2:  "
+set $ws1    "1:  "
+set $ws2    "2:  "
 set $ws3    "3:  "
 set $ws4    "4:  "
 set $ws5    "5:  "
 set $ws6    "6:  "
 set $ws7    "7:  "
 set $ws8    "8:  "
-set $ws9    "9:  "
+set $ws9    "9"
+set $ws10  "10"
 
 # chose a FreeType font, such as:
 font $i3fontinput
@@ -104,20 +111,20 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-hide_edge_borders both
-new_window pixel 0
-new_float pixel 0
-default_border pixel 0
-default_floating_border pixel 0
-bindsym $mod+t border normal
-bindsym $mod+y border pixel 1
-bindsym $mod+u border none
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+hide_edge_borders both
+new_window pixel 1
+new_float pixel 0
+default_border pixel 1
+default_floating_border pixel 0
+bindsym $mod+t border normal
+bindsym $mod+y border pixel 1
+bindsym $mod+u border none
 
 # move focused window
 bindsym $mod+Shift+H move left
@@ -130,6 +137,15 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+bindsym $mod+Ctrl+Right "move workspace to output right"
+bindsym $mod+Ctrl+Left "move workspace to output left"
+
+# Resizing windows by 10 in i3 using keyboard only
+bindsym $mod+Ctrl+Shift+Right resize shrink width 20 px or 20 ppt
+bindsym $mod+Ctrl+Shift+Up resize grow height 20 px or 20 ppt
+bindsym $mod+Ctrl+Shift+Down resize shrink height 20 px or 20 ppt
+bindsym $mod+Ctrl+Shift+Left resize grow width 20 px or 20 ppt
 
 # split in horizontal orientation
 bindsym Control+$mod+h split h
@@ -160,7 +176,7 @@ bindsym $mod+p bar mode toggle
 #bindsym $mod+Shift+l bar mode dock
 bindsym $mod+z workspace prev
 bindsym $mod+x workspace next
-bindsym $mod+c workspace back_and_forth
+bindsym $mod+backslash workspace back_and_forth
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -180,7 +196,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -192,7 +208,7 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 #bindsym $mod+F1 focus output $display0
 #bindsym $mod+F2 focus output $display1
@@ -203,20 +219,14 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 1 px or 1 ppt
-        bindsym k resize grow height 1 px or 1 ppt
-        bindsym l resize shrink height 1 px or 1 ppt
-        bindsym semicolon resize grow width 1 px or 1 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keyR
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -227,19 +237,8 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
-
-# Create Log out, Reboot, Poweroff bindings
-#set $screen_setup SCREEN (l) Laptop Only, (h) Office
-#mode "$screen_setup" {
-    #bindsym l exec --no-startup-id $HOME/.screenlayout/laptop.sh, mode "default"
-    #bindsym h exec --no-startup-id $HOME/.screenlayout/home.sh, mode "default"
-
-    ## back to normal: Enter or Escape
-    #bindsym Return mode "default"
-    #bindsym Escape mode "default"
-#}
-#bindsym $mod+Shift+S mode "$screen_setup"
 
 bindsym $mod+r mode "resize"
 
@@ -247,8 +246,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-  font pango:Terminus for Powerline 08
-  # height 30
+  font pango:agave 11
+  # height 25
   status_command ~/bin/i3status-rs ~/.i3/.i3status-rust.toml
   tray_output eDP-1
   mode dock
@@ -275,7 +274,7 @@ workspace $ws6 output $display1
 workspace $ws7 output $display1
 workspace $ws8 output $display1
 workspace $ws9 output $display0
-workspace 10 output $display2
+workspace $ws10 output $display2
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -292,11 +291,6 @@ assign [class="^Nautilus$"] $ws3
 assign [class="^Evince$"] $ws3
 assign [class="^Zathura$"] $ws3
 assign [class="^Stardict$"] $ws8
-
-# i3-gaps
-gaps inner 05
-gaps outer 05
-smart_gaps on
 
 set $mode_gaps Gaps: (o)uter, (i)nner
 set $mode_gaps_outer Outer Gaps: k|j|0 (local), Up +|-|Ctrl+0 (global)
@@ -338,19 +332,19 @@ mode "$mode_gaps_inner" {
 # custom window settings
 #for_window [class="^.*"] border none; title_format ">_ %title "
 for_window [class=".*"] title_format ">_ %title "
-for_window [class="^.*"] border pixel 0
-for_window [window_role="pop-up"] floating enable; border pixel 0, move absolute center
-for_window [window_role="task_dialog"] floating enable; border pixel 0
-for_window [window_role="bubble"] floating enable; border pixel 0
-for_window [window_role="Preferences"] floating enable; border pixel 0
-for_window [title="- Shutter"] floating enable; border pixel 0
-for_window [class="Gnome-disks"] floating enable; border pixel 0
+for_window [class="^.*"] border pixel 2
+for_window [window_role="pop-up"] floating enable; border pixel 1, move absolute center
+for_window [window_role="task_dialog"] floating enable; border pixel 1
+for_window [window_role="bubble"] floating enable; border pixel 1
+for_window [window_role="Preferences"] floating enable; border pixel 1
+for_window [title="- Shutter"] floating enable; border pixel 1
+for_window [class="Gnome-disks"] floating enable; border pixel 1
 for_window [class="URxvt"] border pixel 0
 for_window [class="(?i)pavucontrol"] floating enable; move position mouse
 for_window [instance="Ranger"] mark ranger
-for_window [title=".*IRC$"] mark irc
-for_window [title=".*MAIL$"] mark mail
-for_window [title=".*DEVEL$"] mark dev
+for_window [title="^.*IRC$"] mark irc
+for_window [title="^.*MAIL$"] mark mail
+for_window [title="^.*DEVEL$"] mark dev
 for_window [class="Firefox"] mark web
 # for_window [instance="Wiki"] move scratchpad
 #for_window [instance="Mail"] resize set 1400 1000, move position center
@@ -368,7 +362,7 @@ exec clipit -d -n
 # exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
 #exec_always feh --bg-scale '/home/gchamoul/Pictures/Discovering-space2-166320056.jpg'
-exec_always feh --bg-scale '/home/gchamoul/Pictures/wall.png'
+exec_always feh --bg-scale '/home/gchamoul/Pictures/wall_1.png'
 exec seapplet
 # exec --no-startup-id urxvt256c-ml -title Wiki -name Wiki -e zsh -c "vim -c VimwikiIndex" &
 exec --no-startup-id xrdb -merge ~/.Xresources &
@@ -376,4 +370,35 @@ exec --no-startup-id ~/.i3/autostart
 
 # Colors                #Border #backg  #text   #indicator
 # class                 border  backgr. text    indicator child_border
-client.focused          #333333 #333333 #ffffff #2e9ef4
+# client.focused          #333333 #333333 #ffffff #2e9ef4
+set_from_resource $darkblack   background  #000000
+set_from_resource $black       background  #000000
+set_from_resource $darkred     color0  #000000
+set_from_resource $red         color8  #000000
+set_from_resource $darkgreen   color1  #000000
+set_from_resource $green       color9  #000000
+set_from_resource $darkyellow  color2  #000000
+set_from_resource $yellow      color10 #000000
+set_from_resource $darkblue    color3  #000000
+set_from_resource $blue        color11 #000000
+set_from_resource $darkmagenta color4  #000000
+set_from_resource $magenta     color12 #000000
+set_from_resource $darkcyan    color5  #000000
+set_from_resource $cyan        color13 #000000
+set_from_resource $darkidk     color6  #000000
+set_from_resource $idk	       color14 #000000
+set_from_resource $darkwhite   color7  #000000
+set_from_resource $white       color15 #000000
+
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+
+# class                 border  	backgr.       text_indicator 	child_border
+client.focused          $darkgreen     $darkgreen     $darkwhite  	$darkgreen       $darkgreen
+client.focused_inactive $black    $black     $darkwhite  	$black       $black
+client.unfocused        $black    $black     $darkwhite  	$black       $black
+client.urgent           $darkgreen     $darkgreen     $darkwhite  	$darkgreen       $darkgreen
+client.placeholder      $darkgreen     $darkgreen     $darkwhite  	$darkgreen       $darkgreen
+
+client.background       $darkgreen
