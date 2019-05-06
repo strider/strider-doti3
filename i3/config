@@ -248,7 +248,7 @@ bar {
   position top
   font pango:agave 11
   # height 25
-  status_command ~/bin/i3status-rs ~/.i3/.i3status-rust.toml
+  status_command bash ~/bin/mybar.sh
   tray_output eDP-1
   mode dock
   separator_symbol "  "
