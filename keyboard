@@ -7,4 +7,3 @@ xcape -e 'Caps_Lock=Escape'
 xcape -e "Shift_R=parenright"
 xcape -e "Shift_L=parenleft"
 xcape
-
