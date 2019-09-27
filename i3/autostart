@@ -2,22 +2,21 @@
 
 # Wait for program coming up
 wait_for_program () {
-  n=0
-  while true
-  do
-    # PID of last background command
-    if xdotool search --onlyvisible --pid $! 2>/dev/null; then
-      break
-    else
-      if [ $n -eq 200 ]; then
-        notify-send -u critical "Error during start: last program $! did not started fast enough"
-        break
-      else
-        n=`expr $n + 1`
-        sleep 0.1
-      fi
-    fi
-  done
+    n=0
+    while true; do
+        # PID of last background command
+        if xdotool search --onlyvisible --pid $! 2>/dev/null; then
+            break
+        else
+            if [ $n -eq 200 ]; then
+                notify-send -u critical "Error during start: last program $! did not started fast enough"
+                break
+            else
+                n=`expr $n + 1`
+                sleep 0.1
+            fi
+        fi
+    done
 }
 
 ## Determine connected monitors
