@@ -21,12 +21,12 @@ wait_for_program () {
 }
 
 ## Determine connected monitors
-DP_2_1=0
-DP_2_2=0
-xrandr | grep -Eq "DP-2-1 connected" && DP_2_1=1
-xrandr | grep -Eq "DP-2-2 connected" && DP_2_2=1
+DP_1_1=0
+DP_1_2=0
+xrandr | grep -Eq "DP-1-1 connected" && DP_1_1=1
+xrandr | grep -Eq "DP-1-2 connected" && DP_1_2=1
 
-if [ "$DP_2_1" -eq 1 ] && [ "$DP_2_2" -eq 1 ]; then
+if [ "$DP_1_1" -eq 1 ] && [ "$DP_1_2" -eq 1 ]; then
     . $HOME/.screenlayout/office.sh
 fi
 

@@ -9,10 +9,11 @@ notmuch_query="tag:unread AND folder:redhat-gmail/INBOX"
                                           pasink \
                                           pasource \
                                           dunst \
+                                          bluetooth \
                                           datetime \
                                           -p nic.states="^down" \
                                           root.path=/  \
                                           nic.format="{intf} {ip} {ssid}" \
                                           battery.showdevice=true \
                                           notmuch_count.query="${notmuch_query}" \
-                                          -t powerline
+                                          -t iceberg-dark-powerline
