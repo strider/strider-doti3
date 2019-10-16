@@ -12,7 +12,7 @@
 set $mod Mod4
 
 # i3-gaps
-gaps inner 5
+gaps inner 20
 gaps outer 5
 smart_gaps on
 smart_borders on
@@ -62,7 +62,7 @@ bindsym $mod+F8 exec --no-startup-id "setxkbmap -layout us -variant altgr-intl -
 bindsym $mod+F9 exec --no-startup-id "setxkbmap -layout fr -option grp:shift_shift_toggle"
 bindsym $mod+F10 exec --no-startup-id $HOME/bin/i3-touchpad enable
 bindsym $mod+F11 exec --no-startup-id $HOME/bin/i3-touchpad disable
-bindsym $mod+d exec i3-msg workspace $ws2; exec "firefox-wayland -P work"
+bindsym $mod+d exec i3-msg workspace $ws2; exec "firefox -P work"
 bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
@@ -75,7 +75,7 @@ bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "mux redhat
 bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/thumb-1920-882625.jpg
+bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/UHD/Wallpaper_4_3440x1440.jpg
 # bindsym Control+$mod+l exec gnome-screensaver-command -l
 bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
@@ -92,6 +92,7 @@ bindsym $mod+n exec --no-startup-id "gnome-terminal -t Emacs -- /bin/zsh -i -c '
 
 # pulse audio volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%; exec /usr/bin/killall -USR1 i3status
+
 bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%; exec /usr/bin/killall -USR1 i3status
 bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle; exec /usr/bin/killall -USR1 i3status
 bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -A 10
@@ -360,9 +361,9 @@ exec --no-startup-id ~/bin/keyboard
 exec --no-startup-id /usr/bin/dunst &
 # exec --no-startup-id compton -b --config ~/.i3/compton.conf
 exec --no-startup-id clipit -d -n
-exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
+# exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/dark_skull_evil_horror_skulls_art_artwork_skeleton_d_5300x2981.jpg'
+exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/Ultrawide Wallpaper- Vector (4).jpg'
 exec --no-startup-id seapplet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
