@@ -3,7 +3,6 @@
 notmuch_query="tag:unread AND folder:redhat-gmail/INBOX"
 
 ~/bin/bumblebee-status/./bumblebee-status -m nic \
-                                          vpn \
                                           notmuch_count \
                                           battery \
                                           pasink \
