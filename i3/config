@@ -257,13 +257,13 @@ bar {
   separator_symbol "  "
   workspace_buttons yes
   colors {
-    separator #586e75
-    background #002b36
-    statusline #aea79f
-    focused_workspace #586e75 #586e75 #ffffff #ffffff
-    active_workspace #073642 #073642 #ffffff #ffffff
-    inactive_workspace #002b36 #002b36 #aea79f #aea79f
-    urgent_workspace #77216f #77216f #ffffff #ffffff
+    separator #666666
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff #ffffff
+    active_workspace #333333 #333333 #ffffff #ffffff
+    inactive_workspace #333333 #333333 #888888 #888888
+    urgent_workspace #2f343a #900000 #ffffff #ffffff
   }
 }
 
@@ -275,13 +275,13 @@ bar {
   font pango:agave 11
   workspace_buttons yes
   colors {
-    separator #586e75
-    background #002b36
-    statusline #aea79f
-    focused_workspace #586e75 #586e75 #ffffff #ffffff
-    active_workspace #073642 #073642 #ffffff #ffffff
-    inactive_workspace #002b36 #002b36 #aea79f #aea79f
-    urgent_workspace #77216f #77216f #ffffff #ffffff
+    separator #666666
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff #ffffff
+    active_workspace #333333 #333333 #ffffff #ffffff
+    inactive_workspace #333333 #333333 #888888 #888888
+    urgent_workspace #2f343a #900000 #ffffff #ffffff
   }
 }
 
@@ -415,10 +415,10 @@ set_from_resource $bg i3wm.color2 #f0f0f0
 
 
 # class                 border  	backgr.       text_indicator 	child_border
-client.focused #586e75 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #073642 #073642 #93a1a1 #002b36
-client.unfocused #002b36 #002b36 #586e75 #002b36
-client.urgent #dc322f #dc322f #fdf6e3 #dc322f
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
 client.placeholder      $darkgreen     $darkgreen     $darkwhite  	$darkgreen       $darkgreen
 
 client.background       $darkgreen
