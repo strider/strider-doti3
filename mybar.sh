@@ -7,6 +7,7 @@ notmuch_query="tag:unread AND folder:redhat-gmail/INBOX"
                                           battery \
                                           pasink \
                                           pasource \
+                                          dunst \
                                           bluetooth \
                                           weather \
                                           datetime \

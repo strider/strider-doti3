@@ -11,17 +11,18 @@
 
 set $mod Mod4
 
-# i3-gaps
-# gaps inner 20
-# gaps outer 5
-# smart_gaps on
-# smart_borders on
+#i3-gaps
+gaps inner 5
+gaps outer 5
+smart_gaps on
+smart_borders on
 
 set $display0 "eDP-1"
 set $display1 "DP-1-2"
 set $display2 "DP-1-1"
 set $i3fontinput "pango:Agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
+set $rofitheme "~/.config/rofi/themes/appsmenu.rasi"
 
 # define names for workspaces
 set $ws1    "1:  "
@@ -50,7 +51,7 @@ bindsym $mod+Shift+Return exec --no-startup-id nautilus
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+space exec "rofi -show drun -o 85"
+bindsym $mod+space exec "rofi -no-lazy-grab -show drun -o 85"
 bindsym $mod+Shift+a exec "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+Shift+p exec passmenu
 bindsym $mod+g exec "gentoken.sh"
@@ -75,7 +76,7 @@ bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "mux redhat
 bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/UHD/Wallpaper_4_3440x1440.jpg
+bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/UHD/3220.jpg
 # bindsym Control+$mod+l exec gnome-screensaver-command -l
 bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
@@ -120,12 +121,12 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 hide_edge_borders both
-new_window normal
-new_float pixel 0
+new_window pixel 3
+new_float normal
 default_border normal
-default_floating_border pixel 0
+default_floating_border normal
 bindsym $mod+t border normal
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 3
 bindsym $mod+u border none
 
 # move focused window
@@ -257,13 +258,13 @@ bar {
   separator_symbol "  "
   workspace_buttons yes
   colors {
-    separator #666666
+    separator #444444
     background #222222
-    statusline #dddddd
-    focused_workspace #0088CC #0088CC #ffffff #ffffff
-    active_workspace #333333 #333333 #ffffff #ffffff
+    statusline #666666
+    focused_workspace #d70a53 #d70a53 #ffffff #ffffff
+    active_workspace #333333 #333333 #888888 #888888
     inactive_workspace #333333 #333333 #888888 #888888
-    urgent_workspace #2f343a #900000 #ffffff #ffffff
+    urgent_workspace #eb709b #eb709b #ffffff #ffffff
   }
 }
 
@@ -275,13 +276,13 @@ bar {
   font pango:agave 11
   workspace_buttons yes
   colors {
-    separator #666666
+    separator #444444
     background #222222
-    statusline #dddddd
-    focused_workspace #0088CC #0088CC #ffffff #ffffff
-    active_workspace #333333 #333333 #ffffff #ffffff
+    statusline #666666
+    focused_workspace #d70a53 #d70a53 #ffffff #ffffff
+    active_workspace #333333 #333333 #888888 #888888
     inactive_workspace #333333 #333333 #888888 #888888
-    urgent_workspace #2f343a #900000 #ffffff #ffffff
+    urgent_workspace #eb709b #eb709b #ffffff #ffffff
   }
 }
 
@@ -353,7 +354,7 @@ mode "$mode_gaps_inner" {
 # custom window settings
 #for_window [class="^.*"] border none; title_format ">_ %title "
 for_window [class=".*"] title_format ">_ %title "
-for_window [class="^.*"] border normal
+for_window [class="^.*"] border pixel 3
 for_window [window_role="pop-up"] floating enable; border pixel 1, move absolute center
 for_window [window_role="task_dialog"] floating enable; border pixel 1
 for_window [window_role="bubble"] floating enable; border pixel 1
@@ -383,7 +384,7 @@ exec --no-startup-id /usr/bin/dunst &
 exec --no-startup-id clipit -d -n
 # exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/Ultrawide Wallpaper- Vector (4).jpg'
+exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/3220.jpg'
 exec --no-startup-id seapplet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
@@ -415,10 +416,10 @@ set_from_resource $bg i3wm.color2 #f0f0f0
 
 
 # class                 border  	backgr.       text_indicator 	child_border
-client.focused #0088CC #0088CC #ffffff #dddddd
-client.focused_inactive #333333 #333333 #888888 #292d2e
-client.unfocused #333333 #333333 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+client.focused #d70a53 #d70a53 #ffffff #8c0333
+client.focused_inactive #333333 #333333 #888888 #333333
+client.unfocused #333333 #333333 #888888 #333333
+client.urgent #eb709b #eb709b #ffffff #eb709b
 client.placeholder      $darkgreen     $darkgreen     $darkwhite  	$darkgreen       $darkgreen
 
 client.background       $darkgreen
