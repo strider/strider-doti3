@@ -76,7 +76,7 @@ bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "mux redhat
 bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
-bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/UHD/3220.jpg
+bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/redhat.png
 # bindsym Control+$mod+l exec gnome-screensaver-command -l
 bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
@@ -254,17 +254,18 @@ bar {
   tray_output primary
   output DP-1-2
   output eDP-1
+  output HDMI-2
   mode dock
   separator_symbol "  "
   workspace_buttons yes
   colors {
-    separator #444444
-    background #222222
-    statusline #666666
-    focused_workspace #d70a53 #d70a53 #ffffff #ffffff
-    active_workspace #333333 #333333 #888888 #888888
-    inactive_workspace #333333 #333333 #888888 #888888
-    urgent_workspace #eb709b #eb709b #ffffff #ffffff
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace #4c7899 #285577 #ffffff #FFFFFF
+    active_workspace #333333 #5f676a #ffffff #ffffff
+    inactive_workspace #333333 #222222 #888888 #AAAAAA
+    urgent_workspace #2f343a #900000 #ffffff #ffffff
   }
 }
 
@@ -276,13 +277,13 @@ bar {
   font pango:agave 11
   workspace_buttons yes
   colors {
-    separator #444444
-    background #222222
-    statusline #666666
-    focused_workspace #d70a53 #d70a53 #ffffff #ffffff
-    active_workspace #333333 #333333 #888888 #888888
-    inactive_workspace #333333 #333333 #888888 #888888
-    urgent_workspace #eb709b #eb709b #ffffff #ffffff
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace #4c7899 #285577 #ffffff #FFFFFF
+    active_workspace #333333 #5f676a #ffffff #ffffff
+    inactive_workspace #333333 #222222 #888888 #AAAAAA
+    urgent_workspace #2f343a #900000 #ffffff #ffffff
   }
 }
 
@@ -384,8 +385,9 @@ exec --no-startup-id /usr/bin/dunst &
 exec --no-startup-id clipit -d -n
 # exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/3220.jpg'
+exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/redhat.png'
 exec --no-startup-id seapplet &
+exec_always --no-startup-id nm-applet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
 
@@ -416,10 +418,10 @@ set_from_resource $bg i3wm.color2 #f0f0f0
 
 
 # class                 border  	backgr.       text_indicator 	child_border
-client.focused #d70a53 #d70a53 #ffffff #8c0333
-client.focused_inactive #333333 #333333 #888888 #333333
-client.unfocused #333333 #333333 #888888 #333333
-client.urgent #eb709b #eb709b #ffffff #eb709b
+client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
 client.placeholder      $darkgreen     $darkgreen     $darkwhite  	$darkgreen       $darkgreen
 
 client.background       $darkgreen

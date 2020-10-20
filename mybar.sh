@@ -3,7 +3,6 @@
 notmuch_query="tag:unread AND folder:redhat-gmail/INBOX"
 
 ~/bin/bumblebee-status/./bumblebee-status -m nic \
-                                          notmuch_count \
                                           battery \
                                           pasink \
                                           pasource \
@@ -13,7 +12,6 @@ notmuch_query="tag:unread AND folder:redhat-gmail/INBOX"
                                           datetime \
                                           -p nic.states="^down" \
                                           root.path=/  \
-                                          nic.format="{intf} {state} {ip} {ssid}" \
+                                          nic.format="{intf} {ip} {ssid}" \
                                           battery.showdevice=true \
-                                          notmuch_count.query="${notmuch_query}" \
-                                          -t gruvbox-powerline
+                                          -t firefox-dark-powerline
