@@ -9,23 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $base00 #212121
-set $base01 #303030
-set $base02 #353535
-set $base03 #4A4A4A
-set $base04 #B2CCD6
-set $base05 #EEFFFF
-set $base06 #EEFFFF
-set $base07 #FFFFFF
-set $base08 #F07178
-set $base09 #F78C6C
-set $base0A #FFCB6B
-set $base0B #C3E88D
-set $base0C #89DDFF
-set $base0D #82AAFF
-set $base0E #C792EA
-set $base0F #FF5370
-
 set $mod Mod4
 
 #i3-gaps
@@ -35,8 +18,8 @@ set $mod Mod4
 # smart_borders on
 
 set $display0 "eDP-1"
-set $display1 "DP-1-2"
-set $display2 "DP-1-1"
+set $display1 "DP-1-1"
+set $display2 "DP-1-2"
 set $i3fontinput "pango:Agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
 set $rofitheme "~/.config/rofi/themes/appsmenu.rasi"
@@ -88,8 +71,8 @@ bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
 bindsym $mod+Shift+x exec i3-msg workspace $ws3; exec urxvt256c-ml -title Ranger -name Ranger -e zsh -c "ranger ~/"
 bindsym $mod+Control+k exec gnome-terminal -t "Get Kerberos Ticket" -- /bin/zsh -i -c "kinit && klist && sleep 2"
 
-bindsym $mod+Shift+u exec gnome-terminal -t IRC -- /bin/zsh -i -c "mux IRC" &
-bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "mux redhat" &
+bindsym $mod+Shift+u exec gnome-terminal -t IRC -- /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
+bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "neomutt" &
 bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
@@ -138,7 +121,7 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 hide_edge_borders both
-new_window pixel 1
+new_window normal
 new_float normal
 default_border normal
 default_floating_border normal
@@ -197,6 +180,10 @@ bindsym $mod+p bar mode toggle
 bindsym $mod+z workspace prev
 bindsym $mod+x workspace next
 bindsym $mod+backslash workspace back_and_forth
+
+bindsym $mod+Tab        exec --no-startup-id i3flip next
+bindsym $mod+Ctrl+Tab   exec --no-startup-id i3flip prev
+
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -276,16 +263,15 @@ bar {
   separator_symbol "  "
   workspace_buttons yes
   colors {
-        background $base00
-        separator  $base01
-        statusline $base04
+        background #222222
+        separator #666666
+        statusline #dddddd
 
         # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
+        focused_workspace #0088CC #0088CC #ffffff #ffffff
+        active_workspace #333333 #333333 #ffffff #ffffff
+        inactive_workspace #333333 #333333 #888888 #888888
+        urgent_workspace #2f343a #900000 #ffffff #ffffff
   }
 }
 
@@ -297,27 +283,27 @@ bar {
   font pango:agave 11
   workspace_buttons yes
   colors {
-    separator #ffffff
-    background #3c3b37
-    statusline #ffffff
-    focused_workspace #526532 #526532 #ffffff #ffffff
-    active_workspace #aea79f #aea79f #3c3b37 #ffffff
-    inactive_workspace #3c3b37 #3c3b37 #aea79f #888888
-    urgent_workspace #FF0000 #FF0000 #ffffff #ffffff
+    separator #666666
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff #ffffff
+    active_workspace #333333 #333333 #ffffff #ffffff
+    inactive_workspace #333333 #333333 #888888 #888888
+    urgent_workspace #2f343a #900000 #ffffff #ffffff
   }
 }
 
 # Workspaces
-workspace $ws1 output $display1
-workspace $ws2 output $display1
-workspace $ws3 output $display1
-workspace $ws4 output $display1
-workspace $ws5 output $display1
+workspace $ws1 output $display2
+workspace $ws2 output $display2
+workspace $ws3 output $display2
+workspace $ws4 output $display2
+workspace $ws5 output $display2
 workspace $ws6 output $display1
 workspace $ws7 output $display1
 workspace $ws8 output $display1
-workspace $ws9 output $display0
-workspace $ws10 output $display2
+workspace $ws9 output $display1
+workspace $ws10 output $display0
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -375,7 +361,7 @@ mode "$mode_gaps_inner" {
 # custom window settings
 #for_window [class="^.*"] border none; title_format ">_ %title "
 for_window [class=".*"] title_format ">_ %title "
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border normal
 for_window [window_role="pop-up"] floating enable; border pixel 1, move absolute center
 for_window [window_role="task_dialog"] floating enable; border pixel 1
 for_window [window_role="bubble"] floating enable; border pixel 1
@@ -387,6 +373,7 @@ for_window [class="(?i)pavucontrol"] floating enable; move position mouse
 for_window [instance="Ranger"] mark ranger
 for_window [title="^.*IRC$"] mark irc
 for_window [title="^.*MAIL$"] mark mail
+for_window [title="^.*Emacs$"] mark emacs
 for_window [title="^.*DEVEL$"] mark dev
 for_window [class="Firefox"] mark web
 for_window [class="Firefox"] border pixel 1
@@ -403,9 +390,9 @@ exec --no-startup-id ~/bin/keyboard
 exec --no-startup-id /usr/bin/dunst &
 # exec --no-startup-id compton -b --config ~/.i3/compton.conf
 exec --no-startup-id clipit -d -n
-# exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
+#exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/redhat.png'
+exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/Ultrawide Wallpaper- Vector (4).jpg'
 exec --no-startup-id seapplet &
 exec_always --no-startup-id nm-applet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
@@ -413,9 +400,7 @@ exec --no-startup-id ~/.i3/autostart
 
 # Basic color configuration using the Base16 variables for windows and borders.
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base0D $base0C
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
-client.background       $base07
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
