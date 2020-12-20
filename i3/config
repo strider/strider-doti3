@@ -24,17 +24,16 @@ set $i3fontinput "pango:Agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
 set $rofitheme "~/.config/rofi/themes/appsmenu.rasi"
 
-# define names for workspaces
-set $ws1    "1:  "
-set $ws2    "2:  "
-set $ws3    "3:  "
-set $ws4    "4:  "
-set $ws5    "5:  "
-set $ws6    "6:  "
-set $ws7    "7:  "
-set $ws8    "8:  "
-set $ws9    "9:  "
-set $ws10  "10:  "
+set $ws1    "1"
+set $ws2    "2"
+set $ws3    "3"
+set $ws4    "4"
+set $ws5    "5"
+set $ws6    "6"
+set $ws7    "7"
+set $ws8    "8"
+set $ws9    "9"
+set $ws10  "10"
 
 # chose a FreeType font, such as:
 font $i3fontinput
@@ -72,6 +71,7 @@ bindsym $mod+Shift+x exec i3-msg workspace $ws3; exec urxvt256c-ml -title Ranger
 bindsym $mod+Control+k exec gnome-terminal -t "Get Kerberos Ticket" -- /bin/zsh -i -c "kinit && klist && sleep 2"
 
 bindsym $mod+Shift+u exec gnome-terminal -t IRC -- /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
+bindsym $mod+Shift+d exec gnome-terminal -t IRC -- /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo-dev" &
 bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "neomutt" &
 bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
 
@@ -80,20 +80,19 @@ bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/
 # bindsym Control+$mod+l exec gnome-screensaver-command -l
 bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
-# compton
-bindsym $mod+b exec --no-startup-id pkill compton; exec notify-send -t 2000 'Compton Off'
-bindsym $mod+Shift+b exec --no-startup-id compton -b --config ~/.i3/compton.conf; exec notify-send -t 2000 'Compton On'
+# Picom
+bindsym $mod+b exec --no-startup-id pkill picom; exec notify-send -t 2000 'Picom Off'
+bindsym $mod+Shift+b exec --no-startup-id picom -b --config ~/.i3/picom.conf; exec notify-send -t 2000 'Picom On'
 
 # redshift
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
 
 # Emacs
 bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -t Emacs -- /bin/zsh -i -c 'emacsclient -nw'"
-bindsym $mod+n exec gnome-terminal -t Emacs -- /bin/zsh -i -c "emacsclient -c -n --alternate-editor=''" &
+bindsym mod1+n exec --no-startup-id "/usr/bin/emacsclient -c -a '' --no-wait"
 
 # pulse audio volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%; exec /usr/bin/killall -USR1 i3status
-
 bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%; exec /usr/bin/killall -USR1 i3status
 bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle; exec /usr/bin/killall -USR1 i3status
 bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -A 10
@@ -141,8 +140,8 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+Ctrl+Right "move workspace to output right"
-bindsym $mod+Ctrl+Left "move workspace to output left"
+bindsym $mod+Ctrl+Right move workspace to output $display2
+bindsym $mod+Ctrl+Left move workspace to output $display0
 
 # Resizing windows by 10 in i3 using keyboard only
 bindsym $mod+Ctrl+Shift+Right resize shrink width 20 px or 20 ppt
@@ -181,8 +180,8 @@ bindsym $mod+z workspace prev
 bindsym $mod+x workspace next
 bindsym $mod+backslash workspace back_and_forth
 
-bindsym $mod+Tab        exec --no-startup-id i3flip next
-bindsym $mod+Ctrl+Tab   exec --no-startup-id i3flip prev
+bindsym $mod+Tab        exec --no-startup-id /usr/bin/i3flip next
+bindsym $mod+Ctrl+Tab   exec --no-startup-id /usr/bin/i3flip prev
 
 
 # focus the child container
@@ -256,41 +255,23 @@ bar {
   font pango:agave 11
   status_command bash ~/bin/mybar.sh
   tray_output primary
-  output DP-1-2
   output eDP-1
-  output HDMI-2
+  output DP-1-1
+  output DP-1-2
   mode dock
   separator_symbol "  "
   workspace_buttons yes
-  colors {
-        background #222222
-        separator #666666
-        statusline #dddddd
+        colors {
+            background #000000
+            statusline #ffffff
 
-        # State             Border  BG      Text
-        focused_workspace #0088CC #0088CC #ffffff #ffffff
-        active_workspace #333333 #333333 #ffffff #ffffff
-        inactive_workspace #333333 #333333 #888888 #888888
-        urgent_workspace #2f343a #900000 #ffffff #ffffff
-  }
-}
+            focused_workspace #c10101 #880404 #ffffff #ffffff
+            active_workspace #333333 #222222 #ffffff #ffffff
+            inactive_workspace #333333 #222222 #888888 #888888
+            urgent_workspace #2F343A #900000 #ffffff #ffffff
+            separator #666666
+        }
 
-bar {
-  position top
-  output DP-1-1
-  mode dock
-  tray_output none
-  font pango:agave 11
-  workspace_buttons yes
-  colors {
-    separator #666666
-    background #222222
-    statusline #dddddd
-    focused_workspace #0088CC #0088CC #ffffff #ffffff
-    active_workspace #333333 #333333 #ffffff #ffffff
-    inactive_workspace #333333 #333333 #888888 #888888
-    urgent_workspace #2f343a #900000 #ffffff #ffffff
-  }
 }
 
 # Workspaces
@@ -299,10 +280,10 @@ workspace $ws2 output $display2
 workspace $ws3 output $display2
 workspace $ws4 output $display2
 workspace $ws5 output $display2
-workspace $ws6 output $display1
-workspace $ws7 output $display1
-workspace $ws8 output $display1
-workspace $ws9 output $display1
+workspace $ws6 output $display2
+workspace $ws7 output $display2
+workspace $ws8 output $display2
+workspace $ws9 output $display2
 workspace $ws10 output $display0
 
 # scratchpad
@@ -316,10 +297,14 @@ bindsym $mod+o scratchpad show
 
 # workspace assignment (use "xprop")
 # assign [class="^Firefox$"] $ws2
-assign [class="^Nautilus$"] $ws3
-assign [class="^Evince$"] $ws3
-assign [class="^Zathura$"] $ws3
-assign [class="^Stardict$"] $ws8
+assign [class="^Nautilus$"]  $ws3
+assign [class="^Evince$"]    $ws3
+assign [class="^Zathura$"]   $ws3
+assign [class="^Stardict$"]  $ws8
+assign [class="^Firefox$"]   $ws2
+assign [class="^Emacs"]	   	 $ws1
+assign [class="^Spotify"]    $ws9
+
 
 set $mode_gaps Gaps: (o)uter, (i)nner
 set $mode_gaps_outer Outer Gaps: k|j|0 (local), Up +|-|Ctrl+0 (global)
@@ -369,11 +354,11 @@ for_window [window_role="Preferences"] floating enable; border pixel 1
 for_window [title="- Shutter"] floating enable; border pixel 1
 for_window [class="Gnome-disks"] floating enable; border pixel 1
 for_window [class="URxvt"] border pixel 0
-for_window [class="(?i)pavucontrol"] floating enable; move position mouse
+for_window [class="(?i)pavucontrol"] flotating enable; move position mouse
 for_window [instance="Ranger"] mark ranger
 for_window [title="^.*IRC$"] mark irc
 for_window [title="^.*MAIL$"] mark mail
-for_window [title="^.*Emacs$"] mark emacs
+for_window [title="^.*Emacs.*"] mark emacs
 for_window [title="^.*DEVEL$"] mark dev
 for_window [class="Firefox"] mark web
 for_window [class="Firefox"] border pixel 1
@@ -388,19 +373,22 @@ exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id ~/bin/keyboard
 exec --no-startup-id /usr/bin/dunst &
-# exec --no-startup-id compton -b --config ~/.i3/compton.conf
-exec --no-startup-id clipit -d -n
+exec --no-startup-id picom -b --config ~/.i3/picom.conf
+exec --no-startup-id clpit -d -n
 #exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/Ultrawide Wallpaper- Vector (4).jpg'
+exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/1492873-widescreen-ultra-wide-wallpapers-3440x1440-3440x1440-for-full-hd.jpg'
 exec --no-startup-id seapplet &
 exec_always --no-startup-id nm-applet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
 
-# Basic color configuration using the Base16 variables for windows and borders.
-# Property Name         Border  BG      Text    Indicator Child Border
-client.focused #0088CC #0088CC #ffffff #dddddd
-client.focused_inactive #333333 #333333 #888888 #292d2e
-client.unfocused #333333 #333333 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+# Original windows decoration colors
+# class                 border  backgr. text    indicator
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused_inactive #333333 #5f676a #ffffff #484e50
+#client.unfocused        #333333 #222222 #888888 #292d2e
+#client.urgent           #2f343a #900000 #ffffff #900000
+client.unfocused        #4c7899 #24364F #aaaaaa #2e9ef4
+client.focused          #c10101 #880404 #ffffff #00AA00
