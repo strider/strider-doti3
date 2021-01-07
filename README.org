@@ -1,0 +1,30 @@
+#+TITLE: =/home/strider/.i3=
+
+* My i3wm Configuration
+
+** Essential stuff used in this config
+- [[https://github.com/Airblader/i3][i3-gaps]] (window manager) + [[https://github.com/tobi-wan-kenobi/bumblebee-status][bumblebee-status]] (status bar)
+- [[https://github.com/alacritty/alacritty][Alacritty]] (Terminal)
+- [[https://github.com/blobject/agave][Agave]] Fonts
+- [[https://github.com/SammysHP/i3lockmore][i3lockmore]] (=i3lock= extension which adds some high-level features)
+- [[https://github.com/davatorium/rofi][Rofi]] (window switcher, launcher, etc...)
+- [[https://github.com/dunst-project/dunst][Dunst]] (notification daemon)
+- [[https://github.com/yshui/picom][Picom]] (Compositor forked from the original Compton)
+
+** How to install
+
+#+BEGIN_SRC shell
+  git clone https://github.com/strider/strider-doti3.git
+  cd strider-doti3
+#+END_SRC
+
+** How to use
+Backup your =~/.i3= directory before to apply my =i3wm= Configuration.
+
+#+BEGIN_SRC shell
+  ./apply.sh
+#+END_SRC
+
+** License
+Released under the [[./LICENSE][GPL v3]] unless otherwise specified by license files in
+subfolders.
