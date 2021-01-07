@@ -56,6 +56,7 @@ bindsym $mod+Shift+p exec passmenu
 bindsym $mod+g exec "gentoken.sh"
 bindsym $mod+F2 exec --no-startup-id $HOME/.screenlayout/docked.sh
 bindsym $mod+F4 exec --no-startup-id $HOME/bin/mutemic.sh
+bindsym $mod+F5 [class="Firefox"] move workspace current
 bindsym $mod+F6 exec $HOME/.i3/monitor_layout.sh
 bindsym $mod+F7 exec $HOME/.i3/rofi-randr
 bindsym $mod+F8 exec --no-startup-id "setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle"
