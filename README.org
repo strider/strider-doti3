@@ -30,6 +30,10 @@ Backup your =~/.i3= directory before to apply my =i3wm= Configuration.
   ./apply.sh
 #+END_SRC
 
+** Configuration borrows heavily from
+- [[https://github.com/leifmadsen/dotfiles][leifmadsen/dotfiles]]
+- [[https://github.com/Algorithm79/Dotfiles_i3][Algorithm79/Dotfiles_i3]]
+
 ** License
 Released under the [[./LICENSE][GPL v3]] unless otherwise specified by license files in
 subfolders.
