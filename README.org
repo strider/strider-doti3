@@ -1,4 +1,5 @@
-#+TITLE: =/home/strider/.i3=
+#+TITLE: =/home/strider/.i3/=
+#+AUTHOR: Gaël Chamoulaud <gchamoul@redhat.com>
 
 * My i3wm Configuration
 
@@ -7,7 +8,7 @@
 - [[https://github.com/alacritty/alacritty][Alacritty]] (Terminal)
 - [[https://github.com/blobject/agave][Agave]] Fonts
 - [[https://github.com/SammysHP/i3lockmore][i3lockmore]] (=i3lock= extension which adds some high-level features)
-- [[https://github.com/davatorium/rofi][Rofi]] (window switcher, launcher, etc...)
+- [[https://github.com/davatorium/rofi][Rofi]] (window switcher, launcher, passmenu, monitor layout, power manager, etc...)
 - [[https://github.com/dunst-project/dunst][Dunst]] (notification daemon)
 - [[https://github.com/yshui/picom][Picom]] (Compositor forked from the original Compton)
 - [[https://github.com/brndnmtthws/conky][Conky]] (Light-weight system monitor for X)
