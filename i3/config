@@ -274,22 +274,19 @@ bar {
   status_command bash ~/bin/mybar.sh
   tray_output primary
   output eDP-1
-  output DP-1-1
   output DP-1-2
   mode dock
   separator_symbol "  "
   workspace_buttons yes
         colors {
-            background #000000
-            statusline #ffffff
-
-            focused_workspace #c10101 #880404 #ffffff #ffffff
-            active_workspace #333333 #222222 #ffffff #ffffff
-            inactive_workspace #333333 #222222 #888888 #888888
-            urgent_workspace #2F343A #900000 #ffffff #ffffff
-            separator #666666
+            background #333333
+            statusline #bbbbbb
+            focused_workspace #888888 #dddddd #222222 #222222
+            inactive_workspace #333333 #555555 #bbbbbb #bbbbbb
+                separator #666666
+                active_workspace #333333 #555555 #bbbbbb #bbbbbb
+                urgent_workspace #2f343a #900000 #ffffff #ffffff
         }
-
 }
 
 # Workspaces
@@ -395,18 +392,16 @@ exec --no-startup-id picom -b --config ~/.i3/picom.conf
 exec --no-startup-id clpit -d -n
 #exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
-exec_always --no-startup-id feh --bg-fill '/home/gchamoul/Pictures/UHD/1492873-widescreen-ultra-wide-wallpapers-3440x1440-3440x1440-for-full-hd.jpg'
+exec_always --no-startup-id feh --bg-fill "$HOME/Pictures/wallhaven-dgy9po.png"
 exec --no-startup-id seapplet &
 exec_always --no-startup-id nm-applet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
 exec --no-startup-id ~/.i3/autostart
 
-# Original windows decoration colors
-# class                 border  backgr. text    indicator
-#client.focused          #4c7899 #285577 #ffffff #2e9ef4
-#client.focused          #4c7899 #285577 #ffffff #2e9ef4
-#client.focused_inactive #333333 #5f676a #ffffff #484e50
-#client.unfocused        #333333 #222222 #888888 #292d2e
-#client.urgent           #2f343a #900000 #ffffff #900000
-client.unfocused        #4c7899 #24364F #aaaaaa #2e9ef4
-client.focused          #c10101 #880404 #ffffff #00AA00
+########## Styling ##########
+
+client.focused #888888 #dddddd #222222 #2e9ef4
+client.focused_inactive #333333 #555555 #bbbbbb #484e50
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
+client.background       #404552
