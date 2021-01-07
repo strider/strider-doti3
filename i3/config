@@ -62,7 +62,6 @@ bindsym $mod+F8 exec --no-startup-id "setxkbmap -layout us -variant altgr-intl -
 bindsym $mod+F9 exec --no-startup-id "setxkbmap -layout fr -option grp:shift_shift_toggle"
 bindsym $mod+F10 exec --no-startup-id $HOME/bin/i3-touchpad enable
 bindsym $mod+F11 exec --no-startup-id $HOME/bin/i3-touchpad disable
-bindsym $mod+d exec i3-msg workspace $ws2; exec "firefox -P work"
 bindsym $mod+F12 exec $HOME/.i3/i3-bindsym.sh
 bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
@@ -105,8 +104,6 @@ bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -A 10
 bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -U 5
 
 # mark container
-#bindsym $mod+i exec i3-input -f $i3fontinput -F 'mark %s' -P 'Mark name: '
-#bindsym $mod+Shift+o exec i3-input -f $i3fontinput -F '[con_mark=%s] focus' -P 'Go to mark: '
 bindsym $mod+i exec ~/.local/bin/i3-rofi-mark mark
 bindsym $mod+shift+o exec ~/.local/bin/i3-rofi-mark goto
 
@@ -160,38 +157,30 @@ bindsym Control+$mod+h split h
 # split in vertical orientation
 bindsym Control+$mod+v split v
 
-# split orientation
-#bindsym $mod+v layout toggle split
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+e layout toggle all
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+Tab focus mode_toggle
+bindsym Mod1+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 bindsym $mod+p bar mode toggle
-#bindsym $mod+Shift+l bar mode dock
 bindsym $mod+z workspace prev
 bindsym $mod+x workspace next
 bindsym $mod+backslash workspace back_and_forth
 
-bindsym $mod+Tab        exec --no-startup-id /usr/bin/i3flip next
-bindsym $mod+Ctrl+Tab   exec --no-startup-id /usr/bin/i3flip prev
-
-
-# focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+Tab        exec --no-startup-id /usr/bin/i3flip next
+# bindsym $mod+Ctrl+Tab   exec --no-startup-id /usr/bin/i3flip prev
 
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
