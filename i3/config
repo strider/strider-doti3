@@ -88,7 +88,7 @@ bindsym $mod+Shift+s exec $HOME/.i3/./rofi-power
 
 # Picom
 bindsym $mod+b exec --no-startup-id pkill picom; exec notify-send -t 2000 'Picom Off'
-bindsym $mod+Shift+b exec --no-startup-id picom -b --config ~/.i3/picom.conf; exec notify-send -t 2000 'Picom On'
+bindsym $mod+Shift+b exec --no-startup-id picom --experimental-backends -b --config ~/.i3/picom.conf; exec notify-send -t 2000 'Picom On'
 
 # redshift
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
@@ -385,7 +385,7 @@ exec --no-startup-id xset -b &
 exec --no-startup-id xset dpms 600 1200 2000 &
 exec --no-startup-id ~/bin/keyboard
 exec --no-startup-id /usr/bin/dunst &
-exec --no-startup-id picom -b --config ~/.i3/picom.conf
+exec --no-startup-id picom --experimental-backends -b --config ~/.i3/picom.conf
 exec --no-startup-id clpit -d -n
 #exec_always --no-startup-id pgrep redshift || redshift -l 48.864716:2.349014 -t 5700:3600 -g 0.8 -m randr -v 2>&1 | tee -a ~/tmp/redshift.log
 exec --no-startup-id /usr/bin/udiskie -anT &
