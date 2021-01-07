@@ -12,10 +12,10 @@
 set $mod Mod4
 
 #i3-gaps
-# gaps inner 5
-# gaps outer 5
-# smart_gaps on
-# smart_borders on
+gaps inner 4
+gaps outer 4
+smart_gaps on
+smart_borders on
 
 set $display0 "eDP-1"
 set $display1 "DP-1-1"
@@ -131,7 +131,7 @@ new_float normal
 default_border normal
 default_floating_border normal
 bindsym $mod+t border normal
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 5
 bindsym $mod+u border none
 
 # move focused window
@@ -359,29 +359,26 @@ mode "$mode_gaps_inner" {
 }
 
 # custom window settings
-#for_window [class="^.*"] border none; title_format ">_ %title "
 for_window [class=".*"] title_format ">_ %title "
-for_window [class="^.*"] border normal
-for_window [window_role="pop-up"] floating enable; border pixel 1, move absolute center
-for_window [window_role="task_dialog"] floating enable; border pixel 1
-for_window [window_role="bubble"] floating enable; border pixel 1
-for_window [window_role="Preferences"] floating enable; border pixel 1
-for_window [title="- Shutter"] floating enable; border pixel 1
-for_window [class="Gnome-disks"] floating enable; border pixel 1
+for_window [class="^.*"] border pixel 5
+for_window [class="(?i)blueman-manager"] floating enable; move absolute center
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [window_role="pop-up"] floating enable; border pixel 5; move absolute center
+for_window [window_role="task_dialog"] floating enable; border pixel 5
+for_window [window_role="bubble"] floating enable; border pixel 5
+for_window [window_role="Preferences"] floating enable; border pixel 5
+for_window [title="- Shutter"] floating enable; border pixel 5
+for_window [class="Gnome-disks"] floating enable; border pixel 5
 for_window [class="URxvt"] border pixel 0
-for_window [class="(?i)pavucontrol"] flotating enable; move position mouse
+for_window [class="(?i)pavucontrol"] floating enable; move position mouse
 for_window [instance="Ranger"] mark ranger
 for_window [title="^.*IRC$"] mark irc
 for_window [title="^.*MAIL$"] mark mail
-for_window [title="^.*Emacs.*"] mark emacs
+for_window [class="(?i)emacs"] mark emacs
 for_window [title="^.*DEVEL$"] mark dev
 for_window [class="Firefox"] mark web
 for_window [class="Firefox"] border pixel 1
-# for_window [instance="Wiki"] move scratchpad
-#for_window [instance="Mail"] resize set 1400 1000, move position center
-#for_window [instance="Mail"] move scratchpad
-
-bindsym $mod+F5 [class="Firefox"] move workspace current
 
 # start the session
 exec --no-startup-id xset -b &
