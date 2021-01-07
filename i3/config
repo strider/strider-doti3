@@ -63,6 +63,7 @@ bindsym $mod+F9 exec --no-startup-id "setxkbmap -layout fr -option grp:shift_shi
 bindsym $mod+F10 exec --no-startup-id $HOME/bin/i3-touchpad enable
 bindsym $mod+F11 exec --no-startup-id $HOME/bin/i3-touchpad disable
 bindsym $mod+F12 exec $HOME/.i3/i3-bindsym.sh
+bindsym $mod+d exec emacs
 bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
@@ -306,7 +307,7 @@ assign [class="^Evince$"]    $ws3
 assign [class="^Zathura$"]   $ws3
 assign [class="^Stardict$"]  $ws8
 assign [class="^Firefox$"]   $ws2
-assign [class="^Emacs"]	   	 $ws1
+# assign [class="^Emacs"]	   	 $ws1
 assign [class="^Spotify"]    $ws9
 
 
