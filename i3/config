@@ -22,7 +22,6 @@ set $display1 "DP-1-1"
 set $display2 "DP-1-2"
 set $i3fontinput "pango:Agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
-set $rofitheme "~/.config/rofi/themes/appsmenu.rasi"
 
 set $ws1    "1"
 set $ws2    "2"

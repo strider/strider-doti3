@@ -10,6 +10,7 @@
 - [[https://github.com/davatorium/rofi][Rofi]] (window switcher, launcher, etc...)
 - [[https://github.com/dunst-project/dunst][Dunst]] (notification daemon)
 - [[https://github.com/yshui/picom][Picom]] (Compositor forked from the original Compton)
+- [[https://github.com/brndnmtthws/conky][Conky]] (Light-weight system monitor for X)
 
 ** How to install
 
