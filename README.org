@@ -3,6 +3,9 @@
 
 * My i3wm Configuration
 
+** Screenshots
+[[file:screenshots/screenshot.png]]
+
 ** Essential stuff used in this config
 - [[https://github.com/Airblader/i3][i3-gaps]] (window manager) + [[https://github.com/tobi-wan-kenobi/bumblebee-status][bumblebee-status]] (status bar)
 - [[https://github.com/alacritty/alacritty][Alacritty]] (Terminal)
