@@ -1,15 +1,14 @@
 #!/bin/bash
 
-notmuch_query="tag:unread AND folder:redhat-gmail/INBOX"
-
 ~/bin/bumblebee-status/./bumblebee-status -m nic \
-                                          battery \
+                                          yubikey \
+                                          battery-upower \
                                           pasink \
                                           pasource \
-                                          bluetooth \
+                                          bluetooth2 \
                                           datetime \
                                           -p nic.states="^down" \
                                           root.path=/  \
+                                          todo_org.file="~/org/inbox.org" \
                                           nic.format="{intf} {ip} {ssid}" \
-                                          battery.showdevice=true \
-                                          -t firefox-dark-powerline
+                                          -t iceberg-dark-powerline
