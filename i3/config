@@ -43,7 +43,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec alacritty
 # start a filemanager
 bindsym $mod+Shift+Return exec --no-startup-id nautilus
 
@@ -68,13 +68,18 @@ bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
 bindsym Print exec "scrot '%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/shots/'"
 
-bindsym $mod+Shift+x exec i3-msg workspace $ws3; exec urxvt256c-ml -title Ranger -name Ranger -e zsh -c "ranger ~/"
-bindsym $mod+Control+k exec gnome-terminal -t "Get Kerberos Ticket" -- /bin/zsh -i -c "kinit && klist && sleep 2"
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+# The middle button and a modifer over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
 
-bindsym $mod+Shift+u exec gnome-terminal -t IRC -- /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
-bindsym $mod+Shift+d exec gnome-terminal -t IRC -- /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo-dev" &
-bindsym $mod+Control+u exec gnome-terminal -t MAIL -- /bin/zsh -i -c "neomutt" &
-bindsym $mod+Control+d exec gnome-terminal -t DEVEL -- /bin/zsh -i -c "mux DEVEL" &
+bindsym $mod+Shift+x exec alacritty -t Ranger -e /bin/zsh -i -c "ranger ~/"
+bindsym $mod+Control+k exec alacritty -t "Get Kerberos Ticket" -e /bin/zsh -i -c "kinit && klist && sleep 2"
+
+bindsym $mod+Shift+u exec alacritty -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
+bindsym $mod+Shift+d exec alacritty -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo-dev" &
+bindsym $mod+Control+u exec alacritty -t MAIL -e /bin/zsh -i -c "neomutt" &
+bindsym $mod+Control+d exec alacritty -t DEVEL -e /bin/zsh -i -c "mux DEVEL" &
 
 # screen locker (first move to "safe" workspace without any chat app)
 bindsym Control+$mod+l exec $HOME/bin/i3lockmore --lock-icon --image-fill $HOME/Pictures/redhat.png
@@ -89,7 +94,7 @@ bindsym $mod+Shift+b exec --no-startup-id picom -b --config ~/.i3/picom.conf; ex
 bindsym Control+$mod+b exec --no-startup-id pkill redshift; exec notify-send -t 2000 'RedShift Off'
 
 # Emacs
-bindsym Control+$mod+n exec --no-startup-id "gnome-terminal -t Emacs -- /bin/zsh -i -c 'emacsclient -nw'"
+bindsym Control+$mod+n exec --no-startup-id "alacritty -t Emacs -e /bin/zsh -i -c 'emacsclient -nw'"
 bindsym mod1+n exec --no-startup-id "/usr/bin/emacsclient -c -a '' --no-wait"
 
 # pulse audio volume control
