@@ -3,6 +3,7 @@
 echo -e "Applying i3 configuration"
 rm -Rvf ~/.i3
 rm -Rvf ~/.config/conky
+rm -Rvf ~/.config/alacritty
 
 mkdir -p ~/.i3
 cp -rvf i3/*  ~/.i3/
@@ -17,3 +18,4 @@ cp -vf keyboard ~/bin
 cp -vf mybar.sh ~/bin
 
 cp -rvf conky ~/.config/
+cp -rvf alacritty ~/.config/
