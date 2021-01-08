@@ -15,6 +15,7 @@
 - [[https://github.com/dunst-project/dunst][Dunst]] (notification daemon)
 - [[https://github.com/yshui/picom][Picom]] (Compositor forked from the original Compton)
 - [[https://github.com/brndnmtthws/conky][Conky]] (Light-weight system monitor for X)
+- [[https://www.gnu.org/software/emacs/][GNU Emacs]] (An extensible, customizable, free/libre text editor - and more)
 
 ** How to install
 
