@@ -129,7 +129,7 @@ new_float normal
 default_border normal
 default_floating_border normal
 bindsym $mod+t border normal
-bindsym $mod+y border pixel 5
+bindsym $mod+y border pixel 2
 bindsym $mod+u border none
 
 # move focused window
@@ -350,16 +350,16 @@ mode "$mode_gaps_inner" {
 
 # custom window settings
 for_window [class=".*"] title_format ">_ %title "
-for_window [class="^.*"] border pixel 5
+for_window [class="^.*"] border pixel 2
 for_window [class="(?i)blueman-manager"] floating enable; move absolute center
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Lxappearance"] floating enable
-for_window [window_role="pop-up"] floating enable; border pixel 5; move absolute center
-for_window [window_role="task_dialog"] floating enable; border pixel 5
-for_window [window_role="bubble"] floating enable; border pixel 5
-for_window [window_role="Preferences"] floating enable; border pixel 5
-for_window [title="- Shutter"] floating enable; border pixel 5
-for_window [class="Gnome-disks"] floating enable; border pixel 5
+for_window [window_role="pop-up"] floating enable; border pixel 2; move absolute center
+for_window [window_role="task_dialog"] floating enable; border pixel 2
+for_window [window_role="bubble"] floating enable; border pixel 2
+for_window [window_role="Preferences"] floating enable; border pixel 2
+for_window [title="- Shutter"] floating enable; border pixel 2
+for_window [class="Gnome-disks"] floating enable; border pixel 2
 for_window [class="URxvt"] border pixel 0
 for_window [class="(?i)pavucontrol"] floating enable; move position mouse
 for_window [instance="Ranger"] mark ranger
