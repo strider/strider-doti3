@@ -61,7 +61,7 @@ bindsym $mod+F6 exec $HOME/.i3/monitor_layout.sh
 bindsym $mod+F7 exec $HOME/.i3/rofi-randr
 bindsym $mod+F8 exec --no-startup-id "setxkbmap -layout us -variant altgr-intl -option grp:shift_shift_toggle"
 bindsym $mod+F9 exec --no-startup-id "setxkbmap -layout fr -option grp:shift_shift_toggle"
-bindsym $mod+F12 exec $HOME/.i3/i3-bindsym.sh
+bindsym $mod+F10 exec $HOME/.i3/i3-bindsym.sh
 bindsym $mod+d exec emacs
 bindsym $mod+shift+m exec "pavucontrol"
 # Take a Screenshot using scrot.
