@@ -27,7 +27,9 @@
 ** How to use
 Backup your =~/.i3= directory before to apply my =i3wm= Configuration.
 
-#+INCLUDE: "apply.sh" src shell
+#+BEGIN_SRC shell
+  ./apply.sh
+#+END_SRC
 
 ** Configuration borrows heavily from
 - [[https://github.com/leifmadsen/dotfiles][leifmadsen/dotfiles]]
