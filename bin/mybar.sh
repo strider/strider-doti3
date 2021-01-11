@@ -6,6 +6,7 @@
                                           pasink \
                                           pasource \
                                           bluetooth2 \
+										  dunstctl \
                                           datetime \
                                           -p nic.states="^down" \
                                           root.path=/  \

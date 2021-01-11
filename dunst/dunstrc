@@ -28,7 +28,7 @@
     show_indicators = true
     icon_position = left
     max_icon_size = 32
-    sticky_histor = yes
+    sticky_history = yes
     history_length = 20
     always_run_script = true
     startup_notification = true
@@ -44,7 +44,7 @@
     dmenu = /usr/bin/rofi -dmenu -p dunst:
 
     # browser for opening urls in context menu
-    browser = /usr/bin/firefox -new-tab
+    browser = /usr/bin/brave-browser
 
 
 [shortcuts]
