@@ -72,11 +72,11 @@ bindsym --release button2 kill
 # The middle button and a modifer over any part of the window kills the window
 bindsym --whole-window $mod+button2 kill
 
-bindsym $mod+Shift+x exec alacritty -t Ranger -e /bin/zsh -i -c "ranger ~/"
+bindsym $mod+Shift+x exec alacritty -t RANGER -e /bin/zsh -i -c "ranger ~/"
 bindsym $mod+Control+k exec alacritty -t "Get Kerberos Ticket" -e /bin/zsh -i -c "kinit && klist && sleep 2"
 
 bindsym $mod+Shift+u exec alacritty -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
-bindsym $mod+Shift+d exec alacritty -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo-dev" &
+bindsym $mod+Shift+d exec alacritty -t TRIPLEO_DEVEL -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo-dev" &
 bindsym $mod+Control+u exec alacritty -t MAIL -e /bin/zsh -i -c "neomutt" &
 bindsym $mod+Control+d exec alacritty -t DEVEL -e /bin/zsh -i -c "mux DEVEL" &
 
@@ -357,11 +357,13 @@ for_window [title="- Shutter"] floating enable; border pixel 2
 for_window [class="Gnome-disks"] floating enable; border pixel 2
 for_window [class="URxvt"] border pixel 0
 for_window [class="(?i)pavucontrol"] floating enable; move position mouse
-for_window [instance="Ranger"] mark ranger
+for_window [title="^.*RANGER"] floating enable; border pixel 2; move absolute center
+for_window [title="^.*RANGER"] mark ranger
 for_window [title="^.*IRC$"] mark irc
 for_window [title="^.*MAIL$"] mark mail
 for_window [class="(?i)emacs"] mark emacs
-for_window [title="^.*DEVEL$"] mark dev
+for_window [title="^DEVEL$"] mark dev
+for_window [title="^TRIPLEO_DEVEL$"] mark ooo-dev
 for_window [class="Firefox"] mark web
 for_window [class="Firefox"] border pixel 1
 
