@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Wait for program coming up
 wait_for_program () {
@@ -12,12 +12,17 @@ wait_for_program () {
                 notify-send -u critical "Error during start: last program $! did not started fast enough"
                 break
             else
-                n=`expr $n + 1`
-                sleep 0.1
+                n=$((n + 1))
+                sleep 0.5
             fi
         fi
     done
 }
+
+EMACS_CMD=$(command -v emacs)
+TERMINAL=$(command -v alacritty)
+CON=$(nmcli net con)
+VPNCON=$(nmcli con show --active id redhat0 | grep GENERAL.STATE | awk '{print $2}')
 
 ## Determine connected monitors
 DP_1_1=0
@@ -25,14 +30,37 @@ DP_1_2=0
 xrandr | grep -Eq "DP-1-1 connected" && DP_1_1=1
 xrandr | grep -Eq "DP-1-2 connected" && DP_1_2=1
 
-if [ "$DP_1_1" -eq 1 ] && [ "$DP_1_2" -eq 1 ]; then
-    . ${HOME}/.screenlayout/docked.sh
+if [ "$DP_1_1" -eq 1 ] || [ "$DP_1_2" -eq 1 ]; then
+    # shellcheck source=/dev/null
+    . ~/.screenlayout/docked.sh
 fi
 
-#pointer_control enable
-xrefresh &
+VPN_ON=0
+# Run vpn-check.sh script
+if [ "$CON" = "full" ]; then
+    if [ "$VPNCON" != "activated" ]; then
+        ~/bin/vpn-check.sh &
+        VPN_ON=$((VPN_ON + 1))
+    fi
+fi
+sleep 10s
 
-# Update dmenu cache
-dmenu_path >/dev/null &
+i3-msg "workspace 1"
+# Run GNU Emacs
+$EMACS_CMD &
+wait_for_program
+
+i3-msg "workspace 4"
+if [ ! $VPN_ON -eq 0 ]; then
+    $TERMINAL -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
+    wait_for_program
+fi
+
+i3-msg split h
+$TERMINAL -t MAIL -e /bin/zsh -i -c "neomutt" &
+wait_for_program
+
+# Always go to workspace after initialization
+i3-msg workspace 1
 
 exit 0

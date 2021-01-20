@@ -387,7 +387,8 @@ exec_always --no-startup-id feh --bg-fill "$HOME/Pictures/wallhaven-dgy9po.png"
 exec --no-startup-id seapplet &
 exec_always --no-startup-id nm-applet &
 exec --no-startup-id xrdb -merge ~/.Xresources &
-exec --no-startup-id ~/.config/.i3/autostart
+exec --no-startup-id ~/.config/i3/autostart
+exec --no-startup-id xrefresh &
 
 ########## Styling ##########
 
