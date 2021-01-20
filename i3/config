@@ -398,3 +398,5 @@ client.focused_inactive #333333 #555555 #bbbbbb #484e50
 client.unfocused #333333 #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
 client.background       #404552
+
+# End of Configuration
