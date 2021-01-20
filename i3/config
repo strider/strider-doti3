@@ -307,7 +307,7 @@ assign [class="^Evince$"]    $ws3
 assign [class="^Zathura$"]   $ws3
 assign [class="^Stardict$"]  $ws8
 assign [class="^Firefox$"]   $ws2
-assign [class="^Brave$"]     $ws2
+assign [class="^Brave-browser"]     $ws2
 assign [class="^Spotify"]    $ws9
 
 
@@ -366,10 +366,11 @@ for_window [title="^.*RANGER"] floating enable; border pixel 2; move absolute ce
 for_window [title="^.*RANGER"] mark ranger
 for_window [title="^.*IRC$"] mark irc
 for_window [title="^.*MAIL$"] mark mail
-for_window [class="(?i)emacs"] mark emacs
+for_window [class="^Emacs"] mark emacs
 for_window [title="^DEVEL$"] mark dev
 for_window [title="^TRIPLEO_DEVEL$"] mark ooo-dev
 for_window [class="Firefox"] mark web
+for_window [class="^Brave-browser"] mark web
 for_window [class="Firefox"] border pixel 1
 
 # start the session
