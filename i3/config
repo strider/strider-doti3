@@ -57,6 +57,7 @@ bindsym $mod+space exec "rofi -no-lazy-grab -show drun -o 85"
 bindsym $mod+Shift+a exec "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+Shift+p exec passmenu
 bindsym $mod+g exec "gentoken.sh"
+bindsym $mod+F1 exec --no-startup-id $HOME/.emacs.d/bin/org-capture
 bindsym $mod+F2 exec --no-startup-id $HOME/.screenlayout/docked.sh
 bindsym $mod+F3 exec --no-startup-id $HOME/.screenlayout/undocked.sh
 bindsym $mod+F4 exec --no-startup-id $HOME/bin/mutemic.sh
