@@ -15,19 +15,22 @@
 - [[https://github.com/dunst-project/dunst][Dunst]] (notification daemon)
 - [[https://github.com/yshui/picom][Picom]] (Compositor forked from the original Compton)
 - [[https://github.com/brndnmtthws/conky][Conky]] (Light-weight system monitor for X)
+- [[https://feh.finalrewind.org/][Feh]] (X11 image viewer)
+- [[http://jonls.dk/redshift/][Redshift]] (Screen color temperature adjustements)
 - [[https://www.gnu.org/software/emacs/][GNU Emacs]] (An extensible, customizable, free/libre text editor - and more)
 
 ** How to install
 
 #+BEGIN_SRC shell
-  git clone https://github.com/strider/strider-doti3.git
-  cd strider-doti3
-  ./apply.sh
+git clone https://github.com/strider/strider-doti3.git
+cd strider-doti3
+./apply.sh
 #+END_SRC
 
 ** Configuration borrows heavily from
 - [[https://github.com/leifmadsen/dotfiles][leifmadsen/dotfiles]]
 - [[https://github.com/Algorithm79/Dotfiles_i3][Algorithm79/Dotfiles_i3]]
+- [[https://github.com/lzap/doti3][lzap/doti3]]
 
 ** License
 Released under the [[./LICENSE][GPL v3]] unless otherwise specified by license files in
