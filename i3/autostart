@@ -52,7 +52,7 @@ wait_for_program
 
 i3-msg "workspace 4"
 if [ ! $VPN_ON -eq 0 ]; then
-    $TERMINAL -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s tripleo" &
+    $TERMINAL -t IRC -e /bin/zsh -i -c "mosh gchamoul@krav -- tmux new -A -D -s IRC" &
     wait_for_program
 fi
 
@@ -60,7 +60,7 @@ i3-msg split h
 $TERMINAL -t MAIL -e /bin/zsh -i -c "neomutt" &
 wait_for_program
 
-# Always go to workspace after initialization
+# Always go to workspace 1 after initialization
 i3-msg workspace 1
 
 exit 0

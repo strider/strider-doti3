@@ -6,10 +6,8 @@
                                           pasink \
                                           pasource \
                                           bluetooth2 \
-										  dunstctl \
+                                          dunstctl \
                                           datetime \
                                           -p nic.states="^down" \
-                                          root.path=/  \
-                                          todo_org.file="~/org/inbox.org" \
                                           nic.format="{intf} {ip} {ssid}" \
-                                          -t iceberg-dark-powerline
+                                          -t nord-colorful

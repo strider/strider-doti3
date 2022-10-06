@@ -22,8 +22,8 @@ smart_gaps on
 smart_borders on
 
 set $display0 "eDP-1"
-set $display1 "DP-1-1"
-set $display2 "DP-1-2"
+set $display1 "HDMI-2"
+# set $display2 "DP-1-2"
 set $i3fontinput "pango:Agave 11"
 set $i3rofimark "~/.local/bin/i3-rofi-mark"
 
@@ -264,7 +264,8 @@ bar {
   status_command bash ~/bin/mybar.sh
   tray_output primary
   output eDP-1
-  output DP-1-2
+  output HDMI-2
+  # output DP-1-2
   mode dock
   separator_symbol "  "
   workspace_buttons yes
@@ -280,15 +281,15 @@ bar {
 }
 
 # Workspaces
-workspace $ws1 output $display2
-workspace $ws2 output $display2
-workspace $ws3 output $display2
-workspace $ws4 output $display2
-workspace $ws5 output $display2
-workspace $ws6 output $display2
-workspace $ws7 output $display2
-workspace $ws8 output $display2
-workspace $ws9 output $display2
+workspace $ws1 output $display1
+workspace $ws2 output $display1
+workspace $ws3 output $display1
+workspace $ws4 output $display1
+workspace $ws5 output $display1
+workspace $ws6 output $display1
+workspace $ws7 output $display1
+workspace $ws8 output $display1
+workspace $ws9 output $display1
 workspace $ws10 output $display0
 
 # scratchpad
